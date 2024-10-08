@@ -16,4 +16,6 @@ const TeacherHeader = () => {
     );
 };
 
+// 잔디 확인용
+
 export default TeacherHeader;

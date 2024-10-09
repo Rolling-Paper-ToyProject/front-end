@@ -1,4 +1,5 @@
 import React from "react"
+import '../styles/components/SocialLogin.css';
 
 const SocialLogin = () => {
 
@@ -11,17 +12,13 @@ const SocialLogin = () => {
     }
     
     return (
-        <div>
-            <div>
-                <button type="button" onClick={handleNaverLogin}>
-                    <img src="/images/socialLoginButtons/btnG_완성형.png" alt="네이버 로그인" />
-                </button>
-            </div>
-            <div>
-                <button type="button" onClick={handleKakaoLogin}>
-                    <img src="/images/socialLoginButtons/kakao_login_large_narrow.png" alt="카카오 로그인" />
-                </button>
-            </div>
+        <div className="social-login">
+            <button type="button" className="social-button" onClick={handleNaverLogin}>
+                <img src="/images/socialLoginButtons/btnG_완성형.png" alt="네이버 로그인" className="social-img" />
+            </button>
+            <button type="button" className="social-button" onClick={handleKakaoLogin}>
+                <img src="/images/socialLoginButtons/kakao_login_large_narrow.png" alt="카카오 로그인" className="social-img" />
+            </button>
         </div>
     )
 

@@ -1,5 +1,6 @@
+import { Component } from "lucide-react";
 import { useState } from "react"
-
+import '../styles/components/StudentSignin.css' 
 
 const StudentSignin = () => {
     const [className, setClassName] = useState('');
@@ -14,9 +15,8 @@ const StudentSignin = () => {
 
     return(
         <div>
-            <img src="\images\logo\rolling-paper-logo.webp" />
-            
             <input 
+                className="className-input"
                 type="text" 
                 value={className}
                 disabled            
@@ -39,7 +39,7 @@ const StudentSignin = () => {
                     onChange={(e) => setName(e.target.value)}
                     required />
                 </div>
-                <button type="submit">롤링페이퍼 참여</button>
+                <button type="submit" className="signin-button">롤링페이퍼 참여</button>
             </form>
         </div>
     )

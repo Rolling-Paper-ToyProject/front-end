@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 
 const RollingPaperList = () => {
-    const papers = [
+    const rolls = [
         { id: 1, name: 'OO초등학교 4-1', code: 'XXXX' },
         { id: 2, name: 'OO초등학교 4-2', code: 'YYYY' }
         // 추가적인 롤링페이퍼 항목들...
@@ -25,11 +25,11 @@ const RollingPaperList = () => {
 
     return (
         <div className="rolling-paper-list-container"> {/* 롤링페이퍼 목록 컨테이너 */}
-            {papers.map((paper, index) => (
+            {rolls.map((roll, index) => (
                 <div key={index} className="rolling-paper-item"> {/* 각 롤링페이퍼 아이템 */}
-                    <h2 className="rolling-paper-name" onClick={롤링페이퍼입장}>{paper.name}</h2>
+                    <h2 className="rolling-paper-name" onClick={롤링페이퍼입장}>{roll.name}</h2>
                     <div className="rolling-paper-code-container"> {/* 학급 코드 컨테이너 */}
-                        <p className="class-code">학급코드 : {paper.code}</p>
+                        <p className="class-code">학급코드 : {roll.code}</p>
                         <div className="button-group"> {/* 버튼 그룹 */}
                             <p className="update-button" onClick={updateRollingPaperName}>수정</p>
                             <p className="delete-button" onClick={deleteRollingPaper}>삭제</p>

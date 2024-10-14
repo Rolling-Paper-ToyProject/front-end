@@ -1,4 +1,3 @@
-import { Component } from "lucide-react";
 import { useState } from "react"
 import '../styles/components/StudentSignin.css' 
 

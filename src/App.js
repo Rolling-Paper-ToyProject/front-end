@@ -16,7 +16,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/studentSignin" element={<StudentSigninPage />} />
             <Route path="/myPage" element={<MyPage />} />
-            <Route path="/rollingPagerPage" element={<RollingPaperPage />} />
+            <Route path="/roll" element={<RollingPaperPage />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

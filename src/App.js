@@ -5,12 +5,12 @@ import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import { Provider } from 'react-redux';
-import store from './store.js'
+// import store from './store.js'
 
 function App() {
   return (
     <div className="app-container">
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
@@ -19,7 +19,7 @@ function App() {
             <Route path="/rollingPagerPage" element={<RollingPaperPage />} />
           </Routes>
         </BrowserRouter>
-      </Provider>
+      {/* </Provider> */}
     </div>
   );
 }

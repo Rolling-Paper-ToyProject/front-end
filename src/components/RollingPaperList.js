@@ -7,9 +7,20 @@ const RollingPaperList = () => {
         { id: 2, name: 'OO초등학교 4-2', code: 'YYYY' }
         // 추가적인 롤링페이퍼 항목들...
     ];
+    const [copySuccess, setCopySuccess] = useState('');
+
     const 롤링페이퍼입장 = () => {
         // /pages/RollingPagerDetail로 들어가야 함
     }
+
+    const urlCopy = () => {
+        const url = window.location.href; // 현재 페이지의 URL을 가져옴
+        navigator.clipboard.writeText(url).then(() => {
+            setCopySuccess('URL이 클립보드에 복사되었습니다!');
+        }).catch(err => {
+            setCopySuccess('복사 실패: ' + err);
+        });
+    };
 
     const updateRollingPaperName = () => {
         // 업데이트 로직
@@ -31,10 +42,12 @@ const RollingPaperList = () => {
                     <div className="rolling-paper-code-container"> {/* 학급 코드 컨테이너 */}
                         <p className="class-code">학급코드 : {roll.code}</p>
                         <div className="button-group"> {/* 버튼 그룹 */}
+                            <p className="url-copy-button" onClick={updateRollingPaperName}>URL 복사</p>
                             <p className="update-button" onClick={updateRollingPaperName}>수정</p>
                             <p className="delete-button" onClick={deleteRollingPaper}>삭제</p>
                         </div>
                     </div>
+                    {copySuccess && <p>{copySuccess}</p>}
                 </div>
             ))}
             <div className="create-rolling-paper-container"> {/* 롤링페이퍼 생성 컨테이너 */}

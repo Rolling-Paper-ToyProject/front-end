@@ -22,7 +22,11 @@ const SocialLogin = () => {
         </div>
     )
 
-    // 소셜로그인 후에 /pages/TeacherPage로 넘어갈 수 있도록 해야 함
+    /** 미구현된 기능
+     * 소셜로그인 후에 /pages/MyPage로 넘어갈 수 있도록 해야 함
+     * MyPage는 소셜로그인한 선생님(유저)
+    */
+
 }
 
 export default SocialLogin;

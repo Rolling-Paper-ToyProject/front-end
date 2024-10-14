@@ -20,6 +20,16 @@
     position: relative; /* 내부 요소 위치 설정 */
 }
 
+/* 생성 버튼 스타일 */
+.paper-create-button {
+    background: none; /* 기본 배경 없음 */
+    border: none; /* 기본 테두리 없음 */
+    cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
+    color: #007BFF; /* 버튼 텍스트 색상 */
+    font-size: 16px; /* 텍스트 크기 */
+    padding: 5px 10px; /* 패딩 */
+}
+
 /* 옵션 아이콘 스타일 */
 .options-icon {
     cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
@@ -39,8 +49,8 @@
     z-index: 1000; /* 모달보다 위에 표시 */
 }
 
-/* 각 옵션 버튼 스타일 */
-.option-button {
+/* 수정, 삭제 옵션 버튼 스타일 */
+.paper-edit-button {
     background: none; /* 기본 배경 없음 */
     border: none; /* 기본 테두리 없음 */
     cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
@@ -49,6 +59,15 @@
     padding: 5px 10px; /* 패딩 */
 }
 
-.option-button:hover {
+.paper-delete-button {
+    background: none; /* 기본 배경 없음 */
+    border: none; /* 기본 테두리 없음 */
+    cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
+    color: #007BFF; /* 버튼 텍스트 색상 */
+    font-size: 16px; /* 텍스트 크기 */
+    padding: 5px 10px; /* 패딩 */
+}
+
+.paper-create-button, .paper-edit-button, .paper-delete-button {
     text-decoration: underline; /* 호버 시 밑줄 */
 }

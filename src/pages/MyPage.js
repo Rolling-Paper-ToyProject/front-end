@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RollingPaperItem from "../components/RollingPaperItem";
+import Roll from "../components/Roll";
 import '../styles/pages/MyPage.css'; // 스타일 import
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -56,7 +56,7 @@ const MyPage = () => {
     }
 
     const handleUpdate = (rollId) => {
-        // RollingPaperItem을 input으로 바꾼다
+        // Roll 제목을 input으로 바꾼다
         // roll 수정하는 API 호출
         // 백엔드에서 sse를 이용하는데 롤 제목이 수정된 것을 반영하기 위해서 새로고침 필요한가?
     }
@@ -79,9 +79,9 @@ const MyPage = () => {
                 <button className="logout-button" onClick={teacherlogout}>LOGOUT</button>
             </div>
 
-            <div className="rolling-paper-list-container">
+            <div className="roll-list-container">
                 {rolls.map((roll) => (
-                    <RollingPaperItem
+                    <Roll
                         key={roll.rollId}
                         roll={roll}
                         onEnter={enterRoll}
@@ -90,7 +90,7 @@ const MyPage = () => {
                         onDelete={handleDelete}
                     />
                 ))}
-                <button onClick={handleCreateRoll} className="create-rolling-paper">롤 생성</button>
+                <button onClick={handleCreateRoll} className="create-roll">롤 생성</button>
             </div>
         </div>
     );

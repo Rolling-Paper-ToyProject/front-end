@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import '../styles/components/RollingPaperDetail.css';
-import CreatePaperModal from "./CreatePaperModal";
-import EditPaperModal from "./EditPaperModal";
+import PaperDetailModal from "./PaperDetailModal";
 
 const RollingPaperDetail = () =>  {
     const [author, setAuthor] = useState('');
     const [loading, setLoading] = useState([]);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isPaperDetailModalOpen, setIsPaperDetailModalOpen] = useState(false);
     const [papers, setPapers] = useState([]);
+    const [selectedPaper, setSelectedPaper] = useState(null);
 
     useEffect(() => {
         
@@ -33,22 +32,14 @@ const RollingPaperDetail = () =>  {
         // fetchPapers();
     }, []);
 
-    const showCreatePaperModal = () => {
-        setIsCreateModalOpen(true);
-    };
-    
-    const showEditPaperModal = () => {
-        setIsEditModalOpen(true);
+    const showPaperDetailModal = (paper) => {
+        setSelectedPaper(paper);
+        setIsPaperDetailModalOpen(true);
     };
 
     const closeModal = () => {
-        if (isCreateModalOpen) {
-            setIsCreateModalOpen(false)
-        } else if (isEditModalOpen) {
-            setIsEditModalOpen(false)
-        } else {
-            return;
-        }
+        setIsPaperDetailModalOpen(false);
+        setSelectedPaper(null);
     };
 
     return (
@@ -60,15 +51,18 @@ const RollingPaperDetail = () =>  {
                 {/* 롤링페이퍼 안 선생님 및 학생들이 남긴 글이 보이게끔 해줘야 함. */}
                 {/* 반복문으로 데이터를 가져와서 보여줘야함. */}
                 {papers.map((paper)=> (
-                    <div key={paper.id} onClick={showEditPaperModal} className="paper-box">
-                        <p>From. {paper.author}</p>
+                    <div key={paper.id} onClick={() => showPaperDetailModal(paper)} className="paper-box">
                         <p>{paper.content}</p>
                     </div>
                 ))}
             </div>
 
-            {isCreateModalOpen && <CreatePaperModal closeModal={closeModal} />}    
-            {isEditModalOpen && <EditPaperModal closeModal={closeModal} />}
+            {isPaperDetailModalOpen && (
+                <PaperDetailModal 
+                    closeModal={closeModal} 
+                    paperContent={selectedPaper?.content} // 선택된 페이퍼 내용 전달
+                />
+            )}
         </div>
     );
 };

@@ -1,13 +1,13 @@
 import React from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 
-const RollingPaperItem = ({ roll, onEnter, onCopy, onUpdate, onDelete, copyMessage }) => {
+const Roll = ({ roll, onEnter, onCopy, onUpdate, onDelete, copyMessage }) => {
     return (
-        <div className="rolling-paper-item">
-            <h2 className="rolling-paper-name" onClick={() => onEnter(roll.rollId)}>
+        <div className="roll-item">
+            <h2 className="roll-name" onClick={() => onEnter(roll.rollId)}>
                 {roll.rollName}
             </h2>
-            <div className="rolling-paper-code-container">
+            <div className="roll-code-container">
                 <p className="class-code">학급코드 : {roll.classCode} {/* class_code 사용 */}</p>
                 <div className="button-group">
                     {/* URL 복사 버튼 */}
@@ -80,4 +80,4 @@ const RollingPaperItem = ({ roll, onEnter, onCopy, onUpdate, onDelete, copyMessa
     // );
 };
 
-export default RollingPaperItem;
+export default Roll;

@@ -14,8 +14,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/studentSignin" element={<StudentSigninPage />} />
-            <Route path="/myPage" element={<MyPage />} />
+            <Route path="/studentsignin" element={<StudentSigninPage />} />
+            <Route path="/mypage" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
           </Routes>
         </BrowserRouter>

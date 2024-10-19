@@ -25,3 +25,5 @@ yarn-error.log*
 # db 폴더 및 docker-compose.yml
 /db
 /docker-compose.yml
+
+.idea

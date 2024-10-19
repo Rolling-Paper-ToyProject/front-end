@@ -78,7 +78,6 @@ const MyPage = () => {
                 <p className="greeting">{teacherName} 선생님, 안녕하세요</p>
                 <button className="logout-button" onClick={teacherlogout}>LOGOUT</button>
             </div>
-
             <div className="roll-list-container">
                 {rolls.map((roll) => (
                     <Roll

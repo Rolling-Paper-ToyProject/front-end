@@ -4,7 +4,7 @@ import '../styles/components/PaperModal.css' // CSS 파일 가져오기
 const CreatePaperModal = ({ closeModal }) => {
 
     const [paperContent, setPaperContent] = useState('');
-
+  
     const postPaper = () => {    
         /**
          * 페이퍼를 등록하는 api를 불러오는 기능 필요

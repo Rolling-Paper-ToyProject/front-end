@@ -4,17 +4,16 @@ import '../styles/components/PaperModal.css' // CSS 파일 가져오기
 const CreatePaperModal = ({ closeModal }) => {
 
     const [paperContent, setPaperContent] = useState('');
-
-    const postPaper = () => {
-        if (!paperContent.trim()) {
-            alert('내용을 입력해주세요.');
-            return;
-            // return; : 함수 실행 중단, API 호출 이뤄지지 않음
-        }
-    
+  
+    const postPaper = () => {    
         /**
          * 페이퍼를 등록하는 api를 불러오는 기능 필요
         */   
+    
+        // 등록 성공 후 처리
+        alert('페이퍼가 등록되었습니다.')
+        setPaperContent(''); // 입력 내용 초기화
+        closeModal(); // 모달 닫기
     }
 
     const handleOverlayClick = (e) => {
@@ -43,7 +42,11 @@ const CreatePaperModal = ({ closeModal }) => {
                     onChange = {(e) => setPaperContent(e.target.value)}
                     placeholder="내용을 입력하세요"
                 /> {/* 롤링페이퍼 작성 */}
-                <button className="paper-create-button" onClick={postPaper}>등록</button>
+                <button 
+                    className="paper-create-button" 
+                    onClick={postPaper}
+                    disabled={!paperContent.trim()} // 내용이 없을 때 버튼 비활성화
+                >등록</button>
             </div>
         </div>
     );

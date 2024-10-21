@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
+import KakaoRedirectHandler from './pages/KakaoRedirectHandler';
 import { Provider } from 'react-redux';
 // import store from './store.js'
 
@@ -15,8 +16,9 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/studentsignin" element={<StudentSigninPage />} />
-            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/mypage/:userId" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
+            <Route path="/oauth/kakao/callback" element={<KakaoRedirectHandler />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

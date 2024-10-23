@@ -13,7 +13,7 @@ const KakaoRedirectHandler = () => {
 
         if (authCode) { // 인증 코드가 존재할 경우 실행
             // 인증 코드를 백엔드로 전송하여 로그인 처리 요청
-            fetch(`http://localhost:3000/kakao-login?code=${authCode}`) // 인증 코드를 포함한 요청을 백엔드로 보냄
+            fetch(`http://localhost:8080/login/oauth2/code/kakao?code=${authCode}`) // 인증 코드를 포함한 요청을 백엔드로 보냄
                 .then(response => response.json()) // 백엔드에서 반환된 응답을 JSON 형태로 변환
                 .then(data => {
                     const userId = data.userId; // 백엔드로부터 받은 사용자 ID를 변수에 저장
@@ -26,7 +26,7 @@ const KakaoRedirectHandler = () => {
         }
     }, {navigate}); // 의존성 배열에 navigate를 넣어 navigate가 변경될 때만 useEffect를 재실행
 
-    return <div>로그인 처리 중입니다...</div>; // 인증 처리 중일 떄 화면에 "로그인 처리 중입니다..."라는 메시지를 출력
+    return <div>카카오 로그인 처리 중입니다...</div>; // 인증 처리 중일 떄 화면에 "로그인 처리 중입니다..."라는 메시지를 출력
 }
 
 export default KakaoRedirectHandler;

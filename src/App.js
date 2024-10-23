@@ -19,6 +19,7 @@ function App() {
             <Route path="/mypage/:userId" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
             <Route path="/oauth/kakao/callback" element={<KakaoRedirectHandler />} />
+            <Route path="/oauth/naver/callback" element={<NaverRedirectHandler />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

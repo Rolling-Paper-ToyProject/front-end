@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import '../styles/components/RollingPaperDetail.css';
 import PaperDetailModal from "./PaperDetailModal";
 
-
 const RollingPaperDetail = () =>  {
     const [author, setAuthor] = useState('');
     const [loading, setLoading] = useState([]);

@@ -1,7 +1,15 @@
 import React from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 
-const Roll = ({ roll, onEnter, onCopy, onUpdate, onDelete, copyMessage }) => {
+const Roll = ({ roll, onEnter, onCopy, onUpdate, onDelete }) => {
+    // 수정 모드 상태를 관리하는 state
+    // const [isEditing, setIsEditing] = useState(false);
+    // const [newRollName, setNewRollName] = useState(roll.rollName);
+
+    const handleSave = () => {
+        onUpdate()
+    }
+    
     return (
         <div className="roll-item">
             <h2 className="roll-name" onClick={() => onEnter(roll.rollId)}>
@@ -18,7 +26,6 @@ const Roll = ({ roll, onEnter, onCopy, onUpdate, onDelete, copyMessage }) => {
 
                     {/* 삭제 버튼 */}
                     <p className="delete-button" onClick={() => onDelete(roll.rollId)}>삭제</p>
-                    {copyMessage && <p>{copyMessage}</p>}
                 </div>
             </div>
         </div>

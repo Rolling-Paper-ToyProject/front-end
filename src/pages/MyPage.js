@@ -13,15 +13,32 @@ const MyPage = () => {
     /** 
      * 실제로는 userId에 할당된 rolls를 불러와야한다.
     */
-    
+
+    // 선생님의 이름과 롤 목록을 백엔드에서 가져오는 함수
+    const fetchTeacherData = async () => {
+        try {
+            // 백엔드에서 선생님의 이름과 롤 테이터를 가져오는 API ghcnf
+            const response = await fetch(`/mypage/{userId}`);
+            const data = await response.json();
+
+            // 데이터 설정
+            setTeacherName(data.name);
+            setRolls(data.rolls);
+        } catch (error) {
+            console.error('데이터 가져오기 실패 : ', error)
+        } 
+    };
+
     // 가상의 API 호출 (실제 구현 시 백엔드에서 user_id를 기반으로 롤 데이터를 가져옴)
     useEffect(()=> {
         // 더미 데이터 (실제 API 응답 사용할 것)
-        const fetchedRolls = [
-            { rollId: 1, rollName: 'OO초등학교 4-1', classCode: 1234, url: 'https://www.sparklenote.com/roll/1' },
-            { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
-        ]
-        setRolls(fetchedRolls);
+        // const fetchedRolls = [
+        //     { rollId: 1, rollName: 'OO초등학교 4-1', classCode: 1234, url: 'https://www.sparklenote.com/roll/1' },
+        //     { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
+        // ]
+        // setRolls(fetchedRolls);
+        
+        fetchTeacherData();
     }, [userId]);
 
     /**
@@ -38,10 +55,9 @@ const MyPage = () => {
         // 로직이 정상적으로 실행된 경우 로그인 페이지로 돌아감
         navigate('/login')
     };
-
+    
     const enterRoll = (rollId) => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-
 
         navigate('roll/${rollId}')
         console.log(`롤링페이퍼 ${rollId}로 이동`);
@@ -79,16 +95,20 @@ const MyPage = () => {
                 <button className="logout-button" onClick={teacherlogout}>LOGOUT</button>
             </div>
             <div className="roll-list-container">
-                {rolls.map((roll) => (
-                    <Roll
-                        key={roll.rollId}
-                        roll={roll}
-                        onEnter={enterRoll}
-                        onCopy={copyUrl}
-                        onUpdate={handleUpdate}
-                        onDelete={handleDelete}
-                    />
-                ))}
+                {rolls. length > 0 ? (
+                    rolls.map((roll) => (
+                        <Roll
+                            key={roll.rollId}
+                            roll={roll}
+                            onEnter={enterRoll}
+                            onCopy={copyUrl}
+                            onUpdate={handleUpdate}
+                            onDelete={handleDelete}
+                        />
+                    ))
+                ) : (
+                    <p>등록한 롤이 없습니다</p>
+                )}
                 <button onClick={handleCreateRoll} className="create-roll">롤 생성</button>
             </div>
         </div>

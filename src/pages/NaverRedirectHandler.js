@@ -27,3 +27,5 @@ const NaverRedirectHandler = () => {
     
 } 
 
+export default NaverRedirectHandler;
+

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Roll from "../components/Roll";
 import '../styles/pages/MyPage.css'; // 스타일 import
 import { useNavigate, useParams } from "react-router-dom";
+import RollItem from "../components/RollItem";
 
 const MyPage = () => {
     const navigate = useNavigate();
 
     const { userId } = useParams(); // URL에서 userId를 추출하여 해당 선생님의 페이지로 접근
-    const [teacherName, setTeacherName] = useState('OOO');
+    const [userName, setUserName] = useState('OOO');
     const [rolls, setRolls] = useState([]);
 
     /** 
@@ -15,14 +15,14 @@ const MyPage = () => {
     */
 
     // 선생님의 이름과 롤 목록을 백엔드에서 가져오는 함수
-    const fetchTeacherData = async () => {
+    const fetchUserData = async () => {
         try {
             // 백엔드에서 선생님의 이름과 롤 테이터를 가져오는 API ghcnf
             const response = await fetch(`/mypage/{userId}`);
             const data = await response.json();
 
             // 데이터 설정
-            setTeacherName(data.name);
+            setUserName(data.name);
             setRolls(data.rolls);
         } catch (error) {
             console.error('데이터 가져오기 실패 : ', error)
@@ -38,7 +38,7 @@ const MyPage = () => {
         // ]
         // setRolls(fetchedRolls);
         
-        fetchTeacherData();
+        fetchUserData();
     }, [userId]);
 
     /**
@@ -91,13 +91,13 @@ const MyPage = () => {
     return (
         <div className="my-page-container"> {/* 전체 페이지 컨테이너 */}
             <div className="greeting-container"> {/* 인사말 컨테이너 */}
-                <p className="greeting">{teacherName} 선생님, 안녕하세요</p>
+                <p className="greeting">{userName} 선생님, 안녕하세요</p>
                 <button className="logout-button" onClick={teacherlogout}>LOGOUT</button>
             </div>
             <div className="roll-list-container">
                 {rolls. length > 0 ? (
                     rolls.map((roll) => (
-                        <Roll
+                        <RollItem
                             key={roll.rollId}
                             roll={roll}
                             onEnter={enterRoll}

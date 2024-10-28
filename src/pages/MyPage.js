@@ -21,7 +21,7 @@ const MyPage = () => {
         }
     }, []);
 
-    /** 
+    /**
      * 실제로는 userId에 할당된 rolls를 불러와야한다.
     */
 
@@ -37,7 +37,7 @@ const MyPage = () => {
             setRolls(data.data);
         } catch (error) {
             console.error('데이터 가져오기 실패 : ', error)
-        } 
+        }
     };
 
     // 가상의 API 호출 (실제 구현 시 백엔드에서 user_id를 기반으로 롤 데이터를 가져옴)
@@ -59,7 +59,7 @@ const MyPage = () => {
                 { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
             ]
             setRolls(fetchedRolls);
-            
+
             fetchUserData();
         }, [userId]);
     */

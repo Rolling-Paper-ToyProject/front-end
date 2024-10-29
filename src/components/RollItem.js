@@ -24,7 +24,7 @@ const RollItem = ({ roll }) => {
             alert('복사 실패: ' + err);
         });
     }
-    
+
     /**
       Clipboard API를 사용하여 url 텍스트를 클립보드에 복사
       navigator.clipboard를 통해 접근, writeText() 메서드 사용하여 텍스트 복사
@@ -53,7 +53,7 @@ const RollItem = ({ roll }) => {
         }
 
     }
-    
+
     return (
         <div className="roll-item">
             {isEditing ? (

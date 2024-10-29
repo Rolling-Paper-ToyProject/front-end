@@ -5,7 +5,7 @@ import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import KakaoRedirectHandler from './pages/KakaoRedirectHandler';
-import NaverRedirectHandler from'./pages/NaverRedirectHandler';
+import NaverRedirectHandler from './pages/NaverRedirectHandler';
 import { Provider } from 'react-redux';
 // import store from './store.js'
 

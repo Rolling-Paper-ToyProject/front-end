@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Roll = () => {
     // 롤 제목 수정 모드 상태를 관리하는 state
+    const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
     const [newRollName, setNewRollName] = useState(roll.rollName);
 
@@ -23,10 +24,15 @@ const Roll = () => {
             alert('복사 실패: ' + err);
         });
     }
+    
+    /**
+      Clipboard API를 사용하여 url 텍스트를 클립보드에 복사
+      navigator.clipboard를 통해 접근, writeText() 메서드 사용하여 텍스트 복사
+      Promise: 비동기 작업을 수행하고 그 결과를 나타내는 객체
+      텍스트 복사가 성공하면 then() 블록에서 추가 동작을 정의할 수 있고, 실패하면 catch() 블록에서 에러 처리
+      비동기적으로 작동하며 성공 시 Promise를 반환
+    */
 
-    // Roll 제목을 input으로 바꾼다
-    // roll 수정하는 API 호출
-    // 백엔드에서 sse를 이용하는데 롤 제목이 수정된 것을 반영하기 위해서 새로고침 필요한가?
     const handleUpdate = async (rollId) => {
         try{
             await axios.put('/roll/update/${rollId}', { rollName: newRollName });
@@ -38,8 +44,6 @@ const Roll = () => {
         }
     }
 
-    // roll 삭제하는 API 호출
-    // 백엔드에서 sse를 이용하는데 롤 제목이 삭제된 것을 반영하기 위해서 새로고침 필요한가?
     const handleDelete = async (rollId) => {
         try{
             await axios.delete('/roll/delete/${rollId}');
@@ -85,61 +89,5 @@ const Roll = () => {
             </div>
         </div>
     )
-    
-    // const rolls = [
-    //     // 더미 롤링페이퍼 설정 
-    //     { id: 1, name: 'OO초등학교 4-1', code: 'XXXX' },
-    //     { id: 2, name: 'OO초등학교 4-2', code: 'YYYY' }
-    //     // 추가적인 롤링페이퍼 항목들
-    // ];
-    // const [copySuccess, setCopySuccess] = useState('');
-
-    // const 롤링페이퍼입장 = () => {
-    //     // /pages/RollingPagerDetail로 들어가야 함
-    // }
-
-    // const urlCopy = () => {
-    //     const url = window.location.href; // 현재 페이지의 URL을 가져옴
-    //     navigator.clipboard.writeText(url).then(() => {
-    //         setCopySuccess('URL이 클립보드에 복사되었습니다.');
-    //     }).catch(err => {
-    //         setCopySuccess('복사 실패: ' + err);
-    //     });
-    // };
-
-    // const updateRollingPaperName = () => {
-    //     // 업데이트 로직
-    // };
-
-    // const deleteRollingPaper = () => {
-    //     // 삭제 로직
-    // };
-
-    // const createRollingPaper = () => {
-    //     // 롤링페이퍼 배열 안에 요소 추가
-    // };
-
-    // return (
-    //     <div className="rolling-paper-list-container"> {/* 롤링페이퍼 목록 컨테이너 */}
-    //         {rolls.map((roll, index) => (
-    //             <div key={index} className="rolling-paper-item"> {/* 각 롤링페이퍼 아이템 */}
-    //                 <h2 className="rolling-paper-name" onClick={롤링페이퍼입장}>{roll.name}</h2>
-    //                 <div className="rolling-paper-code-container"> {/* 학급 코드 컨테이너 */}
-    //                     <p className="class-code">학급코드 : {roll.code}</p>
-    //                     <div className="button-group"> {/* 버튼 그룹 */}
-    //                         <p className="url-copy-button" onClick={updateRollingPaperName}>URL 복사</p>
-    //                         <p className="update-button" onClick={updateRollingPaperName}>수정</p>
-    //                         <p className="delete-button" onClick={deleteRollingPaper}>삭제</p>
-    //                     </div>
-    //                 </div>
-    //                 {copySuccess && <p>{copySuccess}</p>}
-    //             </div>
-    //         ))}
-    //         <div className="create-rolling-paper-container"> {/* 롤링페이퍼 생성 컨테이너 */}
-    //             <p className="create-rolling-paper" onClick={createRollingPaper}>롤링페이퍼 생성</p>
-    //         </div>
-    //     </div>
-    // );
 };
-
-export default Roll;
+export default RollItem;

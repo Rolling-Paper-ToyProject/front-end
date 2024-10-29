@@ -3,7 +3,7 @@ import '../styles/pages/MyPage.css'; // 스타일 import
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-const Roll = ({ roll, onEnter, onCopy, onUpdate, onDelete }) => {
+const Roll = () => {
     // 롤 제목 수정 모드 상태를 관리하는 state
     const [isEditing, setIsEditing] = useState(false);
     const [newRollName, setNewRollName] = useState(roll.rollName);

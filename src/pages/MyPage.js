@@ -55,33 +55,6 @@ const MyPage = () => {
         // 로직이 정상적으로 실행된 경우 로그인 페이지로 돌아감
         navigate('/login')
     };
-    
-    const enterRoll = (rollId) => {
-        // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-
-        navigate('roll/${rollId}')
-        console.log(`롤링페이퍼 ${rollId}로 이동`);
-    }
-
-    const copyUrl = (url) => {
-        navigator.clipboard.writeText(url).then(() => {
-            alert('URL이 클립보드에 복사되었습니다.');
-        }).catch(err => {
-            alert('복사 실패: ' + err);
-        });
-    }
-
-    const handleUpdate = (rollId) => {
-        // Roll 제목을 input으로 바꾼다
-        // roll 수정하는 API 호출
-        // 백엔드에서 sse를 이용하는데 롤 제목이 수정된 것을 반영하기 위해서 새로고침 필요한가?
-    }
-
-    const handleDelete = (rollId) => {
-        alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.')
-        // roll 삭제하는 API 호출
-        // 백엔드에서 sse를 이용하는데 롤 제목이 삭제된 것을 반영하기 위해서 새로고침 필요한가?
-    }
 
     const handleCreateRoll = () => {
         // roll 생성하는 API 호출
@@ -100,10 +73,6 @@ const MyPage = () => {
                         <RollItem
                             key={roll.rollId}
                             roll={roll}
-                            onEnter={enterRoll}
-                            onCopy={copyUrl}
-                            onUpdate={handleUpdate}
-                            onDelete={handleDelete}
                         />
                     ))
                 ) : (

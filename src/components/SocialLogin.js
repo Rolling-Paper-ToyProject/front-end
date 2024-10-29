@@ -25,21 +25,21 @@ const SocialLogin = ({ onLoginSuccess }) => {
     const handleNaverLogin = () => {
         
         /** 
-        */     
-        // Spring Security로 간소화 하기 전 코드
-        const CLIENT_ID = '8JVwALZwrnomasZCN1Gz';
-        const STATE = false;
-        const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/naver';
-    
-        // 네이버 로그인 버튼 클릭 시 호출
-        const handleNaverLogin = () => {
-        window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
-        }
+            // Spring Security로 간소화 하기 전 코드
+            const CLIENT_ID = '8JVwALZwrnomasZCN1Gz';
+            const STATE = false;
+            const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/naver';
+        
+            // 네이버 로그인 버튼 클릭 시 호출
+            const handleNaverLogin = () => {
+            window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
+            }
+        */   
         
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 네이버 OAuth2 인증 엔드포인트로 리다이렉트
-        // window.location.href = '/oauth2/authorization/naver';
+        window.location.href = '/oauth2/authorization/naver';
 
     }
     

@@ -24,4 +24,6 @@ const NaverRedirectHandler = () => {
     }, [navigate]);
 
     return <div>네이버 로그인 처리 중입니다...</div>;
-} 
+};
+
+export default NaverRedirectHandler;

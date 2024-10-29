@@ -1,5 +1,7 @@
 import React, { useEffect } from "react"
+import React, { useEffect } from "react"
 import '../styles/components/SocialLogin.css';
+import { useLocation } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const SocialLogin = ({ onLoginSuccess }) => {
@@ -65,6 +67,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
             onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
         }
     }
+
 
     return (
         <div className="social-login">

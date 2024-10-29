@@ -10,7 +10,7 @@ const LoginPage = () => {
     // 소셜 로그인 성공 시 호출되는 함수
     const handleSocialLoginSuccess = (userId) => {
         // 로그인 성공 후 고유의 userId를 URL에 포함하여 MyPage로 이동
-        navigate('/mypage/${userId}')
+        navigate(`/mypage/${userId}`)
     };
 
     return (

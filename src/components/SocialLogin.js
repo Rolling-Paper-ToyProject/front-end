@@ -1,6 +1,14 @@
 import React, { useEffect } from "react"
 import '../styles/components/SocialLogin.css';
 import { useLocation } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import { CustomButton1, CustomButton2 } from './MuiButton';
+
+const CustomButton = styled(Button)({
+    '&:hover': {
+        backgroundColor: 'lightgray',
+    },
+});
 
 const SocialLogin = ({ onLoginSuccess }) => {
 
@@ -11,7 +19,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
     //     const params = new URLSearchParams(location.search);
     //     // search: 쿼리 스트링 (?key=value) 부분을 의미함
     //     const userId = params.get("userId"); 
-    //     // 예를 들어 ?userId=123 형식으로 전달된다고 가정
+    //     // 예를 들어 ?userId=123 형식으로 전달된다고 가정    
     //     if (userId) {
     //         handleLoginCallback(userId);
     //     }
@@ -60,21 +68,20 @@ const SocialLogin = ({ onLoginSuccess }) => {
         
     }
     
-    // const handleLoginCallback = (userId) => {
-    //     if (userId) {
-    //         onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
-    //     }
-    // }
-
+    const handleLoginCallback = (userId) => {
+        if (userId) {
+            onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
+        }
+    }
 
     return (
         <div className="social-login">
-            <button type="button" className="social-button" onClick={handleNaverLogin}>
+            <CustomButton1 type="button" className="social-button" onClick={handleNaverLogin}>
                 <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img" />
-            </button>
-            <button type="button" className="social-button" onClick={handleKakaoLogin}>
+            </CustomButton1>
+            <CustomButton1 type="button" className="social-button" onClick={handleKakaoLogin}>
                 <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img" />
-            </button>
+            </CustomButton1>
         </div>
     )
 }

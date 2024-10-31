@@ -1,0 +1,105 @@
+/* 전체 페이지 컨테이너 스타일 */
+.my-page-container {
+    height : 99.8vh;
+    display: flex; /* Flexbox 레이아웃 사용 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: center; /* 아이템 수직 중앙 정렬 */
+    background-color: white;
+}
+
+/* 인사말 컨테이너 스타일 */
+.greeting-container {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: space-between; /* 양쪽 끝으로 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100%; /* 컨테이너의 폭을 100%로 설정 */
+    margin-bottom: 20px; /* 인사말과 다음 요소 사이의 간격 설정 */
+    background-color: #e0e0e0; /* 페이지 배경색 설정 */
+}
+
+/* 인사말 텍스트 스타일 */
+.greeting {
+    font-size: 20px; /* 인사말 폰트 크기 설정 */
+    font-weight: bold;;
+    margin: 15px 20px;
+}
+
+/* 로그아웃 버튼 스타일 */
+button.logout-button {
+    margin: 15px 20px;
+    padding: 5px 10px; /* 버튼 패딩 설정 */
+    border: none; /* 버튼 테두리 제거 */
+    border-radius: 8px; /* 버튼 모서리 둥글게 설정 */
+    color: white; /* 버튼 텍스트 색상 설정 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+}
+
+
+/* 롤링페이퍼 목록 컨테이너 스타일 */
+.roll-list-container {
+    width: 100%; /* 가로 폭을 100%로 설정 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: center; /* 아이템 수직 중앙 정렬 */
+}
+
+/* 롤링페이퍼 아이템 스타일 */
+.roll-item {
+    width: 80%; /* 롤링페이퍼 카드 너비 설정 */
+    background-color: white; /* 카드 배경색 설정 */
+    border: 1px solid #ddd; /* 카드 테두리 설정 */
+    border-radius: 8px; /* 카드 모서리 둥글게 설정 */
+    padding: 10px 25px; /* 카드 내부 여백 설정 */
+    margin: 10px 0; /* 카드 간의 상하 간격 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.roll-name {
+    margin: 10px 0 5px 0;
+}
+
+.roll-code-container {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: space-between; /* 양쪽 끝으로 배치 */
+}
+
+/* 학급 코드 스타일 */
+.class-code {
+    margin: 0;
+    display: inline-flex; /* 내부 요소 크기만큼 너비 차지 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    margin-bottom: 10px;
+    margin-right: 10px; /* 오른쪽 간격 설정 */
+}
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    display: inline-flex; /* 내부 요소 크기만큼 너비 차지 */
+    justify-content: center;
+}
+
+/* 수정 버튼과 삭제 버튼 스타일 */
+.url-copy-button, .update-button, .delete-button {
+    margin: 0 0 10px 10px;
+    font-size: 16px; /* 폰트 크기 설정 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+}
+
+/* 버튼 호버 스타일 */
+.url-copy-button:hover, .update-button:hover, .delete-button:hover {
+    color : #cccccc;/* 호버 시 텍스트 밑줄 추가 */
+}
+
+/* 생성 버튼 스타일 */
+button.create-roll {
+    width: 80%;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 15px 0 15px 0; /* 생성 버튼과 상단 요소 간의 간격 설정 */
+    padding: 5px 30px; /* 추가 버튼 패딩 설정 */
+    border: none; /* 버튼 테두리 제거 */
+    border-radius: 8px; /* 버튼 모서리 둥글게 설정 */
+    color: white; /* 버튼 텍스트 색상 설정 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+}

@@ -11,6 +11,12 @@ const CustomButton = styled(Button)({
 });
 
 const SocialLogin = ({ onLoginSuccess }) => {
+    const CustomButton = styled(Button)({
+        '&:hover': {
+            backgroundColor: 'lightgray',
+        },
+    });
+
 
     // const location = useLocation();
 

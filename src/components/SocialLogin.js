@@ -1,8 +1,16 @@
 import React, { useEffect } from "react"
 import '../styles/components/SocialLogin.css';
 import { useLocation } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 const SocialLogin = ({ onLoginSuccess }) => {
+    const CustomButton = styled(Button)({
+        '&:hover': {
+            backgroundColor: 'lightgray',
+        },
+    });
+
 
     // const location = useLocation();
 
@@ -69,12 +77,12 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
     return (
         <div className="social-login">
-            <button type="button" className="social-button" onClick={handleNaverLogin}>
+            <CustomButton type="button" className="social-button" onClick={handleNaverLogin}>
                 <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img" />
-            </button>
-            <button type="button" className="social-button" onClick={handleKakaoLogin}>
+            </CustomButton>
+            <CustomButton type="button" className="social-button" onClick={handleKakaoLogin}>
                 <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img" />
-            </button>
+            </CustomButton>
         </div>
     )
 }

@@ -8,7 +8,7 @@ const StudentSigninPage = () => {
     return (
         <div className="container">  
             <div className="logo-container"> {/* logo-container 추가 */}
-                <img src="\images\\logo\rollingPaperLogo.webp" className="logo" alt="Logo" />
+                <img src="\images\\logo\image_logo.png" className="logo" alt="Logo" />
             </div>
             <StudentSignin />
         </div>

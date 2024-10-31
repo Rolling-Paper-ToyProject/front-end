@@ -4,8 +4,7 @@ import LoginPage from './pages/LoginPage';
 import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
-import KakaoRedirectHandler from './pages/KakaoRedirectHandler';
-import NaverRedirectHandler from './pages/NaverRedirectHandler';
+import RedirectHandler from './pages/RedirectHandler';
 import { Provider } from 'react-redux';
 // import store from './store.js'
 
@@ -15,12 +14,12 @@ function App() {
       {/* <Provider store={store}> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<LoginPage />} />
             <Route path="/studentsignin" element={<StudentSigninPage />} />
-            <Route path="/mypage/:userId" element={<MyPage />} />
+            <Route path="/mypage" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
-            <Route path="/oauth/kakao/callback" element={<KakaoRedirectHandler />} />
-            <Route path="/oauth/naver/callback" element={<NaverRedirectHandler />} />
+            <Route path="/oauth/callback" element={<RedirectHandler />} />
+            {/* <Route path="/oauth/naver/callback" element={<NaverRedirectHandler />} /> */}
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

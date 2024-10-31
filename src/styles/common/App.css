@@ -20,7 +20,7 @@ body{
     margin-top:50px;
 }
 .social-login > button{
-    width : 60%;
+    width : 45%;
 }
 
 .App-header {
@@ -37,7 +37,7 @@ body{
 @media screen and (max-width: 1400px) {
     /*로그인 영역*/
    .app-container {
-       width: 40%;
+       width: 45%;
    }
 
 }
@@ -49,7 +49,7 @@ body{
    }
    /*로그인 영역의 버튼*/
    .social-login > button{
-       width : 50%;
+       width : 45%;
    }
 }
 
@@ -86,5 +86,9 @@ body{
     /* 마이페이지 영역*/
     .App-header {
         font-size: calc(20px + 4vmin); /* 데스크탑에서 폰트 크기를 두 배로 설정 */
-      }
+    }
+    /*로그인 영역의 버튼*/
+    .social-login > button{
+        width : 45%;
+    }
 }

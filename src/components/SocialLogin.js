@@ -68,11 +68,12 @@ const SocialLogin = ({ onLoginSuccess }) => {
         
     }
     
-    const handleLoginCallback = (userId) => {
-        if (userId) {
-            onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
-        }
-    }
+    // const handleLoginCallback = (userId) => {
+    //     if (userId) {
+    //         onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
+    //     }
+    // }
+
 
     return (
         <div className="social-login">

@@ -6,48 +6,60 @@ import RollItem from "../components/RollItem";
 const MyPage = () => {
     const navigate = useNavigate();
 
-    const { userId } = useParams(); // URL에서 userId를 추출하여 해당 선생님의 페이지로 접근
-    const [userName, setUserName] = useState('OOO');
+    const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
+
+    useEffect(() => {
+        // LocalStorage에서 userName을 가져와 설정
+        const storedUserName = localStorage.getItem("userName");
+        if (storedUserName) {
+            setUserName(storedUserName);
+        } else {
+            alert("로그인 상태가 아닙니다. 다시 로그인해주세요.");
+            navigate('/login');
+        }
+    }, []);
 
     /** 
      * 실제로는 userId에 할당된 rolls를 불러와야한다.
     */
 
     // 선생님의 이름과 롤 목록을 백엔드에서 가져오는 함수
-    const fetchUserData = async () => {
+    const fetchRollData = async () => {
         try {
-            // 백엔드에서 선생님의 이름과 롤 테이터를 가져오는 API ghcnf
-            const response = await fetch(`/mypage/{userId}`);
+            // 백엔드에서 선생님의 이름과 롤 테이터를 가져오는 API
+            const response = await fetch(`http://localhost:8080/roll/my/rolls`);
             const data = await response.json();
 
             // 데이터 설정
             setUserName(data.name);
-            setRolls(data.rolls);
+            setRolls(data.data);
         } catch (error) {
             console.error('데이터 가져오기 실패 : ', error)
         } 
     };
 
     // 가상의 API 호출 (실제 구현 시 백엔드에서 user_id를 기반으로 롤 데이터를 가져옴)
-    useEffect(()=> {
-        // 더미 데이터 (실제 API 응답 사용할 것)
-        // const fetchedRolls = [
-        //     { rollId: 1, rollName: 'OO초등학교 4-1', classCode: 1234, url: 'https://www.sparklenote.com/roll/1' },
-        //     { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
-        // ]
-        // setRolls(fetchedRolls);
-        
-        fetchUserData();
-    }, [userId]);
+    /**
+        useEffect(()=> {
+            // 더미 데이터 (실제 API 응답 사용할 것)
+            const fetchedRolls = [
+                { rollId: 1, rollName: 'OO초등학교 4-1', classCode: 1234, url: 'https://www.sparklenote.com/roll/1' },
+                { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
+            ]
+            setRolls(fetchedRolls);
+            
+            fetchUserData();
+        }, [userId]);
+    */
 
     /**
-     * userId는 URL에서 가져온 값으로, 현재 로그인한 유저나 특정 유저를 식별하는 고유 ID
-     * ID를 기반으로 해당 유저의 데이터를 가져오거나 필터링할 수 있음
-     * useEffect의 의존성 배열에 userId를 넣으면, userId가 변경될 때마다 이 useEffect가 다시 실행
-     * 다른 유저로 변경되거나 userId가 새롭게 주어지면 해당 유저의 데이터를 다시 가져오는 역할
-     * 이를 통해 각 유저의 고유한 롤링페이퍼 목록을 렌더링할 수 있게 됨
-     */
+        userId는 URL에서 가져온 값으로, 현재 로그인한 유저나 특정 유저를 식별하는 고유 ID
+        ID를 기반으로 해당 유저의 데이터를 가져오거나 필터링할 수 있음
+        useEffect의 의존성 배열에 userId를 넣으면, userId가 변경될 때마다 이 useEffect가 다시 실행
+        다른 유저로 변경되거나 userId가 새롭게 주어지면 해당 유저의 데이터를 다시 가져오는 역할
+        이를 통해 각 유저의 고유한 롤링페이퍼 목록을 렌더링할 수 있게 됨
+    */
 
     const teacherlogout = () => {
         // 소셜로그인을 로그아웃하는 로직 필요

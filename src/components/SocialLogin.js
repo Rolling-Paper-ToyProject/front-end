@@ -10,6 +10,12 @@ const CustomButton = styled(Button)({
     },
 });
 
+const CustomButton = styled(Button)({
+    '&:hover': {
+        backgroundColor: 'lightgray',
+    },
+});
+
 const SocialLogin = ({ onLoginSuccess }) => {
     const CustomButton = styled(Button)({
         '&:hover': {

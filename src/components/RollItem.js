@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ const RollItem = ({ roll }) => {
     const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
     const [newRollName, setNewRollName] = useState(roll.rollName);
+
+    // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
+    useEffect(() => {
+        setNewRollName(rollName);
+    }, [rollName]);
 
     const navigate = useNavigate();
 
@@ -34,14 +39,16 @@ const RollItem = ({ roll }) => {
     */
 
     const handleUpdate = async (rollId) => {
-        try{
-            await axios.put(`/roll/update/${rollId}`, { rollName: newRollName });
-            alert('롤 제목이 업데이트되었습니다.');
-            setIsEditing(false); // 편집 모드 종료
-        }catch (error){
-            console.log('롤 제목 수정에 실패', error);
+        if (newRollName !== rollName) {
+            try {
+                await axios.put(`/roll/update/${rollId}`, { rollName: newRollName });
+                alert('롤 제목이 업데이트되었습니다.');
+            } catch (error) {
+                console.log('롤 제목 수정에 실패');
+            }
         }
-    }
+        setIsEditing(false); // 편집 모드 종료
+    };
 
     const handleDelete = async (rollId) => {
         try{
@@ -49,7 +56,7 @@ const RollItem = ({ roll }) => {
             alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
             console.log('롤 삭제 성공');
         }catch (error) {
-            console.error('롤 삭제 실패', error);
+            console.error('롤 삭제 실패');
         }
 
     }
@@ -61,8 +68,19 @@ const RollItem = ({ roll }) => {
                     type="text"
                     value={newRollName}
                     onChange={(e) => setNewRollName(e.target.value)}
-                    onBlur={() => handleUpdate(roll.rollId)} // 입력을 마치고 포커스가 벗어나면 업데이트
-                    onKeyDown={(e) => e.key === 'Enter' && handleUpdate(roll.rollId)} // 엔터 키로 업데이트
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleUpdate(); // 엔터 키로 업데이트
+                        }
+                    }}
+                    onBlur={() => {
+                        // 포커스가 벗어날 때도 한 번만 업데이트 수행
+                        if (newRollName !== rollName) {
+                            handleUpdate();
+                        } else {
+                            setIsEditing(false);
+                        }
+                    }}
                 />
             ) : (
                 <h2 className="roll-name" onClick={() => setIsEditing(true)}>
@@ -79,7 +97,7 @@ const RollItem = ({ roll }) => {
                     <p className="update-button" onClick={() => setIsEditing(true)}>수정</p>
 
                     {/* 삭제 버튼 */}
-                    <p className="delete-button" onClick={() => handleDelete()}>삭제</p>
+                    <p className="delete-button" onClick={() => handleDelete(roll.rollId)}>삭제</p>
                 </div>
             </div>
         </div>

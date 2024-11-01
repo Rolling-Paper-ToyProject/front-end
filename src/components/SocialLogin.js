@@ -4,25 +4,7 @@ import { useLocation } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { CustomButton1, CustomButton2 } from './MuiButton';
 
-const CustomButton = styled(Button)({
-    '&:hover': {
-        backgroundColor: 'lightgray',
-    },
-});
-
-const CustomButton = styled(Button)({
-    '&:hover': {
-        backgroundColor: 'lightgray',
-    },
-});
-
 const SocialLogin = ({ onLoginSuccess }) => {
-    const CustomButton = styled(Button)({
-        '&:hover': {
-            backgroundColor: 'lightgray',
-        },
-    });
-
 
     // const location = useLocation();
 

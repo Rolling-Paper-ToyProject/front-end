@@ -19,7 +19,6 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />
-            {/* <Route path="/oauth/naver/callback" element={<NaverRedirectHandler />} /> */}
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

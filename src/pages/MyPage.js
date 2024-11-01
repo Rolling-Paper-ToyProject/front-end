@@ -15,9 +15,10 @@ const MyPage = () => {
         if (storedUserName) {
             setUserName(storedUserName);
         } else {
-            alert("로그인 상태가 아닙니다. 다시 로그인해주세요.");
-            navigate('/login');
-        }
+            alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
+            navigate('/');
+        };
+        fetchRollData();
     }, []);
 
     /** 
@@ -32,8 +33,7 @@ const MyPage = () => {
             const data = await response.json();
 
             // 데이터 설정
-            setUserName(data.name);
-            setRolls(data.data);
+            setRolls(data.data.data);
         } catch (error) {
             console.error('데이터 가져오기 실패 : ', error)
         } 

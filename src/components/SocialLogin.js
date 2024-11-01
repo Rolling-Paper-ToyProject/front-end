@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import '../styles/components/SocialLogin.css';
 import { useLocation } from "react-router-dom";
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { CustomButton1, CustomButton2 } from './MuiButton';
 
 const CustomButton = styled(Button)({
     '&:hover': {
@@ -12,7 +12,7 @@ const CustomButton = styled(Button)({
 
 const SocialLogin = ({ onLoginSuccess }) => {
 
-    const location = useLocation();
+    // const location = useLocation();
 
     // useEffect(() => {
     //     // OAuth 인증 후 리다이렉트된 URL에서 userId 추출
@@ -76,12 +76,12 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
     return (
         <div className="social-login">
-            <CustomButton type="button" className="social-button" onClick={handleNaverLogin}>
+            <CustomButton1 type="button" className="social-button" onClick={handleNaverLogin}>
                 <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img" />
-            </CustomButton>
-            <CustomButton type="button" className="social-button" onClick={handleKakaoLogin}>
+            </CustomButton1>
+            <CustomButton1 type="button" className="social-button" onClick={handleKakaoLogin}>
                 <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img" />
-            </CustomButton>
+            </CustomButton1>
         </div>
     )
 }

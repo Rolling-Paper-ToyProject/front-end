@@ -3,7 +3,7 @@ import '../styles/pages/MyPage.css'; // 스타일 import
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-const Roll = () => {
+const RollItem = ({ roll }) => {
     // 롤 제목 수정 모드 상태를 관리하는 state
     const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
@@ -13,8 +13,8 @@ const Roll = () => {
 
     const enterRoll = (rollId) => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate('roll/${rollId}')
-        console.log('롤링페이퍼 ${rollId}로 이동');
+        navigate(`roll/${rollId}`)
+        console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
     const copyUrl = (url) => {
@@ -35,9 +35,8 @@ const Roll = () => {
 
     const handleUpdate = async (rollId) => {
         try{
-            await axios.put('/roll/update/${rollId}', { rollName: newRollName });
+            await axios.put(`/roll/update/${rollId}`, { rollName: newRollName });
             alert('롤 제목이 업데이트되었습니다.');
-            onUpdate(); // 업데이트 후 부모 컴포넌트의 데이터 갱신
             setIsEditing(false); // 편집 모드 종료
         }catch (error){
             console.log('롤 제목 수정에 실패', error);
@@ -46,17 +45,13 @@ const Roll = () => {
 
     const handleDelete = async (rollId) => {
         try{
-            await axios.delete('/roll/delete/${rollId}');
+            await axios.delete(`/roll/delete/${rollId}`);
             alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
             console.log('롤 삭제 성공');
         }catch (error) {
             console.error('롤 삭제 실패', error);
         }
 
-    }
-
-    const handleSave = () => {
-        onUpdate()
     }
     
     return (
@@ -67,7 +62,7 @@ const Roll = () => {
                     value={newRollName}
                     onChange={(e) => setNewRollName(e.target.value)}
                     onBlur={() => handleUpdate(roll.rollId)} // 입력을 마치고 포커스가 벗어나면 업데이트
-                    onKeyPress={(e) => e.key === 'Enter' && handleUpdate(roll.rollId)} // 엔터 키로 업데이트
+                    onKeyDown={(e) => e.key === 'Enter' && handleUpdate(roll.rollId)} // 엔터 키로 업데이트
                 />
             ) : (
                 <h2 className="roll-name" onClick={() => setIsEditing(true)}>
@@ -78,13 +73,13 @@ const Roll = () => {
                 <p className="class-code">학급코드 : {roll.classCode} {/* class_code 사용 */}</p>
                 <div className="button-group">
                     {/* URL 복사 버튼 */}
-                    <p className="url-copy-button" onClick={() => onCopy(roll.url)}>URL 복사</p>
+                    <p className="url-copy-button" onClick={() => copyUrl(roll.url)}>URL 복사</p>
 
                     {/* 수정 버튼 */}
                     <p className="update-button" onClick={() => setIsEditing(true)}>수정</p>
 
                     {/* 삭제 버튼 */}
-                    <p className="delete-button" onClick={() => onDelete()}>삭제</p>
+                    <p className="delete-button" onClick={() => handleDelete()}>삭제</p>
                 </div>
             </div>
         </div>

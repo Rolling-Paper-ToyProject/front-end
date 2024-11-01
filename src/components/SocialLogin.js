@@ -1,21 +1,29 @@
 import React, { useEffect } from "react"
 import '../styles/components/SocialLogin.css';
 import { useLocation } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 const SocialLogin = ({ onLoginSuccess }) => {
+    const CustomButton = styled(Button)({
+        '&:hover': {
+            backgroundColor: 'lightgray',
+        },
+    });
 
-    const location = useLocation();
 
-    useEffect(() => {
-        // OAuth 인증 후 리다이렉트된 URL에서 userId 추출
-        const params = new URLSearchParams(location.search);
-        // search: 쿼리 스트링 (?key=value) 부분을 의미함
-        const userId = params.get("userId"); 
-        // 예를 들어 ?userId=123 형식으로 전달된다고 가정
-        if (userId) {
-            handleLoginCallback(userId);
-        }
-    }, [location]);
+    // const location = useLocation();
+
+    // useEffect(() => {
+    //     // OAuth 인증 후 리다이렉트된 URL에서 userId 추출
+    //     const params = new URLSearchParams(location.search);
+    //     // search: 쿼리 스트링 (?key=value) 부분을 의미함
+    //     const userId = params.get("userId"); 
+    //     // 예를 들어 ?userId=123 형식으로 전달된다고 가정
+    //     if (userId) {
+    //         handleLoginCallback(userId);
+    //     }
+    // }, [location]);
 
     // 1. useLocation 훅을 사용해 현재 URL 정보를 가져옴
     // 2. useEffect를 이용해 컴포넌트가 렌더링될 때나 location이 변경될 때 실행
@@ -25,21 +33,21 @@ const SocialLogin = ({ onLoginSuccess }) => {
     const handleNaverLogin = () => {
         
         /** 
-        */     
-        // Spring Security로 간소화 하기 전 코드
-        const CLIENT_ID = '8JVwALZwrnomasZCN1Gz';
-        const STATE = false;
-        const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/naver';
-    
-        // 네이버 로그인 버튼 클릭 시 호출
-        const handleNaverLogin = () => {
-        window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
-        }
+            // Spring Security로 간소화 하기 전 코드
+            const CLIENT_ID = '8JVwALZwrnomasZCN1Gz';
+            const STATE = false;
+            const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/naver';
+        
+            // 네이버 로그인 버튼 클릭 시 호출
+            const handleNaverLogin = () => {
+            window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
+            }
+        */   
         
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 네이버 OAuth2 인증 엔드포인트로 리다이렉트
-        // window.location.href = '/oauth2/authorization/naver';
+        window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
 
     }
     
@@ -56,24 +64,25 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 카카오 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = '/oauth2/authorization/kakao';
+        window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
         
     }
     
-    const handleLoginCallback = (userId) => {
-        if (userId) {
-            onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
-        }
-    }
+    // const handleLoginCallback = (userId) => {
+    //     if (userId) {
+    //         onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
+    //     }
+    // }
+
 
     return (
         <div className="social-login">
-            <button type="button" className="social-button" onClick={handleNaverLogin}>
+            <CustomButton type="button" className="social-button" onClick={handleNaverLogin}>
                 <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img" />
-            </button>
-            <button type="button" className="social-button" onClick={handleKakaoLogin}>
+            </CustomButton>
+            <CustomButton type="button" className="social-button" onClick={handleKakaoLogin}>
                 <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img" />
-            </button>
+            </CustomButton>
         </div>
     )
 }

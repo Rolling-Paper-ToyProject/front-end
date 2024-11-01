@@ -5,7 +5,8 @@ const RedirectHandler = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
         const token = params.get('token');
         const refreshToken = params.get('refreshToken');
 

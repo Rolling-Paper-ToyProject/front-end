@@ -42,7 +42,7 @@ const MyPage = () => {
 
     // 가상의 API 호출 (실제 구현 시 백엔드에서 user_id를 기반으로 롤 데이터를 가져옴)
     // LocalStorage에서 userName을 가져와 설정
-    useEffect(() => {
+    /*useEffect(() => {
 
             // 더미 롤 데이터 생성
             const fetchedRolls = [

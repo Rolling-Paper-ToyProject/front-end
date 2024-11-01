@@ -9,7 +9,6 @@ import MyPage2 from './pages/MyPage2';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './components/MuiColor';
 import { Provider } from 'react-redux';
-import MyPage2 from './pages/MyPage2';
 // import store from './store.js'
 
 function App() {

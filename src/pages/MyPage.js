@@ -10,7 +10,7 @@ const MyPage = () => {
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
 
-    /*useEffect(() => {
+    useEffect(() => {
         // LocalStorage에서 userName을 가져와 설정
         const storedUserName = localStorage.getItem("userName");
         if (storedUserName) {

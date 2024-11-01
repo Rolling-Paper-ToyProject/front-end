@@ -1,52 +1,65 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RedirectHandler = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 컴포넌트가 처음 렌더링될 때 실행되는 코드 (카카오 인증 후 리다이렉트된 후 동작)
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        const refreshToken = params.get('refreshToken');
 
-        const token = getCookie("Authorization") // 쿠키에서 token을 가져옴
-        console.log("Token:", token);
+        if (token && refreshToken) {
+            try {
+                // 토큰 저장
+                localStorage.setItem("Authorization", `Bearer ${token}`);
+                localStorage.setItem("RefreshToken", refreshToken);
 
-        if (token) {
-            fetchUserInfo(token);
-        }
-    }, []);
+                console.log("Access Token:", token);
+                console.log("Refresh Token:", refreshToken);
 
-    const fetchUserInfo = async (token) => {
-        try {
-            const response = await fetch(`http://localhost:8080/user/my`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            });
-            console.log("Response:", response);
-            const data = await response.json();
-            console.log("User Data:", data);
+                // 유저 정보 요청
+                const fetchUserInfo = async () => {
+                    try {
+                        const userInfoResponse = await fetch('http://localhost:8080/user/info', {
+                            method: "GET",
+                            headers: {
+                                "Accept": "application/json",
+                                "Authorization": `Bearer ${token}`
+                            }
+                        });
 
-            if (data.userId && data.name) {
-                localStorage.setItem("userName", data.name);
-                localStorage.setItem("userId", data.userId);
-                localStorage.setItem("Authorization", token);
-                navigate(`/mypage`);
+                        if (!userInfoResponse.ok) {
+                            throw new Error('User info fetch failed');
+                        }
+
+                        const userData = await userInfoResponse.json();
+                        console.log("User Data:", userData);
+
+                        // 성공적으로 처리되면 마이페이지로 이동
+                        navigate("/mypage");
+                    } catch (error) {
+                        console.error("Error fetching user info:", error);
+                        navigate("/");  // 에러 시 로그인 페이지로
+                    }
+                };
+
+                fetchUserInfo();
+            } catch (error) {
+                console.error("Error processing tokens:", error);
+                navigate("/");
             }
-        } catch (error) {
-             console.error("사용자 정보 가져오기 실패:" + error);
+        } else {
+            console.error("No tokens received");
+            navigate("/");
         }
-    }
+    }, [navigate]);
 
-    // 쿠키에서 token을 읽어오는 함수
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if(parts.length === 2) return parts.pop().split(';').shift();
-    };
-
-    return <div>로그인 처리 중입니다...</div>; // 인증 처리 중일 떄 화면에 "로그인 처리 중입니다..."라는 메시지를 출력
-}
+    return (
+        <div className="flex justify-center items-center h-screen">
+            <div>로그인 처리 중입니다...</div>
+        </div>
+    );
+};
 
 export default RedirectHandler;

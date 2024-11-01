@@ -16,7 +16,7 @@ const LoginPage = () => {
     return (
         <div className="container">  
             <div className="logo-container"> {/* logo-container 추가 */}
-                <img src="\images\\logo\rollingPaperLogo.webp" className="logo" alt="Logo" />
+                <img src="\images\\logo\image_logo.png" className="logo" alt="Logo" />
             </div>
             {/* 소셜 로그인 컴포넌트. 로그인 성공 시 handleSocialLoginSuccess 실행 */}
             <SocialLogin onLoginSuccess={handleSocialLoginSuccess}/>

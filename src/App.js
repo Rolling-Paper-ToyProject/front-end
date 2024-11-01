@@ -6,10 +6,13 @@ import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './components/MuiColor';
 // import store from './store.js'
 
 function App() {
   return (
+  <ThemeProvider theme={theme}>
     <div className="app-container">
       {/* <Provider store={store}> */}
         <BrowserRouter>
@@ -24,6 +27,7 @@ function App() {
         </BrowserRouter>
       {/* </Provider> */}
     </div>
+  </ThemeProvider>
   );
 }
 

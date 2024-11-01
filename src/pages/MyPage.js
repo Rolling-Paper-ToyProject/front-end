@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 import { useNavigate, useParams } from "react-router-dom";
 import RollItem from "../components/RollItem";
+import { CustomButton1, CustomButton2 } from '../components/MuiButton';
 
 const MyPage = () => {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ const MyPage = () => {
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         // LocalStorage에서 userName을 가져와 설정
         const storedUserName = localStorage.getItem("userName");
         if (storedUserName) {
@@ -40,6 +41,16 @@ const MyPage = () => {
     };
 
     // 가상의 API 호출 (실제 구현 시 백엔드에서 user_id를 기반으로 롤 데이터를 가져옴)
+    // LocalStorage에서 userName을 가져와 설정
+    useEffect(() => {
+
+            // 더미 롤 데이터 생성
+            const fetchedRolls = [
+                { rollId: 1, rollName: 'OO초등학교 4-1', classCode: 1234, url: 'https://www.sparklenote.com/roll/1' },
+                { rollId: 2, rollName: 'OO초등학교 4-2', classCode: 5678, url: 'https://www.sparklenote.com/roll/2' }
+            ];
+            setRolls(fetchedRolls);
+        }, [navigate]);
     /**
         useEffect(()=> {
             // 더미 데이터 (실제 API 응답 사용할 것)
@@ -77,7 +88,7 @@ const MyPage = () => {
         <div className="my-page-container"> {/* 전체 페이지 컨테이너 */}
             <div className="greeting-container"> {/* 인사말 컨테이너 */}
                 <p className="greeting">{userName} 선생님, 안녕하세요</p>
-                <button className="logout-button" onClick={teacherlogout}>LOGOUT</button>
+                <CustomButton2 className="logout-button" onClick={teacherlogout}>LOGOUT</CustomButton2>
             </div>
             <div className="roll-list-container">
                 {rolls. length > 0 ? (
@@ -88,9 +99,9 @@ const MyPage = () => {
                         />
                     ))
                 ) : (
-                    <p>등록한 롤이 없습니다</p>
+                    <p>등록된 학급이 없습니다</p>
                 )}
-                <button onClick={handleCreateRoll} className="create-roll">롤 생성</button>
+                <CustomButton2 onClick={handleCreateRoll} className="create-roll"> ✛ 학급 생성</CustomButton2>
             </div>
         </div>
     );

@@ -73,8 +73,8 @@ const MyPage = () => {
                     "Authorization": token
                 }
             });
-            alert("새 학급이 생성되었습니다.")
-            navigate("/mypage")
+            alert("새 학급이 생성되었습니다.");
+            window.location.reload();
         } catch (error) {
             console.log('롤 생성 실패', error)
         }

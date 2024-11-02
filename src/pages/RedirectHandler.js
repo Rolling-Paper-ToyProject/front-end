@@ -5,12 +5,8 @@ const RedirectHandler = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-<<<<<<< HEAD
         const hash = window.location.hash.substring(1);
         const params = new URLSearchParams(hash);
-=======
-        const params = new URLSearchParams(window.location.search);
->>>>>>> 36ab2119c6764a57a2b8776d416bfc93db9508a2
         const token = params.get('token');
         const refreshToken = params.get('refreshToken');
 

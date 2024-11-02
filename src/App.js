@@ -5,9 +5,10 @@ import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
-import { Provider } from 'react-redux';
+import MyPage2 from './pages/MyPage2';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './components/MuiColor';
+import { Provider } from 'react-redux';
 // import store from './store.js'
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />
-            {/* <Route path="/oauth/naver/callback" element={<NaverRedirectHandler />} /> */}
+            <Route path="/mypage2" element={<MyPage2 />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

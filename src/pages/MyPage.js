@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
 import { CustomButton2 } from '../components/MuiButton';
+import axios from "axios";
 
 const MyPage = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
+    const token = localStorage.getItem("Authorization");
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("Authorization");
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
@@ -65,9 +66,27 @@ const MyPage = () => {
         navigate('/');
     };
 
-    const handleCreateRoll = () => {
-        // roll 생성하는 API 호출 로직
+    const handleCreateRoll = async () => {
+        try {
+            await axios.post(`http://localhost:8080/roll/create`, { rollName: "새 학급"}, {
+                headers: {
+                    "Authorization": token
+                }
+            });
+            alert("새 학급이 생성되었습니다.");
+            window.location.reload();
+        } catch (error) {
+            console.log('롤 생성 실패', error)
+        }
+
+        /** 
+            1. "rollName" : "새 학급" 이라는 요청값을 주면서 롤 생성 API를 불러온다
+            2. 응답을 받으면 RollItem.js에서 띄워준다.
+            3. 롤 조회를 하는 API를 다시 불러온다.
+        */
     };
+
+
 
     return (
         <div className="my-page-container">

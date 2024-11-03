@@ -5,7 +5,6 @@ import StudentSigninPage from './pages/StudentSigninPage';
 import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
-import MyPage2 from './pages/MyPage2';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './components/MuiColor';
 import { Provider } from 'react-redux';
@@ -23,7 +22,6 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/roll" element={<RollingPaperPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />
-            <Route path="/mypage2" element={<MyPage2 />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

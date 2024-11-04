@@ -73,8 +73,17 @@ const RollItem = ({ roll }) => {
 
     const handleDelete = async (rollId) => {
         try{
-            await axios.delete(`/roll/delete/${rollId}`);
+            await axios.delete(`http://localhost:8080/roll/delete/${rollId}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
             alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
+
+             // 상태 업데이트를 위해 페이지 새로고침
+            window.location.reload(); // 새로고침을 통해 롤 삭제를 반영
             console.log('롤 삭제 성공');
         }catch (error) {
             console.error('롤 삭제 실패');

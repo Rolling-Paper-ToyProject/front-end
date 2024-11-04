@@ -17,7 +17,7 @@ body{
 
 /*로그인 영역의 버튼*/
 .social-login{
-    margin-top:50px;
+    margin-top:20px;
 }
 .social-login > button{
     width : 45%;

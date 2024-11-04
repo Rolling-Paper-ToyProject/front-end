@@ -6,17 +6,12 @@ import CreatePaperModal from "../components/CreatePaperModal";
 const RollingPaperPage = () => {
     
     // 모달 상태 관리
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
 
     // 모달을 여는 함수
     const showCreatePaperModal = () => {
-        setIsCreateModalOpen(true);
+        setIsCreatePaperModalOpen(true);
     } 
-
-    // 모달을 닫는 함수
-    const closeModal = () => {
-        setIsCreateModalOpen(false);
-    }
 
     const handleAddPaper = () => {
         
@@ -30,10 +25,10 @@ const RollingPaperPage = () => {
             </div>
 
             {/* RollingPaperDetail 컴포넌트 */}
-            <RollingPaperDetail />
+            <PaperItem paper={paper}/>
 
             {/* CreatePaperModal 컴포넌트 */}
-            {isCreateModalOpen && <CreatePaperModal closeModal={closeModal} />}
+            {isCreatePaperModalOpen && <CreatePaperModal />}
         </div>
     )
     

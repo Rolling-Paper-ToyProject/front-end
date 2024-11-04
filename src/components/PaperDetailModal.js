@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdMore } from "react-icons/io"; // 아이콘 가져오기
 import '../styles/components/PaperModal.css' // CSS 파일 가져오기
 
-const PaperDetailModal = ({ paper, closeModal }) => {
+const PaperDetailModal = ({  }) => {
     const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
     const [editedContent, setEditedContent] = useState(paper.content);
     const [showOptions, setShowOptions] = useState(false); // 수정 및 삭제 옵션 가시성 상태

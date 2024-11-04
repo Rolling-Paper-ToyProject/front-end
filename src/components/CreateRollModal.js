@@ -1,36 +1,38 @@
 import { useState } from "react";
-import '../styles/components/Modal.css' // CSS 파일 가져오기
+import '../styles/components/PaperModal.css' // CSS 파일 가져오기
+import axios from "axios";
 
-const CreatePaperModal = () => {
+const CreateRollModal = ({ closeModal }) => {
 
-    const [paperContent, setPaperContent] = useState('');
-    
+    const token = localStorage.getItem("Authorization");
+    const [rollTitle, setRollTitle] = useState('');
+
     const handleOverlayClick = (e) => {
         if (e.target === e.currentTarget) { // 배경을 클릭했는지 확인
             closeModal();
         }    
     }
 
-    // 모달을 닫는 함수
-    const closeModal = () => {
-        setIsCreateModalOpen(false);
-    }
-
-    const handleCreatePaper = async () => {
+    const createRoll = async () => {
         try {
-            await axios.post(`http://localhost:8080/roll/create`, { content: paperContent }, {
+            await axios.post(`http://localhost:8080/roll/create`, { rollName: rollTitle }, {
                 headers: {
                     "Authorization": token
                 }
             });
-            alert("롤링페이퍼가 작성되었습니다.");
+            alert("새 학급이 생성되었습니다.");
             setRollTitle(''); // 입력 내용 초기화
             window.location.reload();
         } catch (error) {
-            console.log('롤링페이퍼 작성 실패', error)
+            console.log('롤 생성 실패', error)
         }
-    };
 
+        /** 
+            1. 'rollName : 사용자의 요청값'을 주면서 롤 생성 API를 불러온다
+            2. 응답을 받으면 RollItem.js에서 띄워준다.
+            3. 롤 조회를 하는 API를 다시 불러온다.
+        */
+    };
 
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}> {/* 모달 배경 */}
@@ -48,18 +50,19 @@ const CreatePaperModal = () => {
              * */}  
                 <input 
                     type="text"
-                    value = {paperContent}
-                    onChange = {(e) => setPaperContent(e.target.value)}
-                    placeholder="내용을 입력하세요"
+                    value = {rollTitle}
+                    onChange = {(e) => setRollTitle(e.target.value)}
+                    placeholder="새 학급명을 입력해주세요"
                 /> {/* 롤링페이퍼 작성 */}
                 <button 
-                    className="paper-create-button" 
-                    onClick={handleCreatePaper}
-                    disabled={!paperContent.trim()} // 내용이 없을 때 버튼 비활성화
+                    className="roll-create-button" 
+                    onClick={createRoll}
+                    disabled={!rollTitle.trim()} // 내용이 없을 때 버튼 비활성화
                 >등록</button>
             </div>
         </div>
     );
+
 };
 
-export default CreatePaperModal;
+export default CreateRollModal;

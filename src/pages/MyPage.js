@@ -16,7 +16,7 @@ const MyPage = () => {
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
-                navigate('/');
+                navigate('/')
                 return;
             }
 

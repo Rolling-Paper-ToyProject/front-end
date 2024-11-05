@@ -1,8 +1,10 @@
 import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
+import axios from "axios";
 
-const CreatePaperModal = () => {
+const CreatePaperModal = ({ closeModal }) => {
 
+    const token = localStorage.getItem("Authorization");
     const [paperContent, setPaperContent] = useState('');
     
     const handleOverlayClick = (e) => {
@@ -11,20 +13,15 @@ const CreatePaperModal = () => {
         }    
     }
 
-    // 모달을 닫는 함수
-    const closeModal = () => {
-        setIsCreateModalOpen(false);
-    }
-
     const handleCreatePaper = async () => {
         try {
-            await axios.post(`http://localhost:8080/roll/create`, { content: paperContent }, {
+            await axios.post(`http://localhost:8080/paper/create`, { content: paperContent }, {
                 headers: {
                     "Authorization": token
                 }
             });
             alert("롤링페이퍼가 작성되었습니다.");
-            setRollTitle(''); // 입력 내용 초기화
+            setPaperContent(''); // 입력 내용 초기화
             window.location.reload();
         } catch (error) {
             console.log('롤링페이퍼 작성 실패', error)

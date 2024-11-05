@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoMdMore } from "react-icons/io"; // 아이콘 가져오기
-import '../styles/components/PaperModal.css' // CSS 파일 가져오기
+import '../styles/components/Modal.css' // CSS 파일 가져오기
 
 const PaperDetailModal = ({  }) => {
     const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태

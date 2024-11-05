@@ -71,11 +71,11 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
     return (
         <div className="social-login">
-            <CustomButton1 type="button" className="social-button" onClick={handleNaverLogin}>
-                <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img" />
+            <CustomButton1 type="button" className="social-button naver-button" onClick={handleNaverLogin}>
+                <img src="/images/socialLoginButtons/naverSocialLogin.png" alt="네이버 로그인" className="social-img social-naver" />
             </CustomButton1>
             <CustomButton1 type="button" className="social-button" onClick={handleKakaoLogin}>
-                <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img" />
+                <img src="/images/socialLoginButtons/kakaoSocialLogin.png" alt="카카오 로그인" className="social-img social-kakao" />
             </CustomButton1>
         </div>
     )

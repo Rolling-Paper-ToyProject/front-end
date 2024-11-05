@@ -13,7 +13,7 @@
 
 /* 모달 내용 스타일 */
 .modal-content {
-    width: 200px;
+    width: 350px;
     background-color: white; /* 모달 배경색 */
     border-radius: 5px; /* 모서리 둥글게 */
     padding: 20px; /* 여백 */

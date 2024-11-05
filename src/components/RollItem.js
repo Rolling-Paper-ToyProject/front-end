@@ -101,13 +101,13 @@ const RollItem = ({ roll }) => {
                         onChange={(e) => setNewRollName(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                handleUpdate(rollId); // 엔터 키로 업데이트
+                                handleUpdate(); // 엔터 키로 업데이트
                             }
                         }}
                         onBlur={() => {
                             // 포커스가 벗어날 때도 한 번만 업데이트 수행
                             if (newRollName !== rollName) {
-                                handleUpdate(rollId);
+                                handleUpdate();
                             } else {
                                 setIsEditing(false);
                             }
@@ -115,7 +115,7 @@ const RollItem = ({ roll }) => {
                     />
                 ) : (
                     <h2 className="roll-name" onClick={() => enterRoll(rollId)}>
-                        {rollName}
+                        {roll.rollName}
                     </h2>
                 )}
                 <div className="roll-code-container">

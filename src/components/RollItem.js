@@ -7,13 +7,8 @@ const RollItem = ({ roll }) => {
     // 롤 제목 수정 모드 상태를 관리하는 state
     const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
-    const [newRollName, setNewRollName] = useState(roll.rollName);
+    const [newRollName, setNewRollName] = useState(rollName);
     const token = localStorage.getItem("Authorization");
-
-    // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
-    useEffect(() => {
-        setNewRollName(rollName);
-    }, [rollName]);
 
     // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
     useEffect(() => {
@@ -24,12 +19,12 @@ const RollItem = ({ roll }) => {
 
     const enterRoll = (rollId) => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`roll/${rollId}`)
+        navigate(`/paper/${rollId}`, { state: { rollId, rollName } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
     const copyUrl = (url) => {
-        navigator.clipboard.writeText(url).then(() => {
+        navigator.clipboard.writeText(`http://localhost:3000/${url}`).then(() => {
             alert('URL이 클립보드에 복사되었습니다.');
         }).catch(err => {
             alert('복사 실패: ' + err);
@@ -55,7 +50,7 @@ const RollItem = ({ roll }) => {
         // 변경한 제목과 변경 전 제목이 같지않을 경우
         if (newRollName !== rollName) {
             try {
-                await axios.put(`http://localhost:8080/roll/update/${roll.rollId}`,
+                await axios.put(`http://localhost:8080/roll/update/${rollId}`,
                     { rollName: newRollName },
                     {
                         headers: {
@@ -98,44 +93,46 @@ const RollItem = ({ roll }) => {
     }
 
     return (
-        <div className="roll-item">
-            {isEditing ? (
-                <input
-                    type="text"
-                    value={newRollName}
-                    onChange={(e) => setNewRollName(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleUpdate(); // 엔터 키로 업데이트
-                        }
-                    }}
-                    onBlur={() => {
-                        // 포커스가 벗어날 때도 한 번만 업데이트 수행
-                        if (newRollName !== rollName) {
-                            handleUpdate();
-                        } else {
-                            setIsEditing(false);
-                        }
-                    }}
-                />
-            ) : (
-                <h2 className="roll-name" onClick={() => setIsEditing(true)}>
-                    {roll.rollName}
-                </h2>
-            )}
-            <div className="roll-code-container">
-                <p className="class-code">학급코드 : {roll.classCode} {/* class_code 사용 */}</p>
-                <div className="button-group">
-                    {/* URL 복사 버튼 */}
-                    <p className="url-copy-button" onClick={() => copyUrl(roll.url)}>URL 복사</p>
+        <div className="roll-item" onClick={() => {enterRoll(rollId)}}>
+            <div onClick={(e) => {e.stopPropagation()}}>
+                {isEditing ? (
+                    <input
+                        type="text"
+                        value={newRollName}
+                        onChange={(e) => setNewRollName(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                handleUpdate(); // 엔터 키로 업데이트
+                            }
+                        }}
+                        onBlur={() => {
+                            // 포커스가 벗어날 때도 한 번만 업데이트 수행
+                            if (newRollName !== rollName) {
+                                handleUpdate();
+                            } else {
+                                setIsEditing(false);
+                            }
+                        }}
+                    />
+                ) : (
+                    <h2 className="roll-name" onClick={() => enterRoll(rollId)}>
+                        {roll.rollName}
+                    </h2>
+                )}
+                <div className="roll-code-container">
+                    <p className="class-code">학급코드 : {classCode} {/* class_code 사용 */}</p>
+                    <div className="button-group">
+                        {/* URL 복사 버튼 */}
+                        <p className="url-copy-button" onClick={() => copyUrl(url)}>URL 복사</p>
 
-                    {/* 수정 버튼 */}
-                    <p className="update-button" onClick={() => setIsEditing(true)}>수정</p>
+                        {/* 수정 버튼 */}
+                        <p className="update-button" onClick={() => setIsEditing(true)}>수정</p>
 
-                    {/* 삭제 버튼 */}
-                    <p className="delete-button" onClick={() => handleDelete(roll.rollId)}>삭제</p>
+                        {/* 삭제 버튼 */}
+                        <p className="delete-button" onClick={() => handleDelete(rollId)}>삭제</p>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
     )
 };

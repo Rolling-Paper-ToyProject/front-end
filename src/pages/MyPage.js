@@ -4,11 +4,13 @@ import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
 import { CustomButton2 } from '../components/MuiButton';
 import axios from "axios";
+import CreateRollModal from "../components/CreateRollModal";
 
 const MyPage = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
+    const [isCreateRollModalOpen, setIsCreateRollModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
     useEffect(() => {
@@ -66,27 +68,9 @@ const MyPage = () => {
         navigate('/');
     };
 
-    const handleCreateRoll = async () => {
-        try {
-            await axios.post(`http://localhost:8080/roll/create`, { rollName: "새 학급"}, {
-                headers: {
-                    "Authorization": token
-                }
-            });
-            alert("새 학급이 생성되었습니다.");
-            window.location.reload();
-        } catch (error) {
-            console.log('롤 생성 실패', error)
-        }
-
-        /** 
-            1. "rollName" : "새 학급" 이라는 요청값을 주면서 롤 생성 API를 불러온다
-            2. 응답을 받으면 RollItem.js에서 띄워준다.
-            3. 롤 조회를 하는 API를 다시 불러온다.
-        */
-    };
-
-
+    const closeModal = () => {
+        setIsCreateRollModalOpen(false);
+    }
 
     return (
         <div className="my-page-container">
@@ -108,12 +92,15 @@ const MyPage = () => {
                     <p>등록된 학급이 없습니다</p>
                 )}
                 <CustomButton2
-                    onClick={handleCreateRoll}
+                    onClick={() => setIsCreateRollModalOpen(true)}
                     className="create-roll"
                 >
                     ✛ 학급 생성
                 </CustomButton2>
             </div>
+
+            {isCreateRollModalOpen && <CreateRollModal closeModal={closeModal} /> }
+            
         </div>
     );
 };

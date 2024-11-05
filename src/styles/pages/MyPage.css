@@ -53,6 +53,7 @@ button.logout-button {
     padding: 10px 25px; /* 카드 내부 여백 설정 */
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    cursor: pointer;
 }
 
 .roll-name {
@@ -71,6 +72,7 @@ button.logout-button {
     font-size: 16px; /* 폰트 크기 설정 */
     margin-bottom: 10px;
     margin-right: 10px; /* 오른쪽 간격 설정 */
+    cursor: text;
 }
 
 /* 버튼 그룹 스타일 */

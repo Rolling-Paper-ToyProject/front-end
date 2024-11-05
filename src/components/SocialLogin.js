@@ -6,24 +6,6 @@ import { CustomButton1, CustomButton2 } from './MuiButton';
 
 const SocialLogin = ({ onLoginSuccess }) => {
 
-    // const location = useLocation();
-
-    // useEffect(() => {
-    //     // OAuth 인증 후 리다이렉트된 URL에서 userId 추출
-    //     const params = new URLSearchParams(location.search);
-    //     // search: 쿼리 스트링 (?key=value) 부분을 의미함
-    //     const userId = params.get("userId"); 
-    //     // 예를 들어 ?userId=123 형식으로 전달된다고 가정    
-    //     if (userId) {
-    //         handleLoginCallback(userId);
-    //     }
-    // }, [location]);
-
-    // 1. useLocation 훅을 사용해 현재 URL 정보를 가져옴
-    // 2. useEffect를 이용해 컴포넌트가 렌더링될 때나 location이 변경될 때 실행
-    // 3. URL 쿼리 스트링에서 userId 값을 추출
-    // 4. userId가 존재하면 handleLoginCallback을 호출해 로그인 후 처리 진행
-
     const handleNaverLogin = () => {
         
         /** 
@@ -62,13 +44,6 @@ const SocialLogin = ({ onLoginSuccess }) => {
         
     }
     
-    // const handleLoginCallback = (userId) => {
-    //     if (userId) {
-    //         onLoginSuccess(userId); // 로그인 성공 시 LoginPage로 전달
-    //     }
-    // }
-
-
     return (
         <div className="social-login">
             <CustomButton1 type="button" className="social-button naver-button" onClick={handleNaverLogin}>

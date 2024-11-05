@@ -15,6 +15,11 @@ const RollItem = ({ roll }) => {
         setNewRollName(rollName);
     }, [rollName]);
 
+    // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
+    useEffect(() => {
+        setNewRollName(rollName);
+    }, [rollName]);
+
     const navigate = useNavigate();
 
     const enterRoll = (rollId) => {
@@ -68,6 +73,7 @@ const RollItem = ({ roll }) => {
                console.log('롤 제목 수정에 실패:');
             }
         }
+
         setIsEditing(false); // 편집 모드 종료
     };
 

@@ -8,6 +8,12 @@ const RollItem = ({ roll }) => {
     const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
     const [newRollName, setNewRollName] = useState(roll.rollName);
+    const token = localStorage.getItem("Authorization");
+
+    // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
+    useEffect(() => {
+        setNewRollName(rollName);
+    }, [rollName]);
 
     // rollName이 변경될 때 newRollName도 업데이트하도록 useEffect 추가
     useEffect(() => {
@@ -39,21 +45,51 @@ const RollItem = ({ roll }) => {
     */
 
     const handleUpdate = async (rollId) => {
+
+        // 제목이 비었을 경우 경고
+        if (newRollName.trim() === "") {
+            alert("롤 제목을 입력해주세요.");
+            return;
+        }
+
+        // 변경한 제목과 변경 전 제목이 같지않을 경우
         if (newRollName !== rollName) {
             try {
-                await axios.put(`/roll/update/${rollId}`, { rollName: newRollName });
+                await axios.put(`http://localhost:8080/roll/update/${roll.rollId}`,
+                    { rollName: newRollName },
+                    {
+                        headers: {
+                            "Authorization": token // token 변수를 사용할 수 있도록 해당 변수가 정의되어 있어야 합니다.
+                        }
+                    }
+                );
                 alert('롤 제목이 업데이트되었습니다.');
+
+                // 상태 업데이트를 위해 페이지 새로고침
+                window.location.reload(); // 새로고침을 통해 변경된 제목 반영
+                setIsEditing(false);
+
             } catch (error) {
-                console.log('롤 제목 수정에 실패');
+               console.log('롤 제목 수정에 실패:');
             }
         }
+
         setIsEditing(false); // 편집 모드 종료
     };
 
     const handleDelete = async (rollId) => {
         try{
-            await axios.delete(`/roll/delete/${rollId}`);
+            await axios.delete(`http://localhost:8080/roll/delete/${rollId}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
             alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
+
+             // 상태 업데이트를 위해 페이지 새로고침
+            window.location.reload(); // 새로고침을 통해 롤 삭제를 반영
             console.log('롤 삭제 성공');
         }catch (error) {
             console.error('롤 삭제 실패');

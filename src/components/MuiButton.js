@@ -14,6 +14,7 @@ export const CustomButton2 = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: 'white',
     fontSize:'bold',
+    borderRadius: '50%',
     '&:hover': {
         backgroundColor: theme.palette.primary.light,
     },

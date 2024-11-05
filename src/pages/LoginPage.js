@@ -18,6 +18,8 @@ const LoginPage = () => {
             <div className="logo-container"> {/* logo-container 추가 */}
                 <img src="\images\\logo\image_logo.png" className="logo" alt="Logo" />
             </div>
+
+            <h2>Login</h2>
             {/* 소셜 로그인 컴포넌트. 로그인 성공 시 handleSocialLoginSuccess 실행 */}
             <SocialLogin onLoginSuccess={handleSocialLoginSuccess}/>
         </div>

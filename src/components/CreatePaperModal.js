@@ -15,11 +15,14 @@ const CreatePaperModal = ({ closeModal }) => {
 
     const handleCreatePaper = async () => {
         try {
-            await axios.post(`http://localhost:8080/paper/create`, { content: paperContent }, {
-                headers: {
-                    "Authorization": token
+            await axios.post(`http://localhost:8080/paper/create`, 
+                { content: paperContent }, 
+                {
+                    headers: {
+                        "Authorization": token
+                    }
                 }
-            });
+            );
             alert("롤링페이퍼가 작성되었습니다.");
             setPaperContent(''); // 입력 내용 초기화
             window.location.reload();

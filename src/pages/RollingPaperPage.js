@@ -11,7 +11,7 @@ const RollingPaperPage = () => {
     const { rollId, rollName } = location.state || {};
     const navigate = useNavigate();
     const [papers, setPapers] = useState([]);
-    const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
     useEffect(() => {
@@ -36,7 +36,6 @@ const RollingPaperPage = () => {
                 const paperData = await paperResponse.json();
                 console.log("Paper Data Response:", paperData);
                 setPapers(paperData.data || []); // 빈 배열 fallback 추가
-
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -45,12 +44,12 @@ const RollingPaperPage = () => {
 
     // 모달을 여는 함수
     const showCreateModal = () => {
-        setIsCreatePaperModalOpen(true);
+        setIsCreateModalOpen(true);
     } 
 
     // 모달을 닫는 함수
     const closeModal = () => {
-        setIsCreatePaperModalOpen(false);
+        setIsCreateModalOpen(false);
     }
 
     return (
@@ -74,10 +73,9 @@ const RollingPaperPage = () => {
                 )}
             </div>
             {/* CreatePaperModal 컴포넌트 */}
-            {isCreatePaperModalOpen && <CreatePaperModal closeModal={closeModal}/>}
+            {isCreateModalOpen && <CreatePaperModal closeModal={closeModal}/>}
         </div>
     )
-    
 }
 
 export default RollingPaperPage;

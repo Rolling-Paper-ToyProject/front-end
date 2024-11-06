@@ -2,31 +2,29 @@ import { useState, useEffect } from "react";
 import '../styles/pages/RollingPaperPage.css';
 import PaperDetailModal from "./PaperDetailModal";
 
-const PaperItem = (paper) =>  {
-    const { paperId, content } = paper; 
-    const [isPaperDetailModalOpen, setIsPaperDetailModalOpen] = useState(false);
+const PaperItem = ({ paper }) =>  {
+    const { paperId, content, studentName } = paper; 
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+    const token = localStorage.getItem("Authorization");
 
-    const showPaperDetailModal = (paper) => {
-        setSelectedPaper(paper);
-        setIsPaperDetailModalOpen(true);
+    const showModal = (paperId) => {
+        setIsDetailModalOpen(true);
     };
 
-    const closePaperDetailModal = () => {
-        setIsPaperDetailModalOpen(false);
-        setSelectedPaper(null);
+    const closeModal = (paperId) => {
+        setIsDetailModalOpen(false);
     };
 
     return (
         <>
-            <div key={paperId} onClick={() => showPaperDetailModal(paper)} className="paper-box">
+            <div key={paperId} onClick={() => showModal(paperId)} className="paper-box">
                 <p>{content}</p>
             </div>
 
-            {isPaperDetailModalOpen && (
+            {isDetailModalOpen && (
                 <PaperDetailModal 
+                    paper={paper}
                     closeModal={closeModal}
-                    studentName={studentName} 
-                    paperContent={content} // 선택된 페이퍼 내용 전달
                 />
             )}
         </>

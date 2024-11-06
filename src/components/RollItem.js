@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const RollItem = ({ roll }) => {
-    // 롤 제목 수정 모드 상태를 관리하는 state
     const { rollId, rollName, classCode, url } = roll;
     const [isEditing, setIsEditing] = useState(false);
     const [newRollName, setNewRollName] = useState(rollName);
@@ -17,13 +16,13 @@ const RollItem = ({ roll }) => {
 
     const navigate = useNavigate();
 
-    const enterRoll = (rollId) => {
+    const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`/paper/${rollId}`, { state: { rollId, rollName } })
+        navigate(`/roll/join/${url}`, { state: { rollId, rollName } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
-    const copyUrl = (url) => {
+    const copyUrl = () => {
         navigator.clipboard.writeText(`http://localhost:3000/${url}`).then(() => {
             alert('URL이 클립보드에 복사되었습니다.');
         }).catch(err => {
@@ -65,14 +64,14 @@ const RollItem = ({ roll }) => {
                 setIsEditing(false);
 
             } catch (error) {
-               console.log('롤 제목 수정에 실패:');
+               console.log('롤 제목 수정에 실패');
             }
         }
 
         setIsEditing(false); // 편집 모드 종료
     };
 
-    const handleDelete = async (rollId) => {
+    const handleDelete = async () => {
         try{
             await axios.delete(`http://localhost:8080/roll/delete/${rollId}`,
             {
@@ -102,13 +101,13 @@ const RollItem = ({ roll }) => {
                         onChange={(e) => setNewRollName(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                handleUpdate(); // 엔터 키로 업데이트
+                                handleUpdate(rollId); // 엔터 키로 업데이트
                             }
                         }}
                         onBlur={() => {
                             // 포커스가 벗어날 때도 한 번만 업데이트 수행
                             if (newRollName !== rollName) {
-                                handleUpdate();
+                                handleUpdate(rollId);
                             } else {
                                 setIsEditing(false);
                             }
@@ -116,7 +115,7 @@ const RollItem = ({ roll }) => {
                     />
                 ) : (
                     <h2 className="roll-name" onClick={() => enterRoll(rollId)}>
-                        {roll.rollName}
+                        {rollName}
                     </h2>
                 )}
                 <div className="roll-code-container">

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +20,10 @@ const RedirectHandler = () => {
                 console.log("Access Token:", token);
                 console.log("Refresh Token:", refreshToken);
 
-                // 유저 정보 요청
-                const fetchUserInfo = async () => {
+                // 선생님 정보 요청
+                const fetchTeacherInfo = async () => {
                     try {
-                        const userInfoResponse = await fetch('http://localhost:8080/user/info', {
+                        const teacherInfoResponse = await fetch('http://localhost:8080/user/info', {
                             method: "GET",
                             headers: {
                                 "Accept": "application/json",
@@ -30,12 +31,12 @@ const RedirectHandler = () => {
                             }
                         });
 
-                        if (!userInfoResponse.ok) {
+                        if (!teacherInfoResponse.ok) {
                             throw new Error('User info fetch failed');
                         }
 
-                        const userData = await userInfoResponse.json();
-                        console.log("User Data:", userData);
+                        const teacherData = await teacherInfoResponse.json();
+                        console.log("User Data:", teacherData);
 
                         // 성공적으로 처리되면 마이페이지로 이동
                         navigate("/mypage");
@@ -45,7 +46,7 @@ const RedirectHandler = () => {
                     }
                 };
 
-                fetchUserInfo();
+                fetchTeacherInfo();
             } catch (error) {
                 console.error("Error processing tokens:", error);
                 navigate("/");

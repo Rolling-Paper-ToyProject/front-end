@@ -19,7 +19,6 @@ const SocialLogin = ({ onLoginSuccess }) => {
             window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
             }
         */   
-        
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 네이버 OAuth2 인증 엔드포인트로 리다이렉트
@@ -40,7 +39,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 카카오 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+        window.loscation.href = 'http://localhost:8080/oauth2/authorization/kakao';
         
     }
     

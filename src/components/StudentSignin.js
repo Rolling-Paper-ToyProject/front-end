@@ -15,28 +15,41 @@ const StudentSignin = ({ token, url }) => {
         e.preventDefault();
         console.log(url);
         try {
-            const joinResponse = await axios.post(`http://localhost:8080/roll/join/${url}`, 
+            const joinResponse = await axios.post(`http://localhost:8080/roll/${url}/join`, 
                 {
                     "name": studentName,
                     "classCode": classCode,
                     "pinNumber": pinNumber
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': '*/*'
+                    }
                 }
             )
+            
+            const token = await joinResponse.headers["authorization"]?.split(" ")[1];
+            const refreshToken = await joinResponse.headers["refreshtoken"];
+            
+            localStorage.setItem("Authorization", `Bearer ${token}`);
+            localStorage.setItem("RefreshToken", refreshToken);
 
-            const token = joinResponse.headers["authorization"];
-            if (token) {
-                localStorage.setItem("Authorization", token);
-            }
-            console.log("JWT Token:", token);
+            console.log("Token:", token);
+            console.log("Refresh Token:", refreshToken);
+            // const token = joinResponse.headers["authorization"];
+            // if (token) {
+            //     localStorage.setItem("Authorization", token);
+            // }
+            // console.log("JWT Token:", token);
 
-            const joinData = joinResponse.data;
-            if (joinData) {
-                setRollId(joinData.data.rollId);
-                setStudentName(joinData.data.name);
-            }
-            console.log ("입장 응답 데이터:", joinData);
-
-            navigate(`/roll/join/${url}`, { state: { rollId, studentName } });
+            // const joinData = joinResponse.data;
+            // if (joinData) {
+            //     setRollId(joinData.data.rollId);
+            //     setStudentName(joinData.data.name);
+            // }
+            // console.log ("입장 응답 데이터:", joinData);
+            // navigate(`/roll/join/${url}`, { state: { rollId, studentName } });
         } catch (error) {
             console.log("롤링페이퍼 입장 실패:", error);
             alert("롤링페이퍼 입장 실패:", error);

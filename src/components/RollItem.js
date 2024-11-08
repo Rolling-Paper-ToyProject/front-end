@@ -58,7 +58,7 @@ const RollItem = ({ roll }) => {
                         }
                     }
                 );
-                alert('학급명이 수정되었습니다..');
+                alert('학급명이 수정되었습니다.');
 
                 // 상태 업데이트를 위해 페이지 새로고침
                 window.location.reload(); // 새로고침을 통해 변경된 제목 반영

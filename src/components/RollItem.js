@@ -43,7 +43,7 @@ const RollItem = ({ roll }) => {
 
         // 제목이 비었을 경우 경고
         if (newRollName.trim() === "") {
-            alert("롤 제목을 입력해주세요.");
+            alert("학급명을 입력해주세요.");
             return;
         }
 
@@ -58,7 +58,7 @@ const RollItem = ({ roll }) => {
                         }
                     }
                 );
-                alert('롤 제목이 업데이트되었습니다.');
+                alert('학급명이 수정되었습니다..');
 
                 // 상태 업데이트를 위해 페이지 새로고침
                 window.location.reload(); // 새로고침을 통해 변경된 제목 반영
@@ -73,7 +73,7 @@ const RollItem = ({ roll }) => {
     };
 
     async function handleDelete(rollId, token){
-        const result = window.confirm('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
+        const result = window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.');
         if (result) {
             try {
                 await axios.delete(`http://localhost:8080/roll/delete/${rollId}`, {
@@ -82,14 +82,14 @@ const RollItem = ({ roll }) => {
                     }
                 });
 
-                alert('롤이 삭제되었습니다.');
+                alert('학급이 삭제되었습니다.');
 
                 // 상태 업데이트를 위해 페이지 새로고침
                 window.location.reload(); // 새로고침을 통해 롤 삭제를 반영
                 console.log('롤 삭제 성공');
             } catch (error) {
                 console.error('롤 삭제 실패:', error);
-                alert('롤 삭제 중 오류가 발생했습니다.');
+                alert('학급 삭제 중 오류가 발생했습니다.');
             }
         } else {
             console.log('사용자가 롤 삭제를 취소했습니다.');

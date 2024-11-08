@@ -4,9 +4,11 @@ import Button from '@mui/material/Button';
 
 //배경색 없는 Button
 export const CustomButton1 = styled(Button)(({ theme }) => ({
-    color: '#2e8b57',
+    color: '#000000',
     '&:hover': {
-        backgroundColor: 'lightgray',
+        backgroundColor:'#ffffff',
+        color: 'lightgray',
+        fontWeight: 'bold',
     },
 }));
 

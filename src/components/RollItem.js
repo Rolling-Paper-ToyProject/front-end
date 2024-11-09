@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../styles/pages/MyPage.css'; // 스타일 import
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { UrlCopyIcon, RollDelete, RollTittleEdit }from './MuiIcon';
 
 const RollItem = ({ roll }) => {
     // 롤 제목 수정 모드 상태를 관리하는 state
@@ -40,56 +41,56 @@ const RollItem = ({ roll }) => {
     */
 
     const handleUpdate = async (rollId) => {
-
-        // 제목이 비었을 경우 경고
         if (newRollName.trim() === "") {
-            alert("롤 제목을 입력해주세요.");
+            alert("학급명을 입력해주세요.");
             return;
         }
 
-        // 변경한 제목과 변경 전 제목이 같지않을 경우
         if (newRollName !== rollName) {
             try {
                 await axios.put(`http://localhost:8080/roll/update/${rollId}`,
                     { rollName: newRollName },
                     {
                         headers: {
-                            "Authorization": token // token 변수를 사용할 수 있도록 해당 변수가 정의되어 있어야 합니다.
+                            "Authorization": token
                         }
                     }
                 );
-                alert('롤 제목이 업데이트되었습니다.');
+                alert('학급명이 수정되었습니다.');
 
-                // 상태 업데이트를 위해 페이지 새로고침
-                window.location.reload(); // 새로고침을 통해 변경된 제목 반영
+                window.location.reload(); // 새로고침을 통해 롤 수정을 반영
                 setIsEditing(false);
-
             } catch (error) {
-               console.log('롤 제목 수정에 실패:');
+                console.log('롤 제목 수정에 실패:');
             }
         }
 
-        setIsEditing(false); // 편집 모드 종료
+        setIsEditing(false);
     };
 
-    const handleDelete = async (rollId) => {
-        try{
-            await axios.delete(`http://localhost:8080/roll/delete/${rollId}`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
 
-            alert('정말 롤을 삭제하시겠습니까? 삭제된 롤은 복구되지 않습니다.');
+    async function handleDelete(rollId, token){
+        const result = window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.');
+        if (result) {
+            try {
+                await axios.delete(`http://localhost:8080/roll/delete/${rollId}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
 
-             // 상태 업데이트를 위해 페이지 새로고침
-            window.location.reload(); // 새로고침을 통해 롤 삭제를 반영
-            console.log('롤 삭제 성공');
-        }catch (error) {
-            console.error('롤 삭제 실패');
+                alert('학급이 삭제되었습니다.');
+
+                // 상태 업데이트를 위해 페이지 새로고침
+                window.location.reload(); // 새로고침을 통해 롤 삭제를 반영
+                console.log('롤 삭제 성공');
+            } catch (error) {
+                console.error('롤 삭제 실패:', error);
+                alert('학급 삭제 중 오류가 발생했습니다.');
+            }
+        } else {
+            console.log('사용자가 롤 삭제를 취소했습니다.');
         }
-
     }
 
     return (
@@ -108,7 +109,7 @@ const RollItem = ({ roll }) => {
                         onBlur={() => {
                             // 포커스가 벗어날 때도 한 번만 업데이트 수행
                             if (newRollName !== rollName) {
-                                handleUpdate();
+                                handleUpdate(rollId);
                             } else {
                                 setIsEditing(false);
                             }
@@ -123,13 +124,13 @@ const RollItem = ({ roll }) => {
                     <p className="class-code">학급코드 : {classCode} {/* class_code 사용 */}</p>
                     <div className="button-group">
                         {/* URL 복사 버튼 */}
-                        <p className="url-copy-button" onClick={() => copyUrl(url)}>URL 복사</p>
+                        <p className="url-copy-button" onClick={() => copyUrl(url)}><UrlCopyIcon /></p>
 
                         {/* 수정 버튼 */}
-                        <p className="update-button" onClick={() => setIsEditing(true)}>수정</p>
+                        <p className="update-button" onClick={() => setIsEditing(true)}><RollTittleEdit /></p>
 
                         {/* 삭제 버튼 */}
-                        <p className="delete-button" onClick={() => handleDelete(rollId)}>삭제</p>
+                        <p className="delete-button" onClick={() => handleDelete(rollId)}><RollDelete /></p>
                     </div>
                 </div>
             </div>    

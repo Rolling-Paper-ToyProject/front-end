@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
-import { CustomButton2 } from '../components/MuiButton';
+import { CustomButton1, CustomButton2 , CustomLogout} from '../components/MuiButton';
+import {LogoutIcon}from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
 
@@ -75,12 +76,14 @@ const MyPage = () => {
     return (
         <div className="my-page-container">
             <div className="greeting-container">
-                <p className="greeting">{userName} 선생님, 안녕하세요</p>
-                <CustomButton2 className="logout-button" onClick={teacherlogout}>
-                    LOGOUT
-                </CustomButton2>
+                <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
+                <CustomLogout className="logout-button" onClick={teacherlogout}>
+                    <LogoutIcon></LogoutIcon> LOGOUT
+                </CustomLogout>
             </div>
             <div className="roll-list-container">
+                <p className="highlighted-text">학급 목록</p>
+
                 {Array.isArray(rolls) && rolls.length > 0 ? (
                     rolls.map((roll) => (
                         <RollItem

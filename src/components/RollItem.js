@@ -76,7 +76,7 @@ const RollItem = ({ roll }) => {
             await axios.delete(`http://localhost:8080/roll/${rollId}`,
             {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": token
                 }
             });
 

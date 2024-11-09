@@ -28,7 +28,7 @@ const StudentSignin = ({ token, url }) => {
                     }
                 }
             )
-            
+
             const token = await joinResponse.headers["authorization"]?.split(" ")[1];
             const refreshToken = await joinResponse.headers["refreshtoken"];
             
@@ -37,13 +37,8 @@ const StudentSignin = ({ token, url }) => {
 
             console.log("Token:", token);
             console.log("Refresh Token:", refreshToken);
-            // const token = joinResponse.headers["authorization"];
-            // if (token) {
-            //     localStorage.setItem("Authorization", token);
-            // }
-            // console.log("JWT Token:", token);
 
-            // const joinData = joinResponse.data;
+            // const joinData = await joinResponse.data;
             // if (joinData) {
             //     setRollId(joinData.data.rollId);
             //     setStudentName(joinData.data.name);

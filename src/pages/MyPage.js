@@ -13,6 +13,7 @@ const MyPage = () => {
     const [isCreateRollModalOpen, setIsCreateRollModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
+
     useEffect(() => {
         const fetchData = async () => {
 
@@ -24,32 +25,24 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await fetch('http://localhost:8080/user/profile', {
+                const userResponse = await axios.get('http://localhost:8080/user/profile', {
                     headers: {
                         "Authorization": token
                     }
-                });
+                }).catch(error => console.error("Error:", error));
 
-                if (!userResponse.ok) {
-                    throw new Error('Failed to fetch user info');
-                }
-
-                const userData = await userResponse.json();
+                const userData = userResponse.data;
                 console.log("User Info Response:", userData);
                 setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
 
                 // 롤 데이터 가져오기
-                const rollResponse = await fetch(`http://localhost:8080/roll/me`, {
+                const rollResponse = await axios.get(`http://localhost:8080/roll/me`, {
                     headers: {
                         "Authorization": token
                     }
-                });
+                }).catch(error => console.error("Error:", error));
 
-                if (!rollResponse.ok) {
-                    throw new Error('Failed to fetch roll data');
-                }
-
-                const rollData = await rollResponse.json();
+                const rollData = rollResponse.data;
                 console.log("Roll Data Response:", rollData);
                 setRolls(rollData.data || []); // 빈 배열 fallback 추가
 

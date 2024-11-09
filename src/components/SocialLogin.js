@@ -39,7 +39,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 카카오 OAuth2 인증 엔드포인트로 리다이렉트
-        window.loscation.href = 'http://localhost:8080/oauth2/authorization/kakao';
+        window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
         
     }
     

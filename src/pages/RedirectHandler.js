@@ -4,65 +4,48 @@ import { useNavigate } from 'react-router-dom';
 
 const RedirectHandler = () => {
     const navigate = useNavigate();
-    const url = "8ffe30a7";
+    // const url = "8ffe30a7";
 
     useEffect(() => {
-        const hash = window.location.hash.substring(1);
+
+        // window.location.hash는 URL의 해시(즉, "#" 뒤에 오는 부분)를 가져옴
+        // 예를 들어, URL이 http://example.com/#token=abc&refreshToken=xyz라면,
+        // window.location.hash는 "#token=abc&refreshToken=xyz"가 됨
+        const hash = window.location.hash.substring(1); // "#" 기호를 제외하고 "token=abc&refreshToken=xyz" 부분만 추출
+
+        // URLSearchParams 객체를 생성해 해시 문자열을 파싱함
+        // "token=abc&refreshToken=xyz" 형식을 key-value 쌍으로 인식할 수 있게 만듦
         const params = new URLSearchParams(hash);
+
+        // params 객체에서 'token'이라는 키로 값을 검색하여 변수 token에 저장
+        // 위의 예시에서는 token 변수에 "abc"가 저장됨
         const token = params.get('token');
+
+        // params 객체에서 'refreshToken'이라는 키로 값을 검색하여 변수 refreshToken에 저장
+        // 위의 예시에서는 refreshToken 변수에 "xyz"가 저장됨
         const refreshToken = params.get('refreshToken');
+        
+        console.log(hash);
+        console.log(params);
+        console.log(token);
+        console.log(refreshToken);
 
         if (token && refreshToken) {
-            try {
-                // 토큰 저장
-                localStorage.setItem("Authorization", `Bearer ${token}`);
-                localStorage.setItem("RefreshToken", refreshToken);
+            
+            // 토큰 저장
+            localStorage.setItem("Authorization", `Bearer ${token}`);
+            localStorage.setItem("RefreshToken", refreshToken);
 
-                console.log("Access Token:", token);
-                console.log("Refresh Token:", refreshToken);
-                
-                // 선생님 정보 요청
-                // const fetchTeacherInfo = async () => {
-                //     try {
-                //         const teacherInfoResponse = await fetch('http://localhost:8080/user/info', {
-                //             method: "GET",
-                //             headers: {
-                //                 "Accept": "application/json",
-                //                 "Authorization": `Bearer ${token}`
-                //             }
-                //         });
+            console.log("Access Token:", token);
+            console.log("Refresh Token:", refreshToken);
 
-                //         if (!teacherInfoResponse.ok) {
-                //             throw new Error('User info fetch failed');
-                //         }
+            navigate("/mypage");
 
-                //         const teacherData = await teacherInfoResponse.json();
-                //         console.log("User Data:", teacherData);
-
-                //         // 성공적으로 처리되면 마이페이지로 이동
-                //         navigate("/mypage");
-                //     } catch (error) {
-                //         console.error("Error fetching user info:", error);
-                //         navigate("/");  // 에러 시 로그인 페이지로
-                //     }
-                // };
-
-                // 학생 정보 요청
-                // const fetchStudentInfo = async () => {
-                //     try {
-                //         const studentInfoResponse = await axios.get(`http://localhost:8080/paper/${rollId}`,)
-                //     }
-                // }
-
-                // fetchTeacherInfo();
-            } catch (error) {
-                console.error("Error processing tokens:", error);
-                navigate("/");
-            }
         } else {
             console.error("No tokens received");
-            navigate("/");
+            // navigate("/");
         }
+        
     }, [navigate]);
 
     return (

@@ -24,7 +24,7 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await fetch('http://localhost:8080/user/info', {
+                const userResponse = await fetch('http://localhost:8080/user/profile', {
                     headers: {
                         "Authorization": token
                     }
@@ -39,7 +39,7 @@ const MyPage = () => {
                 setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
 
                 // 롤 데이터 가져오기
-                const rollResponse = await fetch(`http://localhost:8080/roll/my/rolls`, {
+                const rollResponse = await fetch(`http://localhost:8080/roll/me`, {
                     headers: {
                         "Authorization": token
                     }

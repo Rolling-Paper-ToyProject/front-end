@@ -18,7 +18,7 @@ const RollItem = ({ roll }) => {
 
     const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`/roll/join/${url}`, { state: { rollId, rollName } })
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
@@ -49,7 +49,7 @@ const RollItem = ({ roll }) => {
         // 변경한 제목과 변경 전 제목이 같지않을 경우
         if (newRollName !== rollName) {
             try {
-                await axios.put(`http://localhost:8080/roll/update/${rollId}`,
+                await axios.put(`http://localhost:8080/roll/${rollId}`,
                     { rollName: newRollName },
                     {
                         headers: {
@@ -73,7 +73,7 @@ const RollItem = ({ roll }) => {
 
     const handleDelete = async () => {
         try{
-            await axios.delete(`http://localhost:8080/roll/delete/${rollId}`,
+            await axios.delete(`http://localhost:8080/roll/${rollId}`,
             {
                 headers: {
                     "Authorization": `Bearer ${token}`

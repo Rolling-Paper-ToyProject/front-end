@@ -27,7 +27,7 @@ const RollingPaperPage = () => {
                 // 사용자 정보 가져오기
 
                 // 페이퍼 정보 가져오기
-                const paperResponse = await axios.get(`http://localhost:8080/paper/${rollId}`, {
+                const paperResponse = await axios.get(`http://localhost:8080/paper/rolls/${rollId}`, {
                     headers: {
                         "Authorization": token
                     }

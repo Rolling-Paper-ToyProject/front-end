@@ -40,6 +40,10 @@ button.logout-button {
     transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
+button.logout-button>LogoutIcon{
+    margin-right:4px;
+}
+
 
 /* 롤링페이퍼 목록 컨테이너 스타일 */
 .roll-list-container {
@@ -77,12 +81,10 @@ button.logout-button {
 /* 롤링페이퍼 아이템 스타일 */
 .roll-item {
     width: 80%; /* 롤링페이퍼 카드 너비 설정 */
-    background-color: white; /* 카드 배경색 설정 */
-    border: 1px solid #ddd; /* 카드 테두리 설정 */
-    border-radius: 8px; /* 카드 모서리 둥글게 설정 */
+    background-color: rgb(244, 244, 244); /* 카드 배경색 설정 */
+    border-radius: 10px; /* 카드 모서리 둥글게 설정 */
     padding: 10px 25px; /* 카드 내부 여백 설정 */
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
     cursor: pointer;
 }
 
@@ -93,6 +95,7 @@ button.logout-button {
 .roll-code-container {
     display: flex; /* Flexbox 레이아웃 사용 */
     justify-content: space-between; /* 양쪽 끝으로 배치 */
+    align-items: center;
 }
 
 /* 학급 코드 스타일 */
@@ -109,6 +112,7 @@ button.logout-button {
 .button-group {
     display: inline-flex; /* 내부 요소 크기만큼 너비 차지 */
     justify-content: center;
+    align-items: center;
 }
 
 /* 수정 버튼과 삭제 버튼 스타일 */

@@ -33,7 +33,6 @@ export const CustomButton1 = styled(Button)(({ theme }) => ({
     },
 }));
 
-
 export const CustomButton2 = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: 'white',

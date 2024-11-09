@@ -83,6 +83,7 @@ const MyPage = () => {
             </div>
             <div className="roll-list-container">
                 <p className="highlighted-text">학급 목록</p>
+
                 {Array.isArray(rolls) && rolls.length > 0 ? (
                     rolls.map((roll) => (
                         <RollItem

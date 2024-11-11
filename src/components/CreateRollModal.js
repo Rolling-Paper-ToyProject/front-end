@@ -15,7 +15,7 @@ const CreateRollModal = ({ closeModal }) => {
 
     const createRoll = async () => {
         try {
-            await axios.post(`http://localhost:8080/roll/create`, { rollName: rollTitle }, {
+            await axios.post(`http://localhost:8080/roll`, { rollName: rollTitle }, {
                 headers: {
                     "Authorization": token
                 }
@@ -53,6 +53,11 @@ const CreateRollModal = ({ closeModal }) => {
                     value = {rollTitle}
                     onChange = {(e) => setRollTitle(e.target.value)}
                     placeholder="새 학급명을 입력해주세요"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            createRoll();
+                        }
+                    }}
                 /> {/* 롤링페이퍼 작성 */}
                 <button 
                     className="roll-create-button" 

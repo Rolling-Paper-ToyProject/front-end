@@ -48,7 +48,7 @@ const RollItem = ({ roll }) => {
 
         if (newRollName !== rollName) {
             try {
-                await axios.put(`http://localhost:8080/roll/update/${rollId}`,
+                await axios.put(`http://localhost:8080/roll/${rollId}`,
                     { rollName: newRollName },
                     {
                         headers: {
@@ -73,7 +73,7 @@ const RollItem = ({ roll }) => {
         const result = window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.');
         if (result) {
             try {
-                await axios.delete(`http://localhost:8080/roll/delete/${rollId}`, {
+                await axios.delete(`http://localhost:8080/roll/${rollId}`, {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }

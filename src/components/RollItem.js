@@ -18,13 +18,13 @@ const RollItem = ({ roll }) => {
 
     const navigate = useNavigate();
 
-    const enterRoll = (rollId) => {
+    const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
         navigate(`/paper/${rollId}`, { state: { rollId, rollName } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
-    const copyUrl = (url) => {
+    const copyUrl = () => {
         navigator.clipboard.writeText(`http://localhost:3000/${url}`).then(() => {
             alert('URL이 클립보드에 복사되었습니다.');
         }).catch(err => {
@@ -40,7 +40,7 @@ const RollItem = ({ roll }) => {
       비동기적으로 작동하며 성공 시 Promise를 반환
     */
 
-    const handleUpdate = async (rollId) => {
+    const handleUpdate = async () => {
         if (newRollName.trim() === "") {
             alert("학급명을 입력해주세요.");
             return;
@@ -69,7 +69,7 @@ const RollItem = ({ roll }) => {
     };
 
 
-    async function handleDelete(rollId, token){
+    async function handleDelete(){
         const result = window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.');
         if (result) {
             try {
@@ -94,7 +94,7 @@ const RollItem = ({ roll }) => {
     }
 
     return (
-        <div className="roll-item" onClick={() => {enterRoll(rollId)}}>
+        <div className="roll-item" onClick={enterRoll}>
             <div onClick={(e) => {e.stopPropagation()}}>
                 {isEditing ? (
                     <input
@@ -109,14 +109,14 @@ const RollItem = ({ roll }) => {
                         onBlur={() => {
                             // 포커스가 벗어날 때도 한 번만 업데이트 수행
                             if (newRollName !== rollName) {
-                                handleUpdate(rollId);
+                                handleUpdate();
                             } else {
                                 setIsEditing(false);
                             }
                         }}
                     />
                 ) : (
-                    <h2 className="roll-name" onClick={() => enterRoll(rollId)}>
+                    <h2 className="roll-name" onClick={enterRoll}>
                         {roll.rollName}
                     </h2>
                 )}
@@ -124,13 +124,13 @@ const RollItem = ({ roll }) => {
                     <p className="class-code">학급코드 : {classCode} {/* class_code 사용 */}</p>
                     <div className="button-group">
                         {/* URL 복사 버튼 */}
-                        <p className="url-copy-button" onClick={() => copyUrl(url)}><UrlCopyIcon /></p>
+                        <p className="url-copy-button" onClick={copyUrl}><UrlCopyIcon /></p>
 
                         {/* 수정 버튼 */}
                         <p className="update-button" onClick={() => setIsEditing(true)}><RollTittleEdit /></p>
 
                         {/* 삭제 버튼 */}
-                        <p className="delete-button" onClick={() => handleDelete(rollId)}><RollDelete /></p>
+                        <p className="delete-button" onClick={handleDelete}><RollDelete /></p>
                     </div>
                 </div>
             </div>    

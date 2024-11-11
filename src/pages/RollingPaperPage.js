@@ -24,16 +24,14 @@ const RollingPaperPage = () => {
             }
 
             try {
-                // 사용자 정보 가져오기
-
                 // 페이퍼 정보 가져오기
-                const paperResponse = await axios.get(`http://localhost:8080/paper/${rollId}`, {
+                const paperResponse = await axios.get(`http://localhost:8080/paper/rolls/${rollId}`, {
                     headers: {
                         "Authorization": token
                     }
                 });
 
-                const paperData = await paperResponse.json();
+                const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
                 setPapers(paperData.data || []); // 빈 배열 fallback 추가
 
@@ -41,6 +39,8 @@ const RollingPaperPage = () => {
                 console.error('Error:', error);
             }
         }
+
+        fetchPaperData();
     }, [rollId]);
 
     // 모달을 여는 함수
@@ -74,7 +74,11 @@ const RollingPaperPage = () => {
                 )}
             </div>
             {/* CreatePaperModal 컴포넌트 */}
-            {isCreatePaperModalOpen && <CreatePaperModal closeModal={closeModal}/>}
+            {isCreatePaperModalOpen && 
+                <CreatePaperModal 
+                    rollId={rollId}
+                    closeModal={closeModal}
+                />}
         </div>
     )
     

@@ -48,9 +48,7 @@ const RollItem = ({ roll }) => {
 
         if (newRollName !== rollName) {
             try {
-                await axios.put(`http://localhost:8080/roll/${rollId}`,
-                    { rollName: newRollName },
-                    {
+                await axios.put(`http://localhost:8080/roll/${rollId}`, { rollName: newRollName }, {
                         headers: {
                             "Authorization": token
                         }
@@ -61,7 +59,7 @@ const RollItem = ({ roll }) => {
                 window.location.reload(); // 새로고침을 통해 롤 수정을 반영
                 setIsEditing(false);
             } catch (error) {
-                console.log('롤 제목 수정에 실패:');
+                console.log('롤 제목 수정에 실패:', error);
             }
         }
 
@@ -103,6 +101,7 @@ const RollItem = ({ roll }) => {
                         onChange={(e) => setNewRollName(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
+                                e.preventDefault();
                                 handleUpdate(); // 엔터 키로 업데이트
                             }
                         }}

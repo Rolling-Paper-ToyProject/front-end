@@ -6,37 +6,36 @@ const RedirectHandler = () => {
 
     useEffect(() => {
 
-        // window.location.hash는 URL의 해시(즉, "#" 뒤에 오는 부분)를 가져옴
-        // 예를 들어, URL이 http://example.com/#token=abc&refreshToken=xyz라면,
-        // window.location.hash는 "#token=abc&refreshToken=xyz"가 됨
-        const hash = window.location.hash.substring(1); // "#" 기호를 제외하고 "token=abc&refreshToken=xyz" 부분만 추출
+        /** 
+         * window.location.hash는 URL의 해시("#" 뒷부분)
+         * ex) URL : http://example.com/#token=abc&refreshToken=xyz
+         * window.location.hash = "#token=abc&refreshToken=xyz"
+        */
+         const hash = window.location.hash.substring(1); // "#" 기호를 제외하고 "token=abc&refreshToken=xyz" 부분만 추출
 
-        // URLSearchParams 객체를 생성해 해시 문자열을 파싱함
-        // "token=abc&refreshToken=xyz" 형식을 key-value 쌍으로 인식할 수 있게 만듦
-        const params = new URLSearchParams(hash);
+        /** 
+         * URLSearchParams 객체 생성, 해시 문자열 파싱
+         * "token=abc&refreshToken=xyz" => key-value 쌍으로 인식할 수 있게 만듦
+        */
+         const params = new URLSearchParams(hash);
 
-        // params 객체에서 'token'이라는 키로 값을 검색하여 변수 token에 저장
-        // 위의 예시에서는 token 변수에 "abc"가 저장됨
+        /** 
+         * params 객체에서 'token'이라는 키로 값을 검색하여 변수 token에 저장
+         * 위의 예시에서는 token 변수에 "abc"가 저장됨
+        */
         const token = params.get('token');
 
-        // params 객체에서 'refreshToken'이라는 키로 값을 검색하여 변수 refreshToken에 저장
-        // 위의 예시에서는 refreshToken 변수에 "xyz"가 저장됨
+        /**  
+         * params 객체에서 'refreshToken'이라는 키로 값을 검색하여 변수 refreshToken에 저장
+         * 위의 예시에서는 refreshToken 변수에 "xyz"가 저장됨
+        */
         const refreshToken = params.get('refreshToken');
         
-        console.log(hash);
-        console.log(params);
-        console.log(token);
-        console.log(refreshToken);
-
         if (token && refreshToken) {
             
             // 토큰 저장
             localStorage.setItem("Authorization", `Bearer ${token}`);
             localStorage.setItem("RefreshToken", refreshToken);
-
-            console.log("Access Token:", token);
-            console.log("Refresh Token:", refreshToken);
-
             navigate("/mypage");
 
         } else {

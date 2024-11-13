@@ -5,55 +5,44 @@ const RedirectHandler = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
+
+        /** 
+         * window.location.hash는 URL의 해시("#" 뒷부분)
+         * ex) URL : http://example.com/#token=abc&refreshToken=xyz
+         * window.location.hash = "#token=abc&refreshToken=xyz"
+        */
+         const hash = window.location.hash.substring(1); // "#" 기호를 제외하고 "token=abc&refreshToken=xyz" 부분만 추출
+
+        /** 
+         * URLSearchParams 객체 생성, 해시 문자열 파싱
+         * "token=abc&refreshToken=xyz" => key-value 쌍으로 인식할 수 있게 만듦
+        */
+         const params = new URLSearchParams(hash);
+
+        /** 
+         * params 객체에서 'token'이라는 키로 값을 검색하여 변수 token에 저장
+         * 위의 예시에서는 token 변수에 "abc"가 저장됨
+        */
         const token = params.get('token');
+
+        /**  
+         * params 객체에서 'refreshToken'이라는 키로 값을 검색하여 변수 refreshToken에 저장
+         * 위의 예시에서는 refreshToken 변수에 "xyz"가 저장됨
+        */
         const refreshToken = params.get('refreshToken');
-
+        
         if (token && refreshToken) {
-            try {
-                // 토큰 저장
-                localStorage.setItem("Authorization", `Bearer ${token}`);
-                localStorage.setItem("RefreshToken", refreshToken);
+            
+            // 토큰 저장
+            localStorage.setItem("Authorization", `Bearer ${token}`);
+            localStorage.setItem("RefreshToken", refreshToken);
+            navigate("/mypage");
 
-                console.log("Access Token:", token);
-                console.log("Refresh Token:", refreshToken);
-
-                // 유저 정보 요청
-                const fetchUserInfo = async () => {
-                    try {
-                        const userInfoResponse = await fetch('http://localhost:8080/user/info', {
-                            method: "GET",
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${token}`
-                            }
-                        });
-
-                        if (!userInfoResponse.ok) {
-                            throw new Error('User info fetch failed');
-                        }
-
-                        const userData = await userInfoResponse.json();
-                        console.log("User Data:", userData);
-
-                        // 성공적으로 처리되면 마이페이지로 이동
-                        navigate("/mypage");
-                    } catch (error) {
-                        console.error("Error fetching user info:", error);
-                        navigate("/");  // 에러 시 로그인 페이지로
-                    }
-                };
-
-                fetchUserInfo();
-            } catch (error) {
-                console.error("Error processing tokens:", error);
-                navigate("/");
-            }
         } else {
             console.error("No tokens received");
-            navigate("/");
+            // navigate("/");
         }
+        
     }, [navigate]);
 
     return (

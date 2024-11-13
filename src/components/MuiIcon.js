@@ -30,4 +30,4 @@ function UserLogout(props) {
 }
 
 // 이름 내보내기
-export { UrlCopyIcon, RollDelete, RollTittleEdit, LogoutIcon };
+export { UrlCopyIcon, RollDelete, RollTittleEdit, UserLogout };

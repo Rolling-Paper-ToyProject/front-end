@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
 import { CustomButton1, CustomButton2 , CustomLogout} from '../components/MuiButton';
-import {LogoutIcon}from '../components/MuiIcon';
+import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
 
@@ -25,7 +25,7 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await fetch('http://localhost:8080/user/info', {
+                const userResponse = await fetch('http://localhost:8080/user/profile', {
                     headers: {
                         "Authorization": token
                     }
@@ -40,7 +40,7 @@ const MyPage = () => {
                 setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
 
                 // 롤 데이터 가져오기
-                const rollResponse = await fetch(`http://localhost:8080/roll/my/rolls`, {
+                const rollResponse = await fetch(`http://localhost:8080/roll/me`, {
                     headers: {
                         "Authorization": token
                     }
@@ -78,7 +78,7 @@ const MyPage = () => {
             <div className="greeting-container">
                 <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
                 <CustomLogout className="logout-button" onClick={teacherlogout}>
-                    <LogoutIcon></LogoutIcon> LOGOUT
+                    <UserLogout>LOGOUT</UserLogout>
                 </CustomLogout>
             </div>
             <div className="roll-list-container">

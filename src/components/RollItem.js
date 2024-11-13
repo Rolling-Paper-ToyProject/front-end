@@ -67,9 +67,8 @@ const RollItem = ({ roll }) => {
     };
 
 
-    async function handleDelete(){
-        const result = window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.');
-        if (result) {
+    const handleDelete = async () => {
+        if (window.confirm('학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.')) {
             try {
                 await axios.delete(`http://localhost:8080/roll/${rollId}`, {
                     headers: {

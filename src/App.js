@@ -20,10 +20,9 @@ function App() {
             <Route path="/" element={<LoginPage />} />
             <Route path="/studentsignin" element={<StudentSigninPage />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/paper/:rollId" element={<RollingPaperPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />
             <Route path="/:url" element={<StudentSigninPage />} />
-            <Route path="/roll/join/:url" element={<RollingPaperPage />} />
+            <Route path="/roll/:url/join/" element={<RollingPaperPage />} />
           </Routes>
         </BrowserRouter>
       {/* </Provider> */}

@@ -1,31 +1,45 @@
 import { useState } from "react"
 import '../styles/components/StudentSignin.css' 
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const StudentSignin = ({ url }) => {
+    const navigate = useNavigate();
     const [pinNumber, setPinNumber] = useState('');
     const [classCode, setClassCode] = useState('');
     const [studentName, setStudentName] = useState('');
 
-    const handleSignin = (e) => {
+    const handleSignin = async (e) => {
         e.preventDefault();
-        console.log(url);
         try {
-            axios.post(`http://localhost:8080/roll/${url}/join`, 
+            const response = await axios.post(`http://localhost:8080/roll/${url}/join`, 
                 {
                     "name": studentName,
                     "classCode": classCode,
                     "pinNumber": pinNumber
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'accept': '*/*'
-                    }
                 }
-            )
+            );
 
+            if(!response === 200) {
+                throw new Error("응답을 불러올 수 없습니다.")
+            }
+
+            const studentData = response.data;
+            const token = studentData.data.accessToken;
+            const refreshToken = studentData.data.refreshToken;
+            const rollName = studentData.data.rollName;
+            const studentPapers = studentData.data.papers
+
+            if (token && refreshToken) {
+                localStorage.setItem("Authorization", `Bearer ${token}`);
+                localStorage.setItem("RefreshToken", refreshToken);
+                navigate(`/roll/${url}/join`, { state: { rollName, studentPapers }})
+            }
+
+        } catch (error) {
+            console.log("토큰 fetch 실패: ", error);
+            alert("사용자 정보를 불러올 수 없습니다.");
+        }
             // const token = await joinResponse.headers["authorization"]?.split(" ")[1];
             // const refreshToken = await joinResponse.headers["refreshtoken"];
             
@@ -42,10 +56,6 @@ const StudentSignin = ({ url }) => {
             // }
             // console.log ("입장 응답 데이터:", joinData);
             // navigate(`/roll/join/${url}`, { state: { rollId, studentName } });
-        } catch (error) {
-            console.log("롤링페이퍼 입장 실패:", error);
-            alert("롤링페이퍼 입장 실패:", error);
-        }
     }
 
     return(

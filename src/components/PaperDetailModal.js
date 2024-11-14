@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { IoMdMore } from "react-icons/io"; // 아이콘 가져오기
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
 

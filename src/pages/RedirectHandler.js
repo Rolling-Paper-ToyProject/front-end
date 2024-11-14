@@ -5,7 +5,8 @@ const RedirectHandler = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-
+        
+        console.log(window.location.href)
         /** 
          * window.location.hash는 URL의 해시("#" 뒷부분)
          * ex) URL : http://example.com/#token=abc&refreshToken=xyz
@@ -30,6 +31,11 @@ const RedirectHandler = () => {
          * 위의 예시에서는 refreshToken 변수에 "xyz"가 저장됨
         */
         const refreshToken = params.get('refreshToken');
+
+        console.log(hash);
+        console.log(params);
+        console.log(token);
+        console.log(refreshToken);
         
         if (token && refreshToken) {
             

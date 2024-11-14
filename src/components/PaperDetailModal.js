@@ -67,7 +67,6 @@ const PaperDetailModal = ({ paper, closeModal }) => {
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}> {/* 모달 배경 */}
             <div className="modal-content" onClick={(e) => {e.stopPropagation()}}> {/* 모달 내용 */}
-            {/* <IoMdMore onClick={toggleOptions} className="options-icon" /> 옵션 아이콘 */}
                 <p>From. {authorName}</p> {/* 롤링페이퍼 내용 */}
                 {isEditing ? (
                     <>

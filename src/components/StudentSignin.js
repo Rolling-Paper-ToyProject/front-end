@@ -27,13 +27,14 @@ const StudentSignin = ({ url }) => {
             const studentData = response.data;
             const token = studentData.data.accessToken;
             const refreshToken = studentData.data.refreshToken;
+            const rollId = studentData.data.rollId;
             const rollName = studentData.data.rollName;
             const studentPapers = studentData.data.papers
 
             if (token && refreshToken) {
                 localStorage.setItem("Authorization", `Bearer ${token}`);
                 localStorage.setItem("RefreshToken", refreshToken);
-                navigate(`/roll/${url}/join`, { state: { rollName, studentPapers }})
+                navigate(`/roll/${url}/join`, { state: { rollId, rollName, studentPapers }})
             }
 
         } catch (error) {

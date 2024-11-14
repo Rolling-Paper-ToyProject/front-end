@@ -8,7 +8,9 @@ import axios from "axios";
 const RollingPaperPage = () => {
 
     const location = useLocation();
-    const { rollId, rollName } = location.state || {};
+    const { rollId } = location.state || {};
+    const { rollName } = location.state || {};
+    const { studentPapers } = location.state || {};
     const navigate = useNavigate();
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
@@ -24,24 +26,21 @@ const RollingPaperPage = () => {
             }
 
             try {
-                // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(`http://localhost:8080/paper/rolls/${rollId}`, {
                     headers: {
                         "Authorization": token
                     }
                 });
-
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
                 setPapers(paperData.data || []); // 빈 배열 fallback 추가
-
             } catch (error) {
                 console.error('Error:', error);
             }
         }
 
         fetchPaperData();
-    }, [rollId]);
+    }, [papers]);
 
     // 모달을 여는 함수
     const showCreateModal = () => {

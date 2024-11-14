@@ -1,26 +1,55 @@
 import { useState } from "react"
 import '../styles/components/StudentSignin.css' 
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const StudentSignin = () => {
-    const [className, setClassName] = useState('');
+const StudentSignin = ({ url }) => {
+    const [pinNumber, setPinNumber] = useState('');
     const [classCode, setClassCode] = useState('');
-    const [name, setName] = useState('');
-    
+    const [studentName, setStudentName] = useState('');
+
     const handleSignin = (e) => {
         e.preventDefault();
-        // URL로 해당 링크로 입장한 후에 className에 할당된 classCode를 입력해야 들어갈 수 있도록 해야 함
-        // 롤링페이퍼 참여 버튼 눌렀을 때 /pages/RollingPaperDetail로 이동해야 함
+        console.log(url);
+        try {
+            axios.post(`http://localhost:8080/roll/${url}/join`, 
+                {
+                    "name": studentName,
+                    "classCode": classCode,
+                    "pinNumber": pinNumber
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': '*/*'
+                    }
+                }
+            )
+
+            // const token = await joinResponse.headers["authorization"]?.split(" ")[1];
+            // const refreshToken = await joinResponse.headers["refreshtoken"];
+            
+            // localStorage.setItem("Authorization", `Bearer ${token}`);
+            // localStorage.setItem("RefreshToken", refreshToken);
+
+            // console.log("Token:", token);
+            // console.log("Refresh Token:", refreshToken);
+
+            // const joinData = await joinResponse.data;
+            // if (joinData) {
+            //     setRollId(joinData.data.rollId);
+            //     setStudentName(joinData.data.name);
+            // }
+            // console.log ("입장 응답 데이터:", joinData);
+            // navigate(`/roll/join/${url}`, { state: { rollId, studentName } });
+        } catch (error) {
+            console.log("롤링페이퍼 입장 실패:", error);
+            alert("롤링페이퍼 입장 실패:", error);
+        }
     }
 
     return(
         <div>
-            <input 
-                className="className-input"
-                type="text" 
-                value={className}
-                disabled            
-            />
-
             <form onSubmit={handleSignin}>
                 <div>
                     <input 
@@ -34,11 +63,19 @@ const StudentSignin = () => {
                     <input 
                     type="text" 
                     placeholder="이름을 입력해주세요" 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={studentName}
+                    onChange={(e) => setStudentName(e.target.value)}
                     required />
                 </div>
-                <button type="submit" className="signin-button">롤링페이퍼 참여</button>
+                <div>
+                    <input 
+                    type="password" 
+                    placeholder="비밀번호 4자리를 입력해주세요" 
+                    value={pinNumber}
+                    onChange={(e) => setPinNumber(e.target.value)}
+                    required />
+                </div>
+                <button type="submit" className="signin-button">롤링페이퍼 입장</button>
             </form>
         </div>
     )

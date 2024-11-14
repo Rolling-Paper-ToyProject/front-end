@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
-import { CustomButton1, CustomButton2 , CustomLogout} from '../components/MuiButton';
+import { CustomButton2 , CustomLogout} from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";

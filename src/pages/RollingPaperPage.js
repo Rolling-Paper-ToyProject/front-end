@@ -10,7 +10,6 @@ const RollingPaperPage = () => {
     const location = useLocation();
     const { rollId } = location.state || {};
     const { rollName } = location.state || {};
-    const { studentPapers } = location.state || {};
     const navigate = useNavigate();
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);

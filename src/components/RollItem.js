@@ -20,7 +20,7 @@ const RollItem = ({ roll }) => {
 
     const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`/paper/${rollId}`, { state: { rollId, rollName } })
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
@@ -91,48 +91,51 @@ const RollItem = ({ roll }) => {
     }
 
     return (
-        <div className="roll-item" onClick={enterRoll}>
-            <div onClick={(e) => {e.stopPropagation()}}>
-                {isEditing ? (
-                    <input
-                        type="text"
-                        value={newRollName}
-                        onChange={(e) => setNewRollName(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                e.preventDefault();
-                                handleUpdate(); // 엔터 키로 업데이트
-                            }
-                        }}
-                        onBlur={() => {
-                            // 포커스가 벗어날 때도 한 번만 업데이트 수행
-                            if (newRollName !== rollName) {
-                                handleUpdate();
-                            } else {
-                                setIsEditing(false);
-                            }
-                        }}
-                    />
-                ) : (
-                    <h2 className="roll-name" onClick={enterRoll}>
-                        {roll.rollName}
-                    </h2>
-                )}
-                <div className="roll-code-container">
-                    <p className="class-code">학급코드 : {classCode} {/* class_code 사용 */}</p>
-                    <div className="button-group">
-                        {/* URL 복사 버튼 */}
-                        <p className="url-copy-button" onClick={copyUrl}><UrlCopyIcon /></p>
+        <>
+            <div className="roll-item" onClick={enterRoll}>
+                <div onClick={(e) => {e.stopPropagation()}}>
+                    {isEditing ? (
+                        <input
+                            type="text"
+                            value={newRollName}
+                            onChange={(e) => setNewRollName(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    handleUpdate(); // 엔터 키로 업데이트
+                                }
+                            }}
+                            onBlur={() => {
+                                // 포커스가 벗어날 때도 한 번만 업데이트 수행
+                                if (newRollName !== rollName) {
+                                    handleUpdate();
+                                } else {
+                                    setIsEditing(false);
+                                }
+                            }}
+                        />
+                    ) : (
+                        <h2 className="roll-name" onClick={enterRoll}>
+                            {roll.rollName}
+                        </h2>
+                    )}
+                    <div className="roll-code-container">
+                        <p className="class-code">학급코드 : {classCode} {/* class_code 사용 */}</p>
+                        <div className="button-group">
+                            {/* URL 복사 버튼 */}
+                            <p className="url-copy-button" onClick={copyUrl}><UrlCopyIcon /></p>
 
-                        {/* 수정 버튼 */}
-                        <p className="update-button" onClick={() => setIsEditing(true)}><RollTittleEdit /></p>
+                            {/* 수정 버튼 */}
+                            <p className="update-button" onClick={() => setIsEditing(true)}><RollTittleEdit /></p>
 
-                        {/* 삭제 버튼 */}
-                        <p className="delete-button" onClick={handleDelete}><RollDelete /></p>
+                            {/* 삭제 버튼 */}
+                            <p className="delete-button" onClick={handleDelete}><RollDelete /></p>
+                        </div>
                     </div>
-                </div>
-            </div>    
-        </div>
+                </div>    
+            </div>
+            {isUpdateRollModalOpen && <UpdateRollModal />}
+        </>    
     )
 };
 export default RollItem;

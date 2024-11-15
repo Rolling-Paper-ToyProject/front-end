@@ -39,7 +39,7 @@ const RollingPaperPage = () => {
         }
 
         fetchPaperData();
-    }, [papers]);
+    }, [token]);
 
     // 모달을 여는 함수
     const showCreateModal = () => {

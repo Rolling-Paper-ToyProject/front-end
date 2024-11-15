@@ -134,7 +134,7 @@ const RollItem = ({ roll }) => {
                     </div>
                 </div>    
             </div>
-            {isUpdateRollModalOpen && <UpdateRollModal />}
+            {/* {isUpdateRollModalOpen && <UpdateRollModal />} */}
         </>    
     )
 };

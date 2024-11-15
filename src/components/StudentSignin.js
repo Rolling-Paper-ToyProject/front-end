@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import '../styles/components/StudentSignin.css' 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,33 @@ const StudentSignin = ({ url }) => {
     const [pinNumber, setPinNumber] = useState('');
     const [classCode, setClassCode] = useState('');
     const [studentName, setStudentName] = useState('');
+    const token = localStorage.getItem("Authorization");
+
+    useEffect(() => {
+        const fetchTeacherData = async () => {
+            if(token) {
+                try {
+                    const userResponse = await axios.get('http://localhost:8080/roll/me', {
+                        headers: {
+                            "Authorization": token
+                        }
+                    });
+                    const userData = userResponse.data;
+                    const foundItem = userData.data.find(item => item.url === url);
+                    
+                    if (foundItem) {
+                        const { rollId, rollName } = foundItem;                
+                        navigate(`/roll/${url}/join`, { state: { rollId, rollName } });
+                    }
+                } catch (error) {
+
+                }
+            }
+        }
+
+        fetchTeacherData();
+
+    }, [token, url, navigate]);
 
     const handleSignin = async (e) => {
         e.preventDefault();
@@ -25,16 +52,15 @@ const StudentSignin = ({ url }) => {
             }
 
             const studentData = response.data;
-            const token = studentData.data.accessToken;
+            const studentToken = studentData.data.accessToken;
             const refreshToken = studentData.data.refreshToken;
             const rollId = studentData.data.rollId;
             const rollName = studentData.data.rollName;
-            const studentPapers = studentData.data.papers
 
-            if (token && refreshToken) {
-                localStorage.setItem("Authorization", `Bearer ${token}`);
+            if (studentToken && refreshToken) {
+                localStorage.setItem("Authorization", `Bearer ${studentToken}`);
                 localStorage.setItem("RefreshToken", refreshToken);
-                navigate(`/roll/${url}/join`, { state: { rollId, rollName, studentPapers }})
+                navigate(`/roll/${url}/join`, { state: { rollId, rollName }})
             }
 
         } catch (error) {

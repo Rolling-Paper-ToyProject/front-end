@@ -44,7 +44,7 @@ const UpdateRollModal = ({ closeModal, roll }) => {
         <input
           type="text"
           value={rollTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
+          onChange={(e) => setRollTitle(e.target.value)}
           placeholder={roll.rollName}
         />
         <div className="modal-actions">

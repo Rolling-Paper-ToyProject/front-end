@@ -37,11 +37,9 @@ const UpdateRollModal = ({ closeModal, roll }) => {
       }}
     >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="update-title">
-          <h3>
-            <BorderColorIcon style={{ marginRight: "10px" }} />
-            학급명 수정
-          </h3>
+        <div className="update-title" style={{ marginBottom: "5px" }}>
+          <BorderColorIcon style={{ marginRight: "8px", float: "left" }} />
+          <h3 style={{ width: "150px" }}>학급명 수정</h3>
         </div>
         <input
           type="text"

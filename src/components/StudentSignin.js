@@ -41,22 +41,6 @@ const StudentSignin = ({ url }) => {
             console.log("토큰 fetch 실패: ", error);
             alert("사용자 정보를 불러올 수 없습니다.");
         }
-            // const token = await joinResponse.headers["authorization"]?.split(" ")[1];
-            // const refreshToken = await joinResponse.headers["refreshtoken"];
-            
-            // localStorage.setItem("Authorization", `Bearer ${token}`);
-            // localStorage.setItem("RefreshToken", refreshToken);
-
-            // console.log("Token:", token);
-            // console.log("Refresh Token:", refreshToken);
-
-            // const joinData = await joinResponse.data;
-            // if (joinData) {
-            //     setRollId(joinData.data.rollId);
-            //     setStudentName(joinData.data.name);
-            // }
-            // console.log ("입장 응답 데이터:", joinData);
-            // navigate(`/roll/join/${url}`, { state: { rollId, studentName } });
     }
 
     return(

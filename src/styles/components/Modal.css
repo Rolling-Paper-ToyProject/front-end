@@ -15,10 +15,10 @@
 
 /* 모달 내용 스타일 */
 .modal-content {
-  width: 350px;
+  width: 320px;
   background-color: white; /* 모달 배경색 */
   border-radius: 5px; /* 모서리 둥글게 */
-  padding: 20px; /* 여백 */
+  padding: 20px 20px 0 20px; /* 여백 */
   position: relative; /* 내부 요소 위치 설정 */
 }
 

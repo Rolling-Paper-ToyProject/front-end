@@ -1,31 +1,101 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
+
 /* 헤더 스타일 */
 .header {
-    display: flex; /* Flexbox 레이아웃 사용 */
-    justify-content: space-between; /* 양쪽 끝으로 배치 */
-    align-items: center; /* 수직 중앙 정렬 */
-    width: 100%; /* 컨테이너의 폭을 100%로 설정 */
-    margin-bottom: 20px; /* 인사말과 다음 요소 사이의 간격 설정 */
-    background-color: #f7f7f7; /* 페이지 배경색 설정 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 100%; /* 컨테이너의 폭을 100%로 설정 */
+  margin-bottom: 20px; /* 인사말과 다음 요소 사이의 간격 설정 */
 }
 
 .className {
-    font-size: 18px; /* 인사말 폰트 크기 설정 */
-    font-weight: bold;;
-    margin: 18px 20px;
+  width: 75%;
+  font-size: 30px; /* 인사말 폰트 크기 설정 */
+  font-weight: bold;
+  margin: 18px 20px;
+  text-align: center;
+  padding-left: 60px;
+
+  font-family: "Hi Melody", cursive;
 }
 
+.paper-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap; /* 여러 줄로 아이템이 배치되도록 설정 */
+  gap: 10px; /* 아이템 간의 간격 */
+  justify-content: center;
+
+  font-family: "Hi Melody", cursive;
+}
+
+/* From 이름 */
+.fromName {
+  font-size: 20px;
+  text-align: center;
+}
+
+/* 롤링페이퍼 */
+.paper-box {
+  width: 100px;
+  height: 100px;
+  background: lightpink;
+  position: relative;
+  transform: rotate(45deg);
+  margin: 50px 35px 50px 35px;
+
+  display: flex;
+}
+.paper-box::before {
+  content: "";
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: -50%;
+  border-radius: 50%;
+  background: lightpink;
+}
+.paper-box::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -50%;
+  border-radius: 50%;
+  background: lightpink;
+}
+
+.paper-box > p {
+  transform: rotate(-45deg);
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3; /* 세 줄로 제한 */
+  line-height: 1.5; /* 줄 간격 설정 */
+  max-height: calc(1.5em * 3); /* 최대 높이 설정 */
+
+  width: 100%;
+  padding: 0 20px 10px 0;
+}
 /* 버튼 스타일 */
 .add-paper-button {
-    margin: 18px 20px;
-    padding: 3px 10px; /* 버튼 패딩 설정 */
-    background-color: #4CAF50; /* 버튼 배경색 설정 */
-    border: none; /* 버튼 테두리 제거 */
-    border-radius: 5px; /* 버튼 모서리 둥글게 설정 */
-    color: white; /* 버튼 텍스트 색상 설정 */
-    cursor: pointer; /* 커서 포인터로 변경 */
-    transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+  margin: 18px 20px;
+  padding: 3px 10px; /* 버튼 패딩 설정 */
+  background-color: #4caf50; /* 버튼 배경색 설정 */
+  border: none; /* 버튼 테두리 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 설정 */
+  color: white; /* 버튼 텍스트 색상 설정 */
+  cursor: pointer; /* 커서 포인터로 변경 */
+  transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
 .add-paper-button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }

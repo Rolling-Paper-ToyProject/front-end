@@ -46,6 +46,9 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           value={rollTitle}
           onChange={(e) => setRollTitle(e.target.value)}
           placeholder={roll.rollName}
+          onKeyDown={(e) => {
+            updateRoll();
+          }}
         />
         <div className="modal-actions">
           <CustomLogout onClick={closeModal}>취소</CustomLogout>

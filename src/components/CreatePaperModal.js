@@ -36,7 +36,6 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      {" "}
       {/* 모달 배경 */}
       <div
         className="modal-content"
@@ -44,7 +43,6 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
           e.stopPropagation();
         }}
       >
-        {" "}
         {/* 모달 내용 */}
         {/**
          * 이벤트 버블링은 하위 요소에서 발생한 이벤트가 상위 요소로 전파되는 현상이다.
@@ -65,7 +63,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
           value={paperContent}
           onChange={(e) => setPaperContent(e.target.value)}
           placeholder="내용을 입력하세요"
-        />{" "}
+        />
         {/* 롤링페이퍼 작성 */}
         <CustomLogout
           className="paper-create-button"

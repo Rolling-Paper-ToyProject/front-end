@@ -1,9 +1,10 @@
 /* fonts */
+/* Google Fonts에서 Hi Melody 폰트를 불러옴 */
 @import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
 
 /* 헤더 스타일 */
 .header {
-  display: flex; /* Flexbox 레이아웃 사용 */
+  display: flex; /* Flexbox 레이아웃을 사용하여 자식 요소를 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
   width: 100%; /* 컨테이너의 폭을 100%로 설정 */
   margin-bottom: 20px; /* 인사말과 다음 요소 사이의 간격 설정 */
@@ -37,19 +38,19 @@
   text-align: center;
 }
 
-/* 롤링페이퍼 */
+/* 롤링페이퍼 (하트모양)*/
 .paper-box {
   width: 100px;
   height: 100px;
   background: lightpink;
   position: relative;
-  transform: rotate(45deg);
+  transform: rotate(45deg); /* 요소를 45도 회전 */
   margin: 50px 35px 50px 35px;
 
   display: flex;
 }
 .paper-box::before {
-  content: "";
+  content: ""; /* 가상 요소 내용 없음 */
   width: 100px;
   height: 100px;
   position: absolute;
@@ -68,15 +69,15 @@
 }
 
 .paper-box > p {
-  transform: rotate(-45deg);
+  transform: rotate(-45deg); /* 요소를 -45도 회전하여 정렬 */
   z-index: 1;
   text-align: center;
   overflow: hidden;
 
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  display: -webkit-box; /* Flexbox처럼 동작하는 box로 설정 */
+  -webkit-box-orient: vertical; /* 수직 방향으로 정렬 */
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 처리 */
   -webkit-line-clamp: 3; /* 세 줄로 제한 */
   line-height: 1.5; /* 줄 간격 설정 */
   max-height: calc(1.5em * 3); /* 최대 높이 설정 */

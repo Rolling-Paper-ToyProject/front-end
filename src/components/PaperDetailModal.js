@@ -70,10 +70,15 @@ const PaperDetailModal = ({ paper, closeModal }) => {
                 <p>From. {authorName}</p> {/* 롤링페이퍼 내용 */}
                 {isEditing ? (
                     <>
-                        <input 
+                        <textarea
                             type="text"
                             value={newContent}
-                            onChange={(e) => setNewContent(e.target.value)}                 
+                            onChange={(e) => setNewContent(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSave();
+                                }
+                            }}                 
                         />
                         <div className="paper-modal-button">
                             <button className="paper-edit-save-button" onClick={handleSave}>저장</button>

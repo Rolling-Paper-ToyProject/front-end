@@ -13,7 +13,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
         }    
     }
 
-    const handleCreatePaper = async () => {
+    const createPaper = async () => {
         try {
             await axios.post(`http://localhost:8080/paper/rolls/${rollId}`, 
                 { content: paperContent }, 
@@ -46,15 +46,20 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
              * 이벤트가 상위 요소로 전달되는 버블링 또는 캡처링 단계를 차단한다.
              * 특정 요소의 이벤트 처리에만 동작을 제한하고 싶을 때 사용된다.
              */}  
-                <input 
+                <textarea 
                     type="text"
                     value = {paperContent}
                     onChange = {(e) => setPaperContent(e.target.value)}
                     placeholder="내용을 입력하세요"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            createPaper();
+                        }
+                    }}
                 /> {/* 롤링페이퍼 작성 */}
                 <button 
                     className="paper-create-button" 
-                    onClick={handleCreatePaper}
+                    onClick={createPaper}
                     disabled={!paperContent.trim()} // 내용이 없을 때 버튼 비활성화
                 >등록</button>
             </div>

@@ -22,6 +22,11 @@
   position: relative; /* 내부 요소 위치 설정 */
 }
 
+.modal-content > p {
+  line-height: 1.5; /* 줄 간격 설정 */
+  font-size: 22px;
+}
+
 /* 롤, 페이퍼 생성 / 페이퍼 생성, 수정(+ 수정사항 저장, 수정 취소), 삭제,  버튼 스타일 */
 .roll-create-button,
 .paper-create-button,
@@ -46,6 +51,8 @@
   text-decoration: underline; /* 호버 시 밑줄 */
 }
 
-.modal-actions {
+.modal-actions,
+.paper-modal-button {
   float: right;
+  margin-bottom: 5px;
 }

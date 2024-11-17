@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
-import { CustomButton1, CustomButton2 , CustomLogout} from '../components/MuiButton';
+import { CustomButton2 , CustomLogout} from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
@@ -25,32 +25,32 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await fetch('http://localhost:8080/user/profile', {
+                const userResponse = await axios.get('http://localhost:8080/user/profile', {
                     headers: {
                         "Authorization": token
                     }
                 });
 
-                if (!userResponse.ok) {
+                if (!userResponse === 200) {
                     throw new Error('Failed to fetch user info');
                 }
 
-                const userData = await userResponse.json();
+                const userData = userResponse.data;
                 console.log("User Info Response:", userData);
                 setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
 
                 // 롤 데이터 가져오기
-                const rollResponse = await fetch(`http://localhost:8080/roll/me`, {
+                const rollResponse = await axios.get(`http://localhost:8080/roll/me`, {
                     headers: {
                         "Authorization": token
                     }
                 });
 
-                if (!rollResponse.ok) {
+                if (!rollResponse === 200) {
                     throw new Error('Failed to fetch roll data');
                 }
 
-                const rollData = await rollResponse.json();
+                const rollData = rollResponse.data;
                 console.log("Roll Data Response:", rollData);
                 setRolls(rollData.data || []); // 빈 배열 fallback 추가
 

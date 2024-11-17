@@ -13,10 +13,11 @@ const RollItem = ({ roll }) => {
 
   const navigate = useNavigate();
 
-  const enterRoll = () => {
-    navigate(`/paper/${rollId}`, { state: { rollId, rollName } });
-    console.log(`롤링페이퍼 ${rollId}로 이동`);
-  };
+    const enterRoll = () => {
+        // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName } })
+        console.log(`롤링페이퍼 ${rollId}로 이동`);
+    }
 
   const copyUrl = () => {
     navigator.clipboard

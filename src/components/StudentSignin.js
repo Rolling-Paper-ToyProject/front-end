@@ -1,26 +1,76 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import '../styles/components/StudentSignin.css' 
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const StudentSignin = () => {
-    const [className, setClassName] = useState('');
+const StudentSignin = ({ url }) => {
+    const navigate = useNavigate();
+    const [pinNumber, setPinNumber] = useState('');
     const [classCode, setClassCode] = useState('');
-    const [name, setName] = useState('');
-    
-    const handleSignin = (e) => {
+    const [studentName, setStudentName] = useState('');
+    const token = localStorage.getItem("Authorization");
+
+    useEffect(() => {
+        const fetchTeacherData = async () => {
+            if(token) {
+                try {
+                    const userResponse = await axios.get('http://localhost:8080/roll/me', {
+                        headers: {
+                            "Authorization": token
+                        }
+                    });
+                    const userData = userResponse.data;
+                    const foundItem = userData.data.find(item => item.url === url);
+                    
+                    if (foundItem) {
+                        const { rollId, rollName } = foundItem;                
+                        navigate(`/roll/${url}/join`, { state: { rollId, rollName } });
+                    }
+                } catch (error) {
+
+                }
+            }
+        }
+
+        fetchTeacherData();
+
+    }, [token, url, navigate]);
+
+    const handleSignin = async (e) => {
         e.preventDefault();
-        // URL로 해당 링크로 입장한 후에 className에 할당된 classCode를 입력해야 들어갈 수 있도록 해야 함
-        // 롤링페이퍼 참여 버튼 눌렀을 때 /pages/RollingPaperDetail로 이동해야 함
+        try {
+            const response = await axios.post(`http://localhost:8080/roll/${url}/join`, 
+                {
+                    "name": studentName,
+                    "classCode": classCode,
+                    "pinNumber": pinNumber
+                }
+            );
+
+            if(!response === 200) {
+                throw new Error("응답을 불러올 수 없습니다.")
+            }
+
+            const studentData = response.data;
+            const studentToken = studentData.data.accessToken;
+            const refreshToken = studentData.data.refreshToken;
+            const rollId = studentData.data.rollId;
+            const rollName = studentData.data.rollName;
+
+            if (studentToken && refreshToken) {
+                localStorage.setItem("Authorization", `Bearer ${studentToken}`);
+                localStorage.setItem("RefreshToken", refreshToken);
+                navigate(`/roll/${url}/join`, { state: { rollId, rollName }})
+            }
+
+        } catch (error) {
+            console.log("토큰 fetch 실패: ", error);
+            alert("사용자 정보를 불러올 수 없습니다.");
+        }
     }
 
     return(
         <div>
-            <input 
-                className="className-input"
-                type="text" 
-                value={className}
-                disabled            
-            />
-
             <form onSubmit={handleSignin}>
                 <div>
                     <input 
@@ -34,11 +84,19 @@ const StudentSignin = () => {
                     <input 
                     type="text" 
                     placeholder="이름을 입력해주세요" 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={studentName}
+                    onChange={(e) => setStudentName(e.target.value)}
                     required />
                 </div>
-                <button type="submit" className="signin-button">롤링페이퍼 참여</button>
+                <div>
+                    <input 
+                    type="password" 
+                    placeholder="비밀번호 4자리를 입력해주세요" 
+                    value={pinNumber}
+                    onChange={(e) => setPinNumber(e.target.value)}
+                    required />
+                </div>
+                <button type="submit" className="signin-button">롤링페이퍼 입장</button>
             </form>
         </div>
     )

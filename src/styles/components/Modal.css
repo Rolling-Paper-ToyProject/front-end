@@ -1,51 +1,58 @@
 /* 모달 배경 스타일 */
 .modal-overlay {
-    position: fixed; /* 화면에 고정 */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 */
-    display: flex; /* 가운데 정렬을 위한 flexbox */
-    justify-content: center; /* 가로 중앙 정렬 */
-    align-items: center; /* 세로 중앙 정렬 */
-    z-index: 10000;
-    cursor: default;
-  }
-  
-  /* 모달 내용 스타일 */
-  .modal-content {
-    width: 320px;
-    background-color: white; /* 모달 배경색 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    padding: 20px 20px 0 20px; /* 여백 */
-    position: relative; /* 내부 요소 위치 설정 */
-  }
-  
-  /* 롤, 페이퍼 생성 / 페이퍼 생성, 수정(+ 수정사항 저장, 수정 취소), 삭제,  버튼 스타일 */
-  .roll-create-button,
-  .paper-create-button,
-  .paper-edit-button,
-  .paper-delete-button,
-  .paper-edit-save-button,
-  .paper-edit-cancel-button {
-    background: none; /* 기본 배경 없음 */
-    border: none; /* 기본 테두리 없음 */
-    cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
-    color: #007bff; /* 버튼 텍스트 색상 */
-    font-size: 16px; /* 텍스트 크기 */
-    padding: 5px 10px; /* 패딩 */
-  }
-  
-  .roll-create-button,
-  .paper-create-button,
-  .paper-edit-button,
-  .paper-delete-button,
-  .paper-edit-save-button,
-  .paper-edit-cancel-button {
-    text-decoration: underline; /* 호버 시 밑줄 */
-  }
-  
-  .modal-actions {
-    float: right;
-  }
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 */
+  display: flex; /* 가운데 정렬을 위한 flexbox */
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  z-index: 10000;
+  cursor: default;
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+  width: 320px;
+  background-color: white; /* 모달 배경색 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  padding: 20px 20px 0 20px; /* 여백 */
+  position: relative; /* 내부 요소 위치 설정 */
+}
+
+.modal-content > p {
+  line-height: 1.5; /* 줄 간격 설정 */
+  font-size: 22px;
+}
+
+/* 롤, 페이퍼 생성 / 페이퍼 생성, 수정(+ 수정사항 저장, 수정 취소), 삭제,  버튼 스타일 */
+.roll-create-button,
+.paper-create-button,
+.paper-edit-button,
+.paper-delete-button,
+.paper-edit-save-button,
+.paper-edit-cancel-button {
+  background: none; /* 기본 배경 없음 */
+  border: none; /* 기본 테두리 없음 */
+  cursor: pointer; /* 마우스 커서가 포인터로 변경됨 */
+  color: #007bff; /* 버튼 텍스트 색상 */
+  font-size: 16px; /* 텍스트 크기 */
+  padding: 5px 10px; /* 패딩 */
+}
+
+.roll-create-button,
+.paper-create-button,
+.paper-edit-button,
+.paper-delete-button,
+.paper-edit-save-button,
+.paper-edit-cancel-button {
+  text-decoration: underline; /* 호버 시 밑줄 */
+}
+
+.modal-actions,
+.paper-modal-button {
+  float: right;
+  margin-bottom: 5px;
+}

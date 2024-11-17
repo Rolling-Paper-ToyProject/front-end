@@ -6,7 +6,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const UpdateRollModal = ({ closeModal, roll }) => {
   const token = localStorage.getItem("Authorization");
-  const [rollTitle, setNewTitle] = useState("");
+  const [rollTitle, setRollTitle] = useState("");
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -44,8 +44,11 @@ const UpdateRollModal = ({ closeModal, roll }) => {
         <input
           type="text"
           value={rollTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
+          onChange={(e) => setRollTitle(e.target.value)}
           placeholder={roll.rollName}
+          onKeyDown={(e) => {
+            updateRoll();
+          }}
         />
         <div className="modal-actions">
           <CustomLogout onClick={closeModal}>취소</CustomLogout>

@@ -58,7 +58,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
           <BorderColorIcon style={{ marginRight: "8px", float: "left" }} />
           <h3 style={{ width: "170px" }}>롤링페이퍼 작성</h3>
         </div>
-        <input
+        <textarea
           type="text"
           value={paperContent}
           onChange={(e) => setPaperContent(e.target.value)}

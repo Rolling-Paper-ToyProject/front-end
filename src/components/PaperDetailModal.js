@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { IoMdMore } from "react-icons/io"; // 아이콘 가져오기
-import "../styles/components/Modal.css"; // CSS 파일 가져오기
+import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
 
@@ -72,7 +71,6 @@ const PaperDetailModal = ({ paper, closeModal }) => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      {" "}
       {/* 모달 배경 */}
       <div
         className="modal-content"
@@ -80,19 +78,22 @@ const PaperDetailModal = ({ paper, closeModal }) => {
           e.stopPropagation();
         }}
       >
-        {" "}
         {/* 모달 내용 */}
-        {/* <IoMdMore onClick={toggleOptions} className="options-icon" /> 옵션 아이콘 */}
         <p style={{ fontWeight: "bold", marginBottom: "10px" }}>
           From. {authorName}
-        </p>{" "}
+        </p>
         {/* 롤링페이퍼 내용 */}
         {isEditing ? (
           <>
-            <input
+            <textarea
               type="text"
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSave();
+                }
+              }}                 
             />
             <div className="paper-modal-button">
               <CustomLogout

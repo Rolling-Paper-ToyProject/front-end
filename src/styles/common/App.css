@@ -15,14 +15,6 @@ body{
   box-sizing: border-box;  /* padding 포함한 전체 크기 조정 */
 }
 
-/*로그인 영역의 버튼*/
-.social-login{
-    margin-top:20px;
-}
-.social-login > button{
-    width : 45%;
-}
-
 .App-header {
   background-color: #282c34; /* 헤더 배경색 설정 */
   display: flex; /* Flexbox 레이아웃 사용 */
@@ -46,10 +38,6 @@ body{
    /*로그인 영역*/
    .app-container {
        width: 40%;
-   }
-   /*로그인 영역의 버튼*/
-   .social-login > button{
-       width : 45%;
    }
 }
 

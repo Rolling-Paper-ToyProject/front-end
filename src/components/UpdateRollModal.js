@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const UpdateRollModal = ({ closeModal, roll }) => {
@@ -51,14 +51,14 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           }}
         />
         <div className="modal-actions">
-          <CustomLogout onClick={closeModal}>취소</CustomLogout>
-          <CustomLogout
+          <LetterClick onClick={closeModal}>취소</LetterClick>
+          <LetterClick
             className="roll-create-button"
             onClick={updateRoll}
             disabled={!rollTitle.trim()}
           >
             등록
-          </CustomLogout>
+          </LetterClick>
         </div>
       </div>
     </div>

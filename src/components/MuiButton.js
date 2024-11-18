@@ -42,8 +42,8 @@ export const CustomButton2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-// 로그아웃 버튼
-export const CustomLogout = styled(Button)(({ theme }) => ({
+// 글자 전용 버튼
+export const LetterClick = styled(Button)(({ theme }) => ({
     color: '#000000',
     '&:hover': {
         backgroundColor:'#ffffff',

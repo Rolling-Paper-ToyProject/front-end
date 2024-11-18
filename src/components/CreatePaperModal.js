@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const CreatePaperModal = ({ rollId, closeModal }) => {
@@ -65,14 +65,14 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
           placeholder="내용을 입력하세요"
         />
         {/* 롤링페이퍼 작성 */}
-        <CustomLogout
+        <LetterClick
           className="paper-create-button"
           onClick={handleCreatePaper}
           disabled={!paperContent.trim()} // 내용이 없을 때 버튼 비활성화
           style={{ float: "right" }}
         >
           등록
-        </CustomLogout>
+        </LetterClick>
       </div>
     </div>
   );

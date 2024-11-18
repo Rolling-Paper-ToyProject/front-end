@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 
 const PaperDetailModal = ({ paper, closeModal }) => {
   const { content, authorName, paperId } = paper;
@@ -96,36 +96,36 @@ const PaperDetailModal = ({ paper, closeModal }) => {
               }}                 
             />
             <div className="paper-modal-button">
-              <CustomLogout
+              <LetterClick
                 className="paper-edit-save-button"
                 onClick={handleSave}
               >
                 저장
-              </CustomLogout>
-              <CustomLogout
+              </LetterClick>
+              <LetterClick
                 className="paper-edit-cancel-button"
                 onClick={handleCancelUpdate}
               >
                 취소
-              </CustomLogout>
+              </LetterClick>
             </div>
           </>
         ) : (
           <>
             <p>{content}</p>
             <div className="paper-modal-button">
-              <CustomLogout
+              <LetterClick
                 className="paper-edit-button"
                 onClick={() => setIsEditing(true)}
               >
                 수정
-              </CustomLogout>
-              <CustomLogout
+              </LetterClick>
+              <LetterClick
                 className="paper-delete-button"
                 onClick={() => handleDelete()}
               >
                 삭제
-              </CustomLogout>
+              </LetterClick>
             </div>
           </>
         )}

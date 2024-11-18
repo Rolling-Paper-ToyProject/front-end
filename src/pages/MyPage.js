@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
-import { CustomButton2 , CustomLogout} from '../components/MuiButton';
+import { CustomButton2 , LetterClick } from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
@@ -77,9 +77,9 @@ const MyPage = () => {
         <div className="my-page-container">
             <div className="greeting-container">
                 <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
-                <CustomLogout className="logout-button" onClick={teacherlogout}>
+                <LetterClick className="logout-button" onClick={teacherlogout}>
                     <UserLogout>LOGOUT</UserLogout>
-                </CustomLogout>
+                </LetterClick>
             </div>
             <div className="roll-list-container">
                 <p className="highlighted-text">학급 목록</p>

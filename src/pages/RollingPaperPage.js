@@ -4,7 +4,7 @@ import "../styles/pages/RollingPaperPage.css";
 import CreatePaperModal from "../components/CreatePaperModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 
 const RollingPaperPage = () => {
     const location = useLocation();
@@ -61,13 +61,13 @@ const RollingPaperPage = () => {
       <div>
         <div className="header">
           <p className="className">{rollName}</p>
-          <CustomLogout
+          <LetterClick
             className="add-paper-button"
             onClick={showCreateModal}
             style={{ fontWeight: "bold", fontSize: "16px" }}
           >
             작성
-          </CustomLogout>
+          </LetterClick>
         </div>
 
         <div className="paper-container">

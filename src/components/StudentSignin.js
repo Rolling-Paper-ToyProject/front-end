@@ -50,6 +50,19 @@ const StudentSignin = ({ url }) => {
 
       if (!response === 200) {
         throw new Error("응답을 불러올 수 없습니다.");
+        // return; 필요하지 않음. Error로 인해 함수 실행이 중단됨.
+      }
+
+      console.log(classCode);
+
+      if (classCode !== classCode.trim()) {
+        alert("입력한 학급코드 앞과 뒤의 여백을 없애주세요")
+        return;
+      }
+
+      if (studentName !== studentName.trim()) {
+        alert("입력한 이름 앞과 뒤의 여백을 없애주세요")
+        return;
       }
 
       const studentData = response.data;

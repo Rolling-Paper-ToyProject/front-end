@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
 import { LetterClick } from "../components/MuiButton";
@@ -7,6 +7,13 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 const UpdateRollModal = ({ closeModal, roll }) => {
   const token = localStorage.getItem("Authorization");
   const [rollTitle, setRollTitle] = useState("");
+
+  // 컴포넌트가 처음 렌더링될 때 rollTitle 초기화
+  useEffect(() => {
+    if (roll && roll.rollName) {
+      setRollTitle(roll.rollName);
+    }
+  }, [roll]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -45,9 +52,11 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           type="text"
           value={rollTitle}
           onChange={(e) => setRollTitle(e.target.value)}
-          placeholder={roll.rollName}
+          placeholder="새 학급명을 입력해주세요" // placeholder를 단순한 안내 텍스트로 사용
           onKeyDown={(e) => {
-            updateRoll();
+            if (e.key === 'Enter') {
+              updateRoll();
+            }
           }}
         />
         <div className="modal-actions">

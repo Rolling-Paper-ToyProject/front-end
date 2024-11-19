@@ -1,8 +1,6 @@
-import React, { useEffect } from "react"
+import React from "react"
 import '../styles/components/SocialLogin.css';
-import { useLocation } from "react-router-dom";
-import { styled } from '@mui/material/styles';
-import { CustomButton1, CustomButton2 } from './MuiButton';
+import { CustomButton1 } from './MuiButton';
 
 const SocialLogin = () => {
 

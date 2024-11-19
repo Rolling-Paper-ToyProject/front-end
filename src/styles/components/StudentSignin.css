@@ -7,8 +7,8 @@
 }
 
 /* 입력 필드 스타일 */
-input[type="text"],
-input[type="password"] {
+.student-container input[type="text"],
+.student-container input[type="password"] {
   width: 180px; /* 입력 필드 너비를 전체의 100%로 설정 */
   padding: 10px; /* 입력 필드 패딩 설정 */
   margin: 8px 0; /* 입력 필드 간의 상하 간격 설정 (5px) */
@@ -29,7 +29,7 @@ input[type="password"] {
     format("woff");
 }
 
-input[type="password"] {
+.student-container input[type="password"] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 
   &::-webkit-input-placeholder {

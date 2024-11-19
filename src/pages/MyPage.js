@@ -6,6 +6,7 @@ import { CustomButton2 , LetterClick } from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
+import AddIcon from '@mui/icons-material/Add';
 
 const MyPage = () => {
     const navigate = useNavigate();
@@ -78,7 +79,8 @@ const MyPage = () => {
             <div className="greeting-container">
                 <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
                 <LetterClick className="logout-button" onClick={teacherlogout}>
-                    <UserLogout>LOGOUT</UserLogout>
+                    <UserLogout />
+                    <p>LOGOUT</p>
                 </LetterClick>
             </div>
             <div className="roll-list-container">
@@ -92,13 +94,13 @@ const MyPage = () => {
                         />
                     ))
                 ) : (
-                    <p>등록된 학급이 없습니다</p>
+                    <p className="no-class">등록된 학급이 없습니다.</p>
                 )}
                 <CustomButton2
                     onClick={() => setIsCreateRollModalOpen(true)}
                     className="create-roll"
                 >
-                    ✛ 학급 생성
+                    <AddIcon style={{marginRight:"5px"}}></AddIcon> 학급 생성
                 </CustomButton2>
             </div>
 

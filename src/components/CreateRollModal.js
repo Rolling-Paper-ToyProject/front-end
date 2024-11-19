@@ -1,6 +1,8 @@
 import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
+import { LetterClick } from '../components/MuiButton';
+import AddIcon from '@mui/icons-material/Add';
 
 const CreateRollModal = ({ closeModal }) => {
 
@@ -48,6 +50,11 @@ const CreateRollModal = ({ closeModal }) => {
              * 이벤트가 상위 요소로 전달되는 버블링 또는 캡처링 단계를 차단한다.
              * 특정 요소의 이벤트 처리에만 동작을 제한하고 싶을 때 사용된다.
              * */}  
+                <div className="modal-creat-tittle">
+                    <AddIcon style={{fontSize:"32px"}}></AddIcon>
+                    <p>학급 생성</p>
+                </div>
+
                 <input 
                     type="text"
                     value = {rollTitle}
@@ -59,11 +66,12 @@ const CreateRollModal = ({ closeModal }) => {
                         }
                     }}
                 /> {/* 롤링페이퍼 작성 */}
-                <button 
+                <LetterClick 
                     className="roll-create-button" 
                     onClick={createRoll}
                     disabled={!rollTitle.trim()} // 내용이 없을 때 버튼 비활성화
-                >등록</button>
+                    style={{marginBottom:"5px"}}
+                >등록</LetterClick>
             </div>
         </div>
     );

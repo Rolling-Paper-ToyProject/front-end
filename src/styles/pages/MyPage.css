@@ -31,17 +31,17 @@
 
 /* 로그아웃 버튼 스타일 */
 button.logout-button {
-    font-size:16px;
-    margin: 15px 20px;
-    padding: 5px 10px; /* 버튼 패딩 설정 */
+    font-size: 13px;
+    margin: 15px 10px;
+    padding: 5px 5px; /* 버튼 패딩 설정 */
     border: none; /* 버튼 테두리 제거 */
     border-radius: 8px; /* 버튼 모서리 둥글게 설정 */
     cursor: pointer; /* 커서 포인터로 변경 */
     transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
-button.logout-button>LogoutIcon{
-    margin-right:4px;
+.logout-button>p{
+    margin-left: 4px;
 }
 
 
@@ -53,12 +53,13 @@ button.logout-button>LogoutIcon{
     align-items: center; /* 아이템 수직 중앙 정렬 */
 }
 
+/* 학급 목록 글자 */
 .highlighted-text{
     display: inline-block; /* 인라인 블록 요소로 설정 */
     position: relative; /* 가상 요소의 기준이 되도록 설정 */
     width:80%;
     text-align: left; /* 텍스트를 왼쪽으로 정렬 */
-    margin: 15px 0; /* 필요에 따라 여백을 제거 */
+    margin: 20px 0; /* 필요에 따라 여백을 제거 */
     padding : 0 7px;
     font-size:24px;
     font-weight : bold;
@@ -66,6 +67,7 @@ button.logout-button>LogoutIcon{
 
 }
 
+/* 학급 목록 글자의 하이라이트 */
 .highlighted-text::before {
     content: '';
     position: absolute;
@@ -77,6 +79,10 @@ button.logout-button>LogoutIcon{
     z-index: -1;
 }
 
+/* 학급 목록 내에 롤이 없을 경우 */
+.no-class{
+    margin: 40px 0;
+}
 
 /* 롤링페이퍼 아이템 스타일 */
 .roll-item {
@@ -86,10 +92,13 @@ button.logout-button>LogoutIcon{
     padding: 10px 25px; /* 카드 내부 여백 설정 */
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */
     cursor: pointer;
+
+    position: relative;
 }
 
 .roll-name {
     margin: 10px 0;
+    width: 200px;
 }
 
 .roll-code-container {
@@ -100,10 +109,9 @@ button.logout-button>LogoutIcon{
 
 /* 학급 코드 스타일 */
 .class-code {
-    margin: 0;
-    display: inline-flex; /* 내부 요소 크기만큼 너비 차지 */
-    font-size: 16px; /* 폰트 크기 설정 */
+    width: 400px;
     margin-bottom: 10px;
+    font-size: 16px; /* 폰트 크기 설정 */
     margin-right: 10px; /* 오른쪽 간격 설정 */
     cursor: text;
 }
@@ -113,11 +121,96 @@ button.logout-button>LogoutIcon{
     display: inline-flex; /* 내부 요소 크기만큼 너비 차지 */
     justify-content: center;
     align-items: center;
+    gap: 20px;
+
+    float: right;
+    position: absolute;
+
+    top: 23px;
+    right: 20px;
 }
 
+/* 숨겨지는 버튼 그룹 */
+.hidden-group{
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    cursor: pointer;
+}
+
+.hidden-button-group {
+    display: flex;
+    gap: 35px; /* 버튼들 사이의 간격 조절 */
+    justify-content: center; /* 버튼들을 중앙에 정렬 */
+    align-items: center; /* 버튼들을 세로로 중앙 정렬 */
+    margin: 10px 15px 5px 0;
+  }
+  
+  .hidden-button-group p {
+    margin: 0; /* 각 버튼의 기본 여백 제거 */
+  }
+
+  .hidden-button-group>.url-copy-button::after {
+    content: "|";
+    margin-left: 20px;
+  }
+
+  .hidden-button-group>.update-button::after {
+    content: "|";
+    margin-left: 32px;
+  }
+
+  .hidden-button-group>.delete-button::after{
+    content: "";
+  }
+
+.hidden-button-group>p:hover{
+    color: #cccccc;
+}
+
+.hidden-button-group.hidden {
+    display: none;
+}
+
+.hidden-button-group.visible {
+    display: flex;
+}
+
+/* 반응형 버튼 그룹 */
+/* 너비가 767px 이하일 때 */
+@media (max-width: 767px) {
+    .button-group {
+        display: none; /* button-group을 숨김 */
+      
+    }
+  
+    .hidden-group {
+        display: block; /* hidden-group을 표시 */
+    }
+  }
+
+  /* 너비가 768px 이상일 때 */
+@media (min-width: 768px) {
+    .button-group {
+      display: flex; /* button-group을 표시 */
+    }
+  
+    .hidden-group {
+      display: none; /* hidden-group을 숨김 */
+    }
+    
+    .hidden-button-group.visible{
+        display: none;
+    }
+  }
+
 /* 수정 버튼과 삭제 버튼 스타일 */
-.url-copy-button, .update-button, .delete-button {
-    margin: 0 0 10px 10px;
+.button-group>.url-copy-button,
+.button-group>.update-button,
+.button-group>.delete-button {
+    display: flex; /* 내부 요소 크기만큼 너비 차지 */
+    flex-direction: column;
+    align-items: center;
     font-size: 16px; /* 폰트 크기 설정 */
     cursor: pointer; /* 커서 포인터로 변경 */
 }
@@ -125,6 +218,10 @@ button.logout-button>LogoutIcon{
 /* 버튼 호버 스타일 */
 .url-copy-button:hover, .update-button:hover, .delete-button:hover {
     color : #cccccc;/* 호버 시 텍스트 밑줄 추가 */
+}
+
+.url-copy-button>p, .update-button>p, .delete-button>p{
+    margin-top: 7px;
 }
 
 /* 생성 버튼 스타일 */

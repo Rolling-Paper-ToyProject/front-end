@@ -1,31 +1,31 @@
 import React from 'react';
-import ShareIcon from '@mui/icons-material/Share';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 //선생님 마잎이지 버튼
 function UrlCopyIcon(props) {
     return (
-        <ShareIcon {...props} style={{ cursor: 'pointer' }} sx={{ color: 'lightblue' }} />
+        <ContentPasteIcon {...props} style={{ cursor: 'pointer', fontSize:'30px' }} />
     );
 }
 
 function RollDelete(props) {
     return (
-        <DeleteIcon {...props} style={{ cursor: 'pointer' }} sx={{ color: 'lightpink' }} />
+        <DeleteForeverIcon {...props} style={{ cursor: 'pointer', fontSize:'30px' }} />
     );
 }
 
 function RollTittleEdit(props) {
    return (
-       <BorderColorIcon {...props} style={{ cursor: 'pointer' }} sx={{ color: 'lightgreen' }} />
+       <BorderColorIcon {...props} style={{ cursor: 'pointer', fontSize:'30px' }} />
    );
 }
 
 function UserLogout(props) {
   return (
-      <LogoutIcon {...props} style={{ cursor: 'pointer' }} />
+      <LogoutIcon {...props} style={{ cursor: 'pointer', fontSize:'20px' }} />
   );
 }
 

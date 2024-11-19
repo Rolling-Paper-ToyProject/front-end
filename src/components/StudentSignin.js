@@ -39,6 +39,16 @@ const StudentSignin = ({ url }) => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
+      if (classCode !== classCode.trim()) {
+        alert("입력한 학급코드 앞과 뒤의 여백을 없애주세요")
+        return;
+      }
+
+      if (studentName !== studentName.trim()) {
+        alert("입력한 이름 앞과 뒤의 여백을 없애주세요")
+        return;
+      }
+      
       const response = await axios.post(
         `http://localhost:8080/roll/${url}/join`,
         {
@@ -54,16 +64,6 @@ const StudentSignin = ({ url }) => {
       }
 
       console.log(classCode);
-
-      if (classCode !== classCode.trim()) {
-        alert("입력한 학급코드 앞과 뒤의 여백을 없애주세요")
-        return;
-      }
-
-      if (studentName !== studentName.trim()) {
-        alert("입력한 이름 앞과 뒤의 여백을 없애주세요")
-        return;
-      }
 
       const studentData = response.data;
       const studentToken = studentData.data.accessToken;

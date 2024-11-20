@@ -1,9 +1,9 @@
 /* fonts */
 /* Google Fonts에서 Hi Melody 폰트를 불러옴 */
-@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 .student-container {
-  font-family: "Hi Melody", cursive;
+  font-family: "Poor Story", system-ui;
 }
 
 /* 입력 필드 스타일 */
@@ -63,8 +63,9 @@ label {
   cursor: pointer; /* 커서 포인터로 변경 */
   transition: background-color 0.4s; /* 배경색 변경 애니메이션 */
 
-  font-size: 16px;
-  font-family: "Hi Melody", cursive;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Poor Story", system-ui;
 }
 
 /* 버튼 호버 스타일 */

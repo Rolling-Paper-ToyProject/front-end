@@ -17,13 +17,13 @@ const PaperItem = ({ paper }) => {
   return (
     <>
       <div>
-        <p className="fromName">From. {authorName}</p>
         <div
           key={paperId}
           onClick={() => showPaperDetailModal(paper)}
           className="paper-box"
         >
-          <p>{content}</p>
+          <p className="fromName">From. {authorName}</p>
+          <p className="roll-content">{content}</p>
         </div>
 
         {isPaperDetailModalOpen && (

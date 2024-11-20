@@ -79,7 +79,7 @@ const PaperDetailModal = ({ paper, closeModal }) => {
         }}
       >
         {/* 모달 내용 */}
-        <p style={{ fontWeight: "bold", marginBottom: "10px" }}>
+        <p className="paper-detail-name">
           From. {authorName}
         </p>
         {/* 롤링페이퍼 내용 */}
@@ -112,7 +112,7 @@ const PaperDetailModal = ({ paper, closeModal }) => {
           </>
         ) : (
           <>
-            <p>{content}</p>
+            <p className="paper-detail-content">{content}</p>
             <div className="paper-modal-button">
               <LetterClick
                 className="paper-edit-button"

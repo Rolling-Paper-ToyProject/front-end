@@ -54,7 +54,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
          * 이벤트가 상위 요소로 전달되는 버블링 또는 캡처링 단계를 차단한다.
          * 특정 요소의 이벤트 처리에만 동작을 제한하고 싶을 때 사용된다.
          * */}
-        <div className="update-title" style={{ marginBottom: "5px" }}>
+        <div className="create-paper-title" style={{ marginBottom: "5px" }}>
           <BorderColorIcon style={{ marginRight: "8px", float: "left" }} />
           <h3 style={{ width: "170px" }}>롤링페이퍼 작성</h3>
         </div>

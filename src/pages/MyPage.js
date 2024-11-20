@@ -11,6 +11,7 @@ const MyPage = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
+    const [role, setRole] = useState();
     const [isCreateRollModalOpen, setIsCreateRollModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
@@ -37,7 +38,8 @@ const MyPage = () => {
 
                 const userData = userResponse.data;
                 console.log("User Info Response:", userData);
-                setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
+                setUserName(userData.data.name);
+                setRole(userData.data.role);
 
                 // 롤 데이터 가져오기
                 const rollResponse = await axios.get(`http://localhost:8080/roll/me`, {
@@ -64,8 +66,9 @@ const MyPage = () => {
     }, [navigate]);
 
     const teacherlogout = () => {
-        localStorage.removeItem("Authorization");
-        localStorage.removeItem("RefreshToken");
+        // localStorage.removeItem("Authorization");
+        // localStorage.removeItem("RefreshToken");
+        localStorage.clear();
         navigate('/');
     };
 
@@ -89,6 +92,7 @@ const MyPage = () => {
                         <RollItem
                             key={roll.rollId}
                             roll={roll}
+                            role={role}
                         />
                     ))
                 ) : (

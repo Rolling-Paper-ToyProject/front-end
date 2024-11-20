@@ -8,9 +8,8 @@ import { CustomLogout } from "../components/MuiButton";
 
 const RollingPaperPage = () => {
     const location = useLocation();
-    const { rollId } = location.state || {};
-    const { rollName } = location.state || {};
     const navigate = useNavigate();
+    const { rollId, rollName, role } = location.state || {};
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
@@ -33,8 +32,6 @@ const RollingPaperPage = () => {
                         },
                     }
                 );
-
-
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
                 setPapers(paperData.data || []); // 빈 배열 fallback 추가
@@ -44,7 +41,7 @@ const RollingPaperPage = () => {
         }
 
         fetchPaperData();
-    }, [rollId]);
+    }, [rollId, token]);
 
     // 모달을 여는 함수
     const showCreateModal = () => {
@@ -60,7 +57,24 @@ const RollingPaperPage = () => {
     return (
       <div>
         <div className="header">
-          <p className="className">{rollName}</p>
+          {role === "TEACHER" ? (
+            <CustomLogout
+              className="roll-list-button"
+              onClick={() => navigate(`/mypage`)}
+              style={{ fontWeight: "bold", fontSize: "16px"}}
+            >
+              학급 목록
+            </CustomLogout>
+          ) : ("")}
+          <p 
+            className="className"
+            style={{
+              paddingLeft: role === "TEACHER" ? "30px" : "60px",
+              paddingRight: role === "TEACHER" ? "30px" : "0"
+            }}
+          >
+            {rollName}
+          </p>
           <CustomLogout
             className="add-paper-button"
             onClick={showCreateModal}
@@ -73,7 +87,7 @@ const RollingPaperPage = () => {
         <div className="paper-container">
           {/* RollingPaperDetail 컴포넌트 */}
           {Array.isArray(papers) && papers.length > 0 ? (
-            papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} />)
+            papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
           ) : (
             <p>작성된 페이퍼가 없습니다</p>
           )}

@@ -16,7 +16,7 @@
   font-weight: bold;
   margin: 18px 20px;
   text-align: center;
-  padding-left: 60px;
+  /* padding-left: 60px; /pages/RollingPaperPage.js 내 요소에 직접 반영 */ 
 
   font-family: "Hi Melody", cursive;
 }

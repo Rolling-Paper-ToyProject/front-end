@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UrlCopyIcon, RollDelete, RollTittleEdit } from "./MuiIcon";
 import UpdateRollModal from "../components/UpdateRollModal";
 
-const RollItem = ({ roll }) => {
+const RollItem = ({ roll, role }) => {
   const { rollId, rollName, classCode, url } = roll;
   // 롤 제목 수정 모드 상태를 관리하는 state
   const [isUpdateRollModalOpen, setIsUpdateRollModalOpen] = useState(false);
@@ -15,7 +15,7 @@ const RollItem = ({ roll }) => {
 
     const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName } })
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 

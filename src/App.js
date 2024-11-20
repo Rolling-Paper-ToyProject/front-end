@@ -18,7 +18,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/studentsignin" element={<StudentSigninPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />
             <Route path="/:url" element={<StudentSigninPage />} />

@@ -7,12 +7,6 @@ import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
     const navigate = useNavigate(); // 페이지 전환을 위한 훅
 
-    // 소셜 로그인 성공 시 호출되는 함수
-    const handleSocialLoginSuccess = (userId) => {
-        // 로그인 성공 후 고유의 userId를 URL에 포함하여 MyPage로 이동
-        navigate('/user/my')
-    };
-
     return (
         <div className="container">  
             <div className="logo-container"> {/* logo-container 추가 */}
@@ -21,7 +15,7 @@ const LoginPage = () => {
 
             <h2>Login</h2>
             {/* 소셜 로그인 컴포넌트. 로그인 성공 시 handleSocialLoginSuccess 실행 */}
-            <SocialLogin onLoginSuccess={handleSocialLoginSuccess}/>
+            <SocialLogin />
         </div>
     );
 };

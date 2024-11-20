@@ -47,7 +47,9 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           onChange={(e) => setRollTitle(e.target.value)}
           placeholder={roll.rollName}
           onKeyDown={(e) => {
-            updateRoll();
+            if (e.key === 'Enter') {
+              updateRoll();
+            }
           }}
         />
         <div className="modal-actions">

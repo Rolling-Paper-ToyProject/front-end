@@ -98,7 +98,7 @@ button.logout-button {
 
 .roll-name {
     margin: 10px 0;
-    width: 200px;
+    width: 250px;
 }
 
 .roll-code-container {
@@ -178,7 +178,7 @@ button.logout-button {
 
 /* 반응형 버튼 그룹 */
 /* 너비가 767px 이하일 때 */
-@media (max-width: 767px) {
+@media screen and (max-width: 909px) {
     .button-group {
         display: none; /* button-group을 숨김 */
       
@@ -190,7 +190,7 @@ button.logout-button {
   }
 
   /* 너비가 768px 이상일 때 */
-@media (min-width: 768px) {
+  @media screen and (min-width: 910px) {
     .button-group {
       display: flex; /* button-group을 표시 */
     }
@@ -201,6 +201,12 @@ button.logout-button {
     
     .hidden-button-group.visible{
         display: none;
+    }
+  }
+
+  @media screen and (max-width: 400px){
+    .roll-name{
+        font-size: 18px;
     }
   }
 

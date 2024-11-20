@@ -36,13 +36,13 @@ body{
 
 @media screen and (min-width: 1300px) and (max-width: 1529px) {
     .app-container {
-        width: 35%;
+        width: 40%;
     }
  }
 
 @media screen and (min-width: 1024px) and (max-width: 1299px) {
    .app-container {
-       width: 45%;
+       width: 55%;
    }
 }
 
@@ -57,7 +57,7 @@ body{
   }
 }
 
-@media screen and ( min-width : 560px) and (max-width: 900px){
+@media screen and ( min-width : 701px) and (max-width: 900px){
    .app-container {
        width: 60%;
    }
@@ -68,7 +68,7 @@ body{
   }
 }
 /* 스마트폰 가로/세로용*/
-@media screen and (max-width: 559px) {
+@media screen and (max-width: 700px) {
     .app-container {
         width: 100%
     }

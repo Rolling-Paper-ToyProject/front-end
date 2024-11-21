@@ -6,7 +6,7 @@ const PaperItem = ({ paper }) => {
   const { paperId, content, authorName, authorRole } = paper;
   const [isPaperDetailModalOpen, setIsPaperDetailModalOpen] = useState(false);
 
-  const showPaperDetailModal = (paper) => {
+  const showPaperDetailModal = () => {
     setIsPaperDetailModalOpen(true);
   };
 
@@ -17,10 +17,14 @@ const PaperItem = ({ paper }) => {
   return (
     <>
       <div>
-        <p className="fromName">From. {authorName}</p>
+        {authorRole === "TEACHER" ? (
+          <p className="fromName">From. {`${authorName} 선생님`}</p>
+        ) : (
+          <p className="fromName">From. {authorName}</p>
+        )}
         <div
           key={paperId}
-          onClick={() => showPaperDetailModal(paper)}
+          onClick={() => showPaperDetailModal()}
           className="paper-box"
         >
           <p>{content}</p>

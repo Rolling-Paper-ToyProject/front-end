@@ -14,27 +14,35 @@ const StudentSignin = ({ url }) => {
     const fetchTeacherData = async () => {
       if (token) {
         try {
-          const userResponse = await axios.get(
-            "https://sparklenote.site/roll/me",
+          const teacherUserResponse = await axios.get(
+            "http://localhost:8080/user/profile",
+            { headers: { Authorization: token } }
+          )
+          const teacherUserData = teacherUserResponse.data;
+          const role = teacherUserData.data.role;
+          if (role !== "TEACHER") return;
+
+          const teacherRollResponse = await axios.get(
+            "http://localhost:8080/roll/me",
             {
               headers: {
                 Authorization: token,
-              },
+              }
             }
           );
-          const userData = userResponse.data;
-          const foundItem = userData.data.find((item) => item.url === url);
+          const teacherRollData = teacherRollResponse.data;
+          const foundItem = teacherRollData.data.find((item) => item.url === url);
 
           if (foundItem) {
             const { rollId, rollName } = foundItem;
-            navigate(`/roll/${url}/join`, { state: { rollId, rollName } });
-          }
+            navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
+          } else { return; }
         } catch (error) {}
       }
     };
 
     fetchTeacherData();
-  }, [token, url, navigate]);
+  }, [token, url]);
 
   const handleSignin = async (e) => {
     e.preventDefault();
@@ -70,11 +78,12 @@ const StudentSignin = ({ url }) => {
       const refreshToken = studentData.data.refreshToken;
       const rollId = studentData.data.rollId;
       const rollName = studentData.data.rollName;
+      const role = studentData.data.role;
 
       if (studentToken && refreshToken) {
         localStorage.setItem("Authorization", `Bearer ${studentToken}`);
         localStorage.setItem("RefreshToken", refreshToken);
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName } });
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
       }
     } catch (error) {
       console.log("토큰 fetch 실패: ", error);

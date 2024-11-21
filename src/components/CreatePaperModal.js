@@ -3,6 +3,7 @@ import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { API } from "../config";
 
 const CreatePaperModal = ({ rollId, closeModal }) => {
   const token = localStorage.getItem("Authorization");
@@ -18,7 +19,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
   const handleCreatePaper = async () => {
     try {
       await axios.post(
-        `https://sparklenote.site/paper/rolls/${rollId}`,
+        API.CREATE_PAPER(rollId),
         { content: paperContent },
         {
           headers: {

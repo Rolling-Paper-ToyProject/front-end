@@ -24,7 +24,8 @@ const StudentSignin = ({ url }) => {
           )
           const teacherUserData = teacherUserResponse.data;
           const role = teacherUserData.data.role;
-          
+          if (role !== "TEACHER") return;
+
           const teacherRollResponse = await axios.get(
             "http://localhost:8080/roll/me",
             {
@@ -39,7 +40,7 @@ const StudentSignin = ({ url }) => {
           if (foundItem) {
             const { rollId, rollName } = foundItem;
             navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
-          }
+          } else { return; }
         } catch (error) {}
       }
     };

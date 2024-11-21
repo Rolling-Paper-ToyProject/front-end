@@ -63,13 +63,13 @@ const RollingPaperPage = () => {
               onClick={() => navigate(`/mypage`)}
               style={{ fontWeight: "bold", fontSize: "16px"}}
             >
-              학급 목록
+              {"<<"}
             </CustomLogout>
           ) : ("")}
           <p 
             className="className"
             style={{
-              paddingLeft: role === "TEACHER" ? "30px" : "60px",
+              paddingLeft: role === "TEACHER" ? "30px" : "80px",
               paddingRight: role === "TEACHER" ? "30px" : "0"
             }}
           >

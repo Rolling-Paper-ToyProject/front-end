@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UrlCopyIcon, RollDelete, RollTittleEdit } from "./MuiIcon";
 import UpdateRollModal from "../components/UpdateRollModal";
+import { API, BASE_URL } from "../config";
 
 const RollItem = ({ roll, role }) => {
   const { rollId, rollName, classCode, url } = roll;
@@ -21,7 +22,7 @@ const RollItem = ({ roll, role }) => {
 
   const copyUrl = () => {
     navigator.clipboard
-      .writeText(`https://sparklenote.site/${url}`)
+      .writeText(BASE_URL + `${url}`)
       .then(() => {
         alert("URL이 클립보드에 복사되었습니다.");
       })
@@ -42,11 +43,10 @@ const RollItem = ({ roll, role }) => {
       )
     ) {
       try {
-        await axios.delete(`https://sparklenote.site/roll/${rollId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await axios.delete(
+          API.DELETE_ROLL(rollId), 
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
         alert("학급이 삭제되었습니다.");
 

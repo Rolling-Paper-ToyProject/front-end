@@ -2,6 +2,7 @@ import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
+import { API } from "../config";
 
 const PaperDetailModal = ({ paper, closeModal }) => {
   const { content, authorName, paperId, authorRole } = paper;
@@ -27,13 +28,9 @@ const PaperDetailModal = ({ paper, closeModal }) => {
     if (newContent !== content) {
       try {
         await axios.put(
-          `https://sparklenote.site/paper/${paperId}`,
+          API.UPDATE_PAPER(paperId),
           { content: newContent },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
+          { headers: { Authorization: token } }
         );
         alert("페이퍼 내용을 수정하였습니다.");
         window.location.reload();
@@ -52,11 +49,10 @@ const PaperDetailModal = ({ paper, closeModal }) => {
   const handleDelete = async () => {
     if (window.confirm("해당 페이퍼를 삭제하시겠습니까?")) {
       try {
-        await axios.delete(`https://sparklenote.site/paper/${paperId}`, {
-          headers: {
-            Authorization: token,
-          },
-        });
+        await axios.delete(
+          API.DELETE_PAPER(paperId), 
+          { headers: { Authorization: token } }
+        );
         console.log("롤링페이퍼 삭제 성공");
         alert("롤링페이퍼가 삭제되었습니다.");
         // closeModal();

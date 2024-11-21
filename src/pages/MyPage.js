@@ -6,6 +6,7 @@ import { CustomButton2 , CustomLogout} from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
+import { API } from "../config";
 
 const MyPage = () => {
     const navigate = useNavigate();
@@ -26,11 +27,10 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await axios.get('http://localhost:8080/user/profile', {
-                    headers: {
-                        "Authorization": token
-                    }
-                });
+                const userResponse = await axios.get(
+                    API.TEACHER_PROFILE, 
+                    { headers: { "Authorization": token } }
+                );
 
                 if (!userResponse === 200) {
                     throw new Error('Failed to fetch user info');
@@ -42,11 +42,10 @@ const MyPage = () => {
                 setRole(userData.data.role);
 
                 // 롤 데이터 가져오기
-                const rollResponse = await axios.get(`http://localhost:8080/roll/me`, {
-                    headers: {
-                        "Authorization": token
-                    }
-                });
+                const rollResponse = await axios.get(
+                    API.GET_ROLL, 
+                    { headers: { "Authorization": token } }
+                );
 
                 if (!rollResponse === 200) {
                     throw new Error('Failed to fetch roll data');

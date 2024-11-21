@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/components/StudentSignin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../config";
 
 const StudentSignin = ({ url }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const StudentSignin = ({ url }) => {
       if (token) {
         try {
           const teacherUserResponse = await axios.get(
-            "http://localhost:8080/user/profile",
+            API.TEACHER_PROFILE,
             { headers: { Authorization: token } }
           )
           const teacherUserData = teacherUserResponse.data;
@@ -23,7 +24,7 @@ const StudentSignin = ({ url }) => {
           if (role !== "TEACHER") return;
 
           const teacherRollResponse = await axios.get(
-            "http://localhost:8080/roll/me",
+            API.GET_ROLL,
             {
               headers: {
                 Authorization: token,
@@ -58,7 +59,7 @@ const StudentSignin = ({ url }) => {
       }
       
       const response = await axios.post(
-        `https://sparklenote.site/roll/${url}/join`,
+        API.STUDENT_JOIN_URL(url),
         {
           name: studentName,
           classCode: classCode,

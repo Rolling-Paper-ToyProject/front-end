@@ -1,6 +1,7 @@
 import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
+import { API } from "../config";
 
 const CreateRollModal = ({ closeModal }) => {
 
@@ -15,11 +16,11 @@ const CreateRollModal = ({ closeModal }) => {
 
     const createRoll = async () => {
         try {
-            await axios.post(`https://sparklenote.site/roll`, { rollName: rollTitle }, {
-                headers: {
-                    "Authorization": token
-                }
-            });
+            await axios.post(
+                API.CREATE_ROLL, 
+                { rollName: rollTitle }, 
+                { headers: { "Authorization": token } }
+            );
             alert("새 학급이 생성되었습니다.");
             setRollTitle(''); // 입력 내용 초기화
             window.location.reload();

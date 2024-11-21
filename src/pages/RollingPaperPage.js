@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
 import { BackToRollList } from "../components/MuiIcon";
+import { API } from "../config";
 
 const RollingPaperPage = () => {
     const location = useLocation();
@@ -26,12 +27,8 @@ const RollingPaperPage = () => {
             try {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
-                    `http://localhost:8080/paper/rolls/${rollId}`,
-                    {
-                        headers: {
-                            Authorization: token,
-                        },
-                    }
+                    API.GET_PAPER,
+                    { headers: { Authorization: token } }
                 );
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);

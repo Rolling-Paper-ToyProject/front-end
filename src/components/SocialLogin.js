@@ -21,7 +21,7 @@ const SocialLogin = () => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 네이버 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
+        window.location.href = 'https://sparklenote.site/oauth2/authorization/naver';
 
     }
     
@@ -38,7 +38,7 @@ const SocialLogin = () => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 카카오 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+        window.location.href = 'https://sparklenote.site/oauth2/authorization/kakao';
         
     }
     

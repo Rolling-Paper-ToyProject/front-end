@@ -18,7 +18,7 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
   const handleCreatePaper = async () => {
     try {
       await axios.post(
-        `http://localhost:8080/paper/rolls/${rollId}`,
+        `https://sparklenote.site/paper/rolls/${rollId}`,
         { content: paperContent },
         {
           headers: {

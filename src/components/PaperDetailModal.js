@@ -27,7 +27,7 @@ const PaperDetailModal = ({ paper, closeModal }) => {
     if (newContent !== content) {
       try {
         await axios.put(
-          `http://localhost:8080/paper/${paperId}`,
+          `https://sparklenote.site/paper/${paperId}`,
           { content: newContent },
           {
             headers: {
@@ -52,7 +52,7 @@ const PaperDetailModal = ({ paper, closeModal }) => {
   const handleDelete = async () => {
     if (window.confirm("해당 페이퍼를 삭제하시겠습니까?")) {
       try {
-        await axios.delete(`http://localhost:8080/paper/${paperId}`, {
+        await axios.delete(`https://sparklenote.site/paper/${paperId}`, {
           headers: {
             Authorization: token,
           },

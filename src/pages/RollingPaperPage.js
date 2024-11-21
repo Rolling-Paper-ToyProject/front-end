@@ -69,7 +69,7 @@ const RollingPaperPage = () => {
           <p 
             className="className"
             style={{
-              paddingLeft: role === "TEACHER" ? "30px" : "80px",
+              paddingLeft: role === "TEACHER" ? "30px" : "100px",
               paddingRight: role === "TEACHER" ? "30px" : "0"
             }}
           >

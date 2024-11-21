@@ -5,6 +5,7 @@ import CreatePaperModal from "../components/CreatePaperModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
+import { BackToRollList } from "../components/MuiIcon";
 
 const RollingPaperPage = () => {
     const location = useLocation();
@@ -63,7 +64,7 @@ const RollingPaperPage = () => {
               onClick={() => navigate(`/mypage`)}
               style={{ fontWeight: "bold", fontSize: "16px"}}
             >
-              {"<<"}
+              < BackToRollList />
             </CustomLogout>
           ) : ("")}
           <p 

@@ -17,7 +17,7 @@ const UpdateRollModal = ({ closeModal, roll }) => {
   const updateRoll = async () => {
     try {
       await axios.put(
-        `http://localhost:8080/roll/${roll.rollId}`,
+        `https://sparklenote.site/roll/${roll.rollId}`,
         { rollName: rollTitle },
         { headers: { Authorization: token } }
       );

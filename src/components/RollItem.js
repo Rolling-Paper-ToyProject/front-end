@@ -21,7 +21,7 @@ const RollItem = ({ roll }) => {
 
   const copyUrl = () => {
     navigator.clipboard
-      .writeText(`http://localhost:3000/${url}`)
+      .writeText(`https://sparklenote.site/${url}`)
       .then(() => {
         alert("URL이 클립보드에 복사되었습니다.");
       })
@@ -42,7 +42,7 @@ const RollItem = ({ roll }) => {
       )
     ) {
       try {
-        await axios.delete(`http://localhost:8080/roll/${rollId}`, {
+        await axios.delete(`https://sparklenote.site/roll/${rollId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

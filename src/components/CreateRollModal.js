@@ -15,7 +15,7 @@ const CreateRollModal = ({ closeModal }) => {
 
     const createRoll = async () => {
         try {
-            await axios.post(`http://localhost:8080/roll`, { rollName: rollTitle }, {
+            await axios.post(`https://sparklenote.site/roll`, { rollName: rollTitle }, {
                 headers: {
                     "Authorization": token
                 }

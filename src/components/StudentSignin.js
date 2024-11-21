@@ -15,7 +15,7 @@ const StudentSignin = ({ url }) => {
       if (token) {
         try {
           const userResponse = await axios.get(
-            "http://localhost:8080/roll/me",
+            "https://sparklenote.site/roll/me",
             {
               headers: {
                 Authorization: token,
@@ -50,7 +50,7 @@ const StudentSignin = ({ url }) => {
       }
       
       const response = await axios.post(
-        `http://localhost:8080/roll/${url}/join`,
+        `https://sparklenote.site/roll/${url}/join`,
         {
           name: studentName,
           classCode: classCode,

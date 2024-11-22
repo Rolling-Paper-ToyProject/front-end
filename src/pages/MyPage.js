@@ -36,9 +36,8 @@ const MyPage = () => {
                 console.log('Axios defaults:', axios.defaults);
 
                 // 사용자 정보 가져오기
-                console.log('Requesting profile from:', API.TEACHER_PROFILE);
                 const userResponse = await axios.get(
-                    API.TEACHER_PROFILE,
+                    'https://sparklenote.site/user/profile',
                     {
                         headers: {
                             "Authorization": token,

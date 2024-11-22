@@ -2,9 +2,10 @@ import { useState } from "react";
 import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
 import { CustomLogout } from "../components/MuiButton";
+import { API } from "../config";
 
 const PaperDetailModal = ({ paper, closeModal }) => {
-  const { content, authorName, paperId } = paper;
+  const { content, authorName, paperId, authorRole } = paper;
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
   const [newContent, setNewContent] = useState(content);
   const token = localStorage.getItem("Authorization");
@@ -27,13 +28,9 @@ const PaperDetailModal = ({ paper, closeModal }) => {
     if (newContent !== content) {
       try {
         await axios.put(
-          `https://sparklenote.site/paper/${paperId}`,
+          API.UPDATE_PAPER(paperId),
           { content: newContent },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
+          { headers: { Authorization: token } }
         );
         alert("페이퍼 내용을 수정하였습니다.");
         window.location.reload();
@@ -52,11 +49,10 @@ const PaperDetailModal = ({ paper, closeModal }) => {
   const handleDelete = async () => {
     if (window.confirm("해당 페이퍼를 삭제하시겠습니까?")) {
       try {
-        await axios.delete(`https://sparklenote.site/paper/${paperId}`, {
-          headers: {
-            Authorization: token,
-          },
-        });
+        await axios.delete(
+          API.DELETE_PAPER(paperId), 
+          { headers: { Authorization: token } }
+        );
         console.log("롤링페이퍼 삭제 성공");
         alert("롤링페이퍼가 삭제되었습니다.");
         // closeModal();
@@ -78,9 +74,8 @@ const PaperDetailModal = ({ paper, closeModal }) => {
           e.stopPropagation();
         }}
       >
-        {/* 모달 내용 */}
-        <p style={{ fontWeight: "bold", marginBottom: "10px" }}>
-          From. {authorName}
+        <p style={{ fontWeight: "bold", marginBottom: "10px"}}>
+          From. {`${authorName}${authorRole === "TEACHER" ? " 선생님" : ""}`}
         </p>
         {/* 롤링페이퍼 내용 */}
         {isEditing ? (
@@ -89,11 +84,14 @@ const PaperDetailModal = ({ paper, closeModal }) => {
               type="text"
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleSave();
-                }
-              }}                 
+              /** 
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSave();
+                  }
+                }}
+                수정 시 다음 줄로 넘어가기 위해서 Enter 누를 시 저장이 되어 보류
+              */                 
             />
             <div className="paper-modal-button">
               <CustomLogout

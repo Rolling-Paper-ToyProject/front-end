@@ -3,6 +3,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 //선생님 마잎이지 버튼
 function UrlCopyIcon(props) {
@@ -29,5 +30,11 @@ function UserLogout(props) {
   );
 }
 
+function BackToRollList(props) {
+    return (
+        <ArrowBackIosNewIcon {...props} style={{ cursor: 'pointer' }} />
+    )
+}
+
 // 이름 내보내기
-export { UrlCopyIcon, RollDelete, RollTittleEdit, UserLogout };
+export { UrlCopyIcon, RollDelete, RollTittleEdit, UserLogout, BackToRollList };

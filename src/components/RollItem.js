@@ -4,8 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UrlCopyIcon, RollDelete, RollTittleEdit } from "./MuiIcon";
 import UpdateRollModal from "../components/UpdateRollModal";
+import { API, BASE_URL } from "../config";
 
-const RollItem = ({ roll }) => {
+const RollItem = ({ roll, role }) => {
   const { rollId, rollName, classCode, url } = roll;
   // 롤 제목 수정 모드 상태를 관리하는 state
   const [isUpdateRollModalOpen, setIsUpdateRollModalOpen] = useState(false);
@@ -15,13 +16,13 @@ const RollItem = ({ roll }) => {
 
     const enterRoll = () => {
         // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName } })
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
         console.log(`롤링페이퍼 ${rollId}로 이동`);
     }
 
   const copyUrl = () => {
     navigator.clipboard
-      .writeText(`https://sparklenote.site/${url}`)
+      .writeText(BASE_URL + `${url}`)
       .then(() => {
         alert("URL이 클립보드에 복사되었습니다.");
       })
@@ -42,11 +43,10 @@ const RollItem = ({ roll }) => {
       )
     ) {
       try {
-        await axios.delete(`https://sparklenote.site/roll/${rollId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await axios.delete(
+          API.DELETE_ROLL(rollId), 
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
         alert("학급이 삭제되었습니다.");
 

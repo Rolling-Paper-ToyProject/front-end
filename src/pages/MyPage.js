@@ -22,7 +22,7 @@ const MyPage = () => {
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
-                navigate('/');
+                navigate('https://sparklenote.site/');
                 return;
             }
 
@@ -33,7 +33,8 @@ const MyPage = () => {
                     headers: {
                         "Authorization": token,
                         "Content-Type": "application/json"
-                    }
+                    },
+                    credentials: 'include'
                 });
 
                 console.log('Fetch Response:', userResponse);
@@ -53,7 +54,8 @@ const MyPage = () => {
                     headers: {
                         "Authorization": token,
                         "Content-Type": "application/json"
-                    }
+                    },
+                    credentials: 'include'
                 });
 
                 if (!rollResponse.ok) {
@@ -66,13 +68,56 @@ const MyPage = () => {
 
             } catch (error) {
                 console.error('Fetch error:', error);
-                navigate('/');
+                navigate('https://sparklenote.site/');
             }
         };
 
         fetchData();
     }, [navigate, token]);
-    // ... 나머지 코드는 동일
+
+    const teacherlogout = () => {
+        localStorage.clear();
+        navigate('https://sparklenote.site/');
+    };
+
+    const closeModal = () => {
+        setIsCreateRollModalOpen(false);
+    }
+
+    return (
+        <div className="my-page-container">
+            <div className="greeting-container">
+                <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
+                <CustomLogout className="logout-button" onClick={teacherlogout}>
+                    <UserLogout>LOGOUT</UserLogout>
+                </CustomLogout>
+            </div>
+            <div className="roll-list-container">
+                <p className="highlighted-text">학급 목록</p>
+
+                {Array.isArray(rolls) && rolls.length > 0 ? (
+                    rolls.map((roll) => (
+                        <RollItem
+                            key={roll.rollId}
+                            roll={roll}
+                            role={role}
+                        />
+                    ))
+                ) : (
+                    <p>등록된 학급이 없습니다</p>
+                )}
+                <CustomButton2
+                    onClick={() => setIsCreateRollModalOpen(true)}
+                    className="create-roll"
+                >
+                    ✛ 학급 생성
+                </CustomButton2>
+            </div>
+
+            {isCreateRollModalOpen && <CreateRollModal closeModal={closeModal} /> }
+
+        </div>
+    );
 };
 
 export default MyPage;

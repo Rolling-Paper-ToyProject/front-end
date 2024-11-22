@@ -18,12 +18,7 @@ const MyPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            // 디버깅용 로그 추가
-            console.log('Current API URLs:', {
-                profile: API.TEACHER_PROFILE,
-                roll: API.GET_ROLL
-            });
-            console.log('Current token:', token);
+            console.log('Attempting to fetch data with token:', token);
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
@@ -32,66 +27,51 @@ const MyPage = () => {
             }
 
             try {
-                // axios 기본 설정 확인
-                console.log('Axios defaults:', axios.defaults);
-
-                // 사용자 정보 가져오기
-                const userResponse = await axios.get(
-                    'https://sparklenote.site/user/profile',
-                    {
-                        headers: {
-                            "Authorization": token,
-                            // CORS 관련 헤더 추가
-                            'Access-Control-Allow-Origin': '*'
-                        }
+                // fetch로 시도해보기
+                const userResponse = await fetch('https://sparklenote.site/user/profile', {
+                    method: 'GET',
+                    headers: {
+                        "Authorization": token,
+                        "Content-Type": "application/json"
                     }
-                );
+                });
 
-                console.log('User Response:', userResponse);
+                console.log('Fetch Response:', userResponse);
 
-                if (userResponse.status !== 200) {  // 조건문 수정
-                    throw new Error('Failed to fetch user info');
+                if (!userResponse.ok) {
+                    throw new Error(`HTTP error! status: ${userResponse.status}`);
                 }
 
-                const userData = userResponse.data;
-                console.log("User Info Response:", userData);
+                const userData = await userResponse.json();
+                console.log("User Data:", userData);
                 setUserName(userData.data.name);
                 setRole(userData.data.role);
 
-                // 롤 데이터 가져오기
-                console.log('Requesting roll data from:', API.GET_ROLL);
-                const rollResponse = await axios.get(
-                    API.GET_ROLL,
-                    {
-                        headers: {
-                            "Authorization": token,
-                            'Access-Control-Allow-Origin': '*'
-                        }
+                // 롤 데이터도 fetch로 시도
+                const rollResponse = await fetch('https://sparklenote.site/roll/me', {
+                    method: 'GET',
+                    headers: {
+                        "Authorization": token,
+                        "Content-Type": "application/json"
                     }
-                );
+                });
 
-                if (rollResponse.status !== 200) {  // 조건문 수정
-                    throw new Error('Failed to fetch roll data');
+                if (!rollResponse.ok) {
+                    throw new Error(`HTTP error! status: ${rollResponse.status}`);
                 }
 
-                const rollData = rollResponse.data;
-                console.log("Roll Data Response:", rollData);
+                const rollData = await rollResponse.json();
+                console.log("Roll Data:", rollData);
                 setRolls(rollData.data || []);
 
             } catch (error) {
-                console.error('Error details:', {
-                    message: error.message,
-                    response: error.response,
-                    request: error.request,
-                    config: error.config
-                });
+                console.error('Fetch error:', error);
                 navigate('/');
             }
         };
 
         fetchData();
-    }, [navigate, token]);  // token 의존성 추가
-
+    }, [navigate, token]);
     // ... 나머지 코드는 동일
 };
 

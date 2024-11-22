@@ -18,68 +18,57 @@ const MyPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('Attempting to fetch data with token:', token);
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
-                navigate('https://sparklenote.site/');
+                navigate('/');
                 return;
             }
 
             try {
-                const userResponse = await fetch('https://sparklenote.site/user/profile', {
-                    method: 'GET',
-                    headers: {
-                        "Authorization": token,
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    credentials: 'include',
-                    mode: 'cors'
-                });
+                // 사용자 정보 가져오기
+                const userResponse = await axios.get(
+                    API.TEACHER_PROFILE,
+                    { headers: { "Authorization": token } }
+                );
 
-                console.log('Fetch Response:', userResponse);
-
-                if (!userResponse.ok) {
-                    throw new Error(`HTTP error! status: ${userResponse.status}`);
+                if (!userResponse === 200) {
+                    throw new Error('Failed to fetch user info');
                 }
 
-                const userData = await userResponse.json();
-                console.log("User Data:", userData);
+                const userData = userResponse.data;
+                console.log("User Info Response:", userData);
                 setUserName(userData.data.name);
                 setRole(userData.data.role);
 
-                const rollResponse = await fetch('https://sparklenote.site/roll/me', {
-                    method: 'GET',
-                    headers: {
-                        "Authorization": token,
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    credentials: 'include',
-                    mode: 'cors'
-                });
+                // 롤 데이터 가져오기
+                const rollResponse = await axios.get(
+                    API.GET_ROLL,
+                    { headers: { "Authorization": token } }
+                );
 
-                if (!rollResponse.ok) {
-                    throw new Error(`HTTP error! status: ${rollResponse.status}`);
+                if (!rollResponse === 200) {
+                    throw new Error('Failed to fetch roll data');
                 }
 
-                const rollData = await rollResponse.json();
-                console.log("Roll Data:", rollData);
-                setRolls(rollData.data || []);
+                const rollData = rollResponse.data;
+                console.log("Roll Data Response:", rollData);
+                setRolls(rollData.data || []); // 빈 배열 fallback 추가
 
             } catch (error) {
-                console.error('Fetch error:', error);
-                navigate('https://sparklenote.site/');
+                console.error('Error:', error);
+                navigate('/');
             }
         };
 
         fetchData();
-    }, [navigate, token]);
+    }, [navigate]);
 
     const teacherlogout = () => {
+        // localStorage.removeItem("Authorization");
+        // localStorage.removeItem("RefreshToken");
         localStorage.clear();
-        navigate('https://sparklenote.site/');
+        navigate('/');
     };
 
     const closeModal = () => {

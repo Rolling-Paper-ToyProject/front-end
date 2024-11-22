@@ -27,14 +27,15 @@ const MyPage = () => {
             }
 
             try {
-                // fetch로 시도해보기
                 const userResponse = await fetch('https://sparklenote.site/user/profile', {
                     method: 'GET',
                     headers: {
                         "Authorization": token,
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
-                    credentials: 'include'
+                    credentials: 'include',
+                    mode: 'cors'
                 });
 
                 console.log('Fetch Response:', userResponse);
@@ -48,14 +49,15 @@ const MyPage = () => {
                 setUserName(userData.data.name);
                 setRole(userData.data.role);
 
-                // 롤 데이터도 fetch로 시도
                 const rollResponse = await fetch('https://sparklenote.site/roll/me', {
                     method: 'GET',
                     headers: {
                         "Authorization": token,
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
-                    credentials: 'include'
+                    credentials: 'include',
+                    mode: 'cors'
                 });
 
                 if (!rollResponse.ok) {

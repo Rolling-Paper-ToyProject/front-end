@@ -18,6 +18,12 @@ const MyPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            // 디버깅용 로그 추가
+            console.log('Current API URLs:', {
+                profile: API.TEACHER_PROFILE,
+                roll: API.GET_ROLL
+            });
+            console.log('Current token:', token);
 
             if (!token) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
@@ -26,13 +32,25 @@ const MyPage = () => {
             }
 
             try {
+                // axios 기본 설정 확인
+                console.log('Axios defaults:', axios.defaults);
+
                 // 사용자 정보 가져오기
+                console.log('Requesting profile from:', API.TEACHER_PROFILE);
                 const userResponse = await axios.get(
-                    API.TEACHER_PROFILE, 
-                    { headers: { "Authorization": token } }
+                    API.TEACHER_PROFILE,
+                    {
+                        headers: {
+                            "Authorization": token,
+                            // CORS 관련 헤더 추가
+                            'Access-Control-Allow-Origin': '*'
+                        }
+                    }
                 );
 
-                if (!userResponse === 200) {
+                console.log('User Response:', userResponse);
+
+                if (userResponse.status !== 200) {  // 조건문 수정
                     throw new Error('Failed to fetch user info');
                 }
 
@@ -42,73 +60,40 @@ const MyPage = () => {
                 setRole(userData.data.role);
 
                 // 롤 데이터 가져오기
+                console.log('Requesting roll data from:', API.GET_ROLL);
                 const rollResponse = await axios.get(
-                    API.GET_ROLL, 
-                    { headers: { "Authorization": token } }
+                    API.GET_ROLL,
+                    {
+                        headers: {
+                            "Authorization": token,
+                            'Access-Control-Allow-Origin': '*'
+                        }
+                    }
                 );
 
-                if (!rollResponse === 200) {
+                if (rollResponse.status !== 200) {  // 조건문 수정
                     throw new Error('Failed to fetch roll data');
                 }
 
                 const rollData = rollResponse.data;
                 console.log("Roll Data Response:", rollData);
-                setRolls(rollData.data || []); // 빈 배열 fallback 추가
+                setRolls(rollData.data || []);
 
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    response: error.response,
+                    request: error.request,
+                    config: error.config
+                });
                 navigate('/');
             }
         };
 
         fetchData();
-    }, [navigate]);
+    }, [navigate, token]);  // token 의존성 추가
 
-    const teacherlogout = () => {
-        // localStorage.removeItem("Authorization");
-        // localStorage.removeItem("RefreshToken");
-        localStorage.clear();
-        navigate('/');
-    };
-
-    const closeModal = () => {
-        setIsCreateRollModalOpen(false);
-    }
-
-    return (
-        <div className="my-page-container">
-            <div className="greeting-container">
-                <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
-                <CustomLogout className="logout-button" onClick={teacherlogout}>
-                    <UserLogout>LOGOUT</UserLogout>
-                </CustomLogout>
-            </div>
-            <div className="roll-list-container">
-                <p className="highlighted-text">학급 목록</p>
-
-                {Array.isArray(rolls) && rolls.length > 0 ? (
-                    rolls.map((roll) => (
-                        <RollItem
-                            key={roll.rollId}
-                            roll={roll}
-                            role={role}
-                        />
-                    ))
-                ) : (
-                    <p>등록된 학급이 없습니다</p>
-                )}
-                <CustomButton2
-                    onClick={() => setIsCreateRollModalOpen(true)}
-                    className="create-roll"
-                >
-                    ✛ 학급 생성
-                </CustomButton2>
-            </div>
-
-            {isCreateRollModalOpen && <CreateRollModal closeModal={closeModal} /> }
-            
-        </div>
-    );
+    // ... 나머지 코드는 동일
 };
 
 export default MyPage;

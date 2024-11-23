@@ -27,7 +27,7 @@ const RollingPaperPage = () => {
             try {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
-                    API.GET_PAPER,
+                    API.GET_PAPER(rollId),
                     { headers: { Authorization: token } }
                 );
                 const paperData = paperResponse.data;

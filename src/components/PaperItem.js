@@ -5,12 +5,12 @@ import PaperDetailModal from "./PaperDetailModal";
 const PaperItem = ({ paper, onUpdatePaper, onDeletePaper }) => {
   const { paperId, content, authorName, authorRole } = paper;
   const [isPaperDetailModalOpen, setIsPaperDetailModalOpen] = useState(false);
+  const [rotation, setRotation] = useState(0);
 
-  // 랜덤 각도 설정
-  const randomRotation = () => {
-    // -5도에서 5도 사이의 랜덤 각도
-    return Math.floor(Math.random() * 10) - 5;
-  };
+  useEffect(() => {
+    // 컴포넌트가 처음 마운트될 때만 랜덤 각도를 설정합니다.
+    setRotation(Math.floor(Math.random() * 10) - 5);
+  }, []); // 빈 의존성 배열이므로 최초 한 번만 실행됩니다.
 
   const showPaperDetailModal = () => {
     setIsPaperDetailModalOpen(true);
@@ -22,30 +22,28 @@ const PaperItem = ({ paper, onUpdatePaper, onDeletePaper }) => {
 
   return (
     <>
-      <div>
-        <div
-          key={paperId}
-          onClick={() => showPaperDetailModal()}
-          className="paper-box"
-          style={{ transform: `rotate(${randomRotation()}deg)` }} // 각도 적용
-        >
-          {authorRole === "TEACHER" ? (
-            <p className="fromName">From. {`${authorName} 선생님`}</p>
-          ) : (
-            <p className="fromName">From. {authorName}</p>
-          )}
-          <p className="roll-content">{content}</p>
-        </div>
-
-        {isPaperDetailModalOpen && (
-          <PaperDetailModal
-            closeModal={closePaperDetailModal}
-            paper={paper} // 선택된 페이퍼 내용 전달
-            onUpdatePaper={onUpdatePaper}
-            onDeletePaper={onDeletePaper}
-          />
+      <div
+        key={paperId}
+        onClick={showPaperDetailModal}
+        className="paper-box"
+        style={{ transform: `rotate(${rotation}deg)` }} // 고정된 랜덤 각도 적용
+      >
+        {authorRole === "TEACHER" ? (
+          <p className="fromName">From. {`${authorName} 선생님`}</p>
+        ) : (
+          <p className="fromName">From. {authorName}</p>
         )}
+        <p className="roll-content">{content}</p>
       </div>
+
+      {isPaperDetailModalOpen && (
+        <PaperDetailModal
+          closeModal={closePaperDetailModal}
+          paper={paper} // 선택된 페이퍼 내용 전달
+          onUpdatePaper={onUpdatePaper}
+          onDeletePaper={onDeletePaper}
+        />
+      )}
     </>
   );
 };

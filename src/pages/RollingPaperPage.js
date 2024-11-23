@@ -24,6 +24,11 @@ const RollingPaperPage = () => {
                 return;
             }
 
+            if (method === "GET") {
+                // POST 요청으로 리디렉션 처리
+                navigate(`/roll/${rollId}/join`, { replace: true });
+            }
+
             try {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(

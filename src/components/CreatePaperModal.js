@@ -18,7 +18,7 @@ const CreatePaperModal = ({ rollId, closeModal, addPaper }) => {
 
   const handleCreatePaper = async () => {
     try {
-      await axios.post(
+      const response = await axios.post(
         API.CREATE_PAPER(rollId),
         { content: paperContent },
         {

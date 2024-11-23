@@ -54,6 +54,10 @@ const RollingPaperPage = () => {
         fetchPaperData();
     }, [rollId, token]);
 
+    useEffect(() => {
+      localStorage.setItem("Authorization", token);
+    }, [token]);
+
     // 모달을 여는 함수
     const showCreateModal = () => {
         setIsCreatePaperModalOpen(true);

@@ -51,6 +51,9 @@ const RollingPaperPage = () => {
         setIsCreatePaperModalOpen(false);
     };
 
+    const addPaper = (newPaper) => {
+      setPapers((prevPapers) => [...prevPapers, newPaper]);
+    };
 
     return (
       <div>
@@ -92,7 +95,11 @@ const RollingPaperPage = () => {
         </div>
         {/* CreatePaperModal 컴포넌트 */}
         {isCreatePaperModalOpen && (
-          <CreatePaperModal rollId={rollId} closeModal={closeModal} />
+          <CreatePaperModal 
+            rollId={rollId} 
+            closeModal={closeModal} 
+            addPaper={addPaper}
+          />
         )}
       </div>
     );

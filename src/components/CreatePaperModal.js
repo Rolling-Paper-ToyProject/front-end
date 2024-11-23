@@ -5,7 +5,7 @@ import { LetterClick } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { API } from "../config";
 
-const CreatePaperModal = ({ rollId, closeModal }) => {
+const CreatePaperModal = ({ rollId, closeModal, addPaper }) => {
   const token = localStorage.getItem("Authorization");
   const [paperContent, setPaperContent] = useState("");
 
@@ -27,9 +27,13 @@ const CreatePaperModal = ({ rollId, closeModal }) => {
           },
         }
       );
+
+      const newPaper = response.data.data;
+
       alert("롤링페이퍼가 작성되었습니다.");
       setPaperContent(""); // 입력 내용 초기화
-      window.location.reload();
+      addPaper(newPaper);
+      closeModal();
     } catch (error) {
       console.log("롤링페이퍼 작성 실패", error);
     }

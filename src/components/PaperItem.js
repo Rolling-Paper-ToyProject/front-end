@@ -23,18 +23,17 @@ const PaperItem = ({ paper, onUpdatePaper, onDeletePaper }) => {
   return (
     <>
       <div>
-        {authorRole === "TEACHER" ? (
-          <p className="fromName">From. {`${authorName} 선생님`}</p>
-        ) : (
-          <p className="fromName">From. {authorName}</p>
-        )}
         <div
           key={paperId}
           onClick={() => showPaperDetailModal()}
           className="paper-box"
           style={{ transform: `rotate(${randomRotation()}deg)` }} // 각도 적용
         >
+          {authorRole === "TEACHER" ? (
+          <p className="fromName">From. {`${authorName} 선생님`}</p>
+        ) : (
           <p className="fromName">From. {authorName}</p>
+        )}
           <p className="roll-content">{content}</p>
         </div>
 

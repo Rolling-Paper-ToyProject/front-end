@@ -75,7 +75,7 @@ const RollingPaperPage = () => {
           {Array.isArray(papers) && papers.length > 0 ? (
             papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} />)
           ) : (
-            <p>작성된 페이퍼가 없습니다</p>
+            <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
           )}
         </div>
         {/* CreatePaperModal 컴포넌트 */}

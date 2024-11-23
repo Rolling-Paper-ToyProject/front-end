@@ -5,7 +5,7 @@
     display: flex; /* Flexbox 레이아웃 사용 */
     flex-direction: column; /* 세로 방향으로 배치 */
     align-items: center; /* 아이템 수직 중앙 정렬 */
-    background-color: white;
+    background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(230,230,250,1) 100%);
 }
 
 /* 인사말 컨테이너 스타일 */
@@ -75,7 +75,7 @@ button.logout-button {
     left: 0;
     width: 105px;
     height: 50%; /* 텍스트의 아래 절반만큼 */
-    background-color: lightgray; /* 형광펜 색상 */
+    background-color: #e0e0ff; /* 형광펜 색상 */
     z-index: -1;
 }
 
@@ -87,7 +87,8 @@ button.logout-button {
 /* 롤링페이퍼 아이템 스타일 */
 .roll-item {
     width: 80%; /* 롤링페이퍼 카드 너비 설정 */
-    background-color: rgb(244, 244, 244); /* 카드 배경색 설정 */
+    background-color: white; /* 카드 배경색 설정 */
+    border: 1px solid #ccc;
     border-radius: 10px; /* 카드 모서리 둥글게 설정 */
     padding: 10px 25px; /* 카드 내부 여백 설정 */
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */

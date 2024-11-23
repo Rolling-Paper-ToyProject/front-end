@@ -53,18 +53,22 @@
     font-weight: bold;
     margin: 5px 0 15px 0;
     text-align: center;
-    background-color: rgb(253, 255, 151,0.8);
+    background-color: lightgoldenrodyellow;
     
  }
 
  .paper-detail-content{
-  font-size: 24px;
+  font-size: 20px;
   text-align: left;
   text-wrap: pretty;
   line-height: 1.3em;
   padding: 20px;
   border: 2px solid #ddd;
   border-radius: 10px;
+
+    word-wrap: break-word; /* 단어가 너무 길 경우 줄바꿈 */
+    overflow-wrap: break-word; /* 동일한 역할, 최신 표준 */
+    white-space: normal; /* 기본 줄바꿈 동작 활성화 */
  }
 
 /* Modal 내 입력란 */

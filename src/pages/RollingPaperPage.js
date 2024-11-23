@@ -14,11 +14,12 @@ const RollingPaperPage = () => {
     const { rollId, rollName, role } = location.state || {};
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
-    const token = localStorage.getItem("Authorization");
+    // token 상태 변수는 제거 (useEffect 내부에서만 사용)
 
     useEffect(() => {
         const fetchPaperData = async () => {
-            if (!token) {
+            const currentToken = localStorage.getItem("Authorization");
+            if (!currentToken) {
                 alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
                 navigate("/");
                 return;
@@ -28,18 +29,23 @@ const RollingPaperPage = () => {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
                     API.GET_PAPER,
-                    { headers: { Authorization: token } }
+                    { headers: { Authorization: currentToken } }
                 );
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
                 setPapers(paperData.data || []); // 빈 배열 fallback 추가
             } catch (error) {
                 console.error('Error:', error);
+                // 401 에러 처리 추가
+                if (error.response?.status === 401) {
+                    alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+                    navigate("/");
+                }
             }
         }
 
         fetchPaperData();
-    }, [rollId, token]);
+    }, [rollId, navigate]); // token 의존성 제거, navigate 추가
 
     // 모달을 여는 함수
     const showCreateModal = () => {
@@ -52,57 +58,57 @@ const RollingPaperPage = () => {
     };
 
     const addPaper = (newPaper) => {
-      setPapers((prevPapers) => [...prevPapers, newPaper]);
+        setPapers((prevPapers) => [...prevPapers, newPaper]);
     };
 
     return (
-      <div>
-        <div className="header">
-          {role === "TEACHER" ? (
-            <LetterClick
-              className="roll-list-button"
-              onClick={() => navigate(`/mypage`)}
-              style={{ fontWeight: "bold", fontSize: "16px"}}
-            >
-              < BackToRollList />
-            </LetterClick>
-          ) : ("")}
-          <p 
-            className="className"
-            style={{
-              paddingLeft: role === "TEACHER" ? "30px" : "100px",
-              paddingRight: role === "TEACHER" ? "30px" : "0"
-            }}
-          >
-            {rollName}
-          </p>
-          <LetterClick
-            className="add-paper-button"
-            onClick={showCreateModal}
-            style={{ fontWeight: "bold", fontSize: "16px" }}
-          >
-            작성
-          </LetterClick>
-        </div>
+        <div>
+            <div className="header">
+                {role === "TEACHER" ? (
+                    <LetterClick
+                        className="roll-list-button"
+                        onClick={() => navigate(`/mypage`)}
+                        style={{ fontWeight: "bold", fontSize: "16px"}}
+                    >
+                        <BackToRollList />
+                    </LetterClick>
+                ) : ("")}
+                <p
+                    className="className"
+                    style={{
+                        paddingLeft: role === "TEACHER" ? "30px" : "100px",
+                        paddingRight: role === "TEACHER" ? "30px" : "0"
+                    }}
+                >
+                    {rollName}
+                </p>
+                <LetterClick
+                    className="add-paper-button"
+                    onClick={showCreateModal}
+                    style={{ fontWeight: "bold", fontSize: "16px" }}
+                >
+                    작성
+                </LetterClick>
+            </div>
 
-        <div className="paper-container">
-          {/* RollingPaperDetail 컴포넌트 */}
-          {Array.isArray(papers) && papers.length > 0 ? (
-            papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
-          ) : (
-            <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
-          )}
+            <div className="paper-container">
+                {/* RollingPaperDetail 컴포넌트 */}
+                {Array.isArray(papers) && papers.length > 0 ? (
+                    papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
+                ) : (
+                    <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
+                )}
+            </div>
+            {/* CreatePaperModal 컴포넌트 */}
+            {isCreatePaperModalOpen && (
+                <CreatePaperModal
+                    rollId={rollId}
+                    closeModal={closeModal}
+                    addPaper={addPaper}
+                />
+            )}
         </div>
-        {/* CreatePaperModal 컴포넌트 */}
-        {isCreatePaperModalOpen && (
-          <CreatePaperModal 
-            rollId={rollId} 
-            closeModal={closeModal} 
-            addPaper={addPaper}
-          />
-        )}
-      </div>
     );
-  };
+};
 
 export default RollingPaperPage;

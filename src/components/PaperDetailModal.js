@@ -4,7 +4,7 @@ import axios from "axios";
 import { LetterClick } from "../components/MuiButton";
 import { API } from "../config";
 
-const PaperDetailModal = ({ paper, closeModal }) => {
+const PaperDetailModal = ({ paper, closeModal, onUpdatePaper, onDeletePaper }) => {
   const { content, authorName, paperId, authorRole } = paper;
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
   const [newContent, setNewContent] = useState(content);
@@ -33,7 +33,8 @@ const PaperDetailModal = ({ paper, closeModal }) => {
           { headers: { Authorization: token } }
         );
         alert("페이퍼 내용을 수정하였습니다.");
-        window.location.reload();
+        onUpdatePaper(paperId, newContent);
+        closeModal();
       } catch (error) {
         console.log("페이퍼 내용 수정 실패", error);
         alert("페이퍼 내용이 수정되지 않았습니다. 다시 시도해주세요.");
@@ -55,8 +56,8 @@ const PaperDetailModal = ({ paper, closeModal }) => {
         );
         console.log("롤링페이퍼 삭제 성공");
         alert("롤링페이퍼가 삭제되었습니다.");
-        // closeModal();
-        window.location.reload();
+        onDeletePaper(paperId);
+        closeModal();
       } catch (error) {
         console.log("롤링페이퍼 삭제 실패:", error);
         alert("페이퍼 삭제 중 오류가 발생했습니다");

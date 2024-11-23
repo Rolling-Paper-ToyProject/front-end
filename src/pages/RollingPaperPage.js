@@ -12,9 +12,15 @@ const RollingPaperPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { rollId, rollName, role } = location.state || {};
+    // const queryParams = new URLSearchParams(location.search);
+    // const rollId = queryParams.get("rollId");
+    // const rollName = queryParams.get("rollName");
+    // const role = queryParams.get("role");
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
+
+    axios.defaults.headers.common['Authorization'] = token;
 
     useEffect(() => {
         const fetchPaperData = async () => {
@@ -32,8 +38,8 @@ const RollingPaperPage = () => {
             try {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
-                    API.GET_PAPER,
-                    { headers: { Authorization: token } }
+                  API.GET_PAPER(rollId),
+                  { headers: { Authorization: token } }
                 );
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
@@ -45,6 +51,10 @@ const RollingPaperPage = () => {
 
         fetchPaperData();
     }, [rollId, token]);
+
+    useEffect(() => {
+      localStorage.setItem("Authorization", token);
+    }, [token]);
 
     // 모달을 여는 함수
     const showCreateModal = () => {
@@ -59,6 +69,20 @@ const RollingPaperPage = () => {
     const addPaper = (newPaper) => {
       setPapers((prevPapers) => [...prevPapers, newPaper]);
     };
+
+    const updatePaper = (paperId, newContent) => {
+      setPapers((prevPapers) => 
+        prevPapers.map((paper) => 
+          paper.paperId === paperId? { ...paper, content: newContent } : paper
+        )
+      );
+    };
+
+    const deletePaper = (paperId) => {
+      setPapers((prevPapers) => 
+        prevPapers.filter((paper) => paper.paperId !== paperId)
+      );
+    }
 
     return (
       <div>
@@ -93,7 +117,14 @@ const RollingPaperPage = () => {
         <div className="paper-container">
           {/* RollingPaperDetail 컴포넌트 */}
           {Array.isArray(papers) && papers.length > 0 ? (
-            papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
+            papers.map((paper) => 
+            <PaperItem 
+              key={paper.paperId} 
+              paper={paper} 
+              role={role}
+              onUpdatePaper={updatePaper}
+              onDeletePaper={deletePaper}
+            />)
           ) : (
             <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
           )}

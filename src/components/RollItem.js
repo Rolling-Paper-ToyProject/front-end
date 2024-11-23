@@ -6,8 +6,9 @@ import { UrlCopyIcon, RollDelete, RollTittleEdit } from "./MuiIcon";
 import UpdateRollModal from "../components/UpdateRollModal";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { API, BASE_URL } from "../config";
 
-const RollItem = ({ roll }) => {
+const RollItem = ({ roll, role }) => {
   const { rollId, rollName, classCode, url } = roll;
   const [isUpdateRollModalOpen, setIsUpdateRollModalOpen] = useState(false);
   const [isHiddenGroupVisible, setIsHiddenGroupVisible] = useState(false);
@@ -16,12 +17,14 @@ const RollItem = ({ roll }) => {
   const navigate = useNavigate();
 
   const enterRoll = () => {
-    navigate(`/roll/${url}/join`, { state: { rollId, rollName } });
-  };
+      // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
+      navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
+      console.log(`롤링페이퍼 ${rollId}로 이동`);
+  }
 
   const copyUrl = () => {
     navigator.clipboard
-      .writeText(`http://localhost:3000/${url}`)
+      .writeText(BASE_URL + `${url}`)
       .then(() => {
         alert("URL이 클립보드에 복사되었습니다.");
       })
@@ -37,11 +40,10 @@ const RollItem = ({ roll }) => {
   const handleDelete = async () => {
     if (window.confirm("학급을 삭제하시겠습니까? 삭제된 학급은 복구할 수 없습니다.")) {
       try {
-        await axios.delete(`http://localhost:8080/roll/${rollId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await axios.delete(
+          API.DELETE_ROLL(rollId), 
+          { headers: { Authorization: token } }
+        );
         alert("학급이 삭제되었습니다.");
         window.location.reload();
       } catch (error) {

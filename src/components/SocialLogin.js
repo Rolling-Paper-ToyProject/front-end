@@ -1,10 +1,9 @@
-import React, { useEffect } from "react"
+import React from "react"
 import '../styles/components/SocialLogin.css';
-import { useLocation } from "react-router-dom";
-import { styled } from '@mui/material/styles';
-import { CustomButton1, CustomButton2 } from './MuiButton';
+import { CustomButton1 } from './MuiButton';
+import { BASE_URL } from "../config";
 
-const SocialLogin = ({ onLoginSuccess }) => {
+const SocialLogin = () => {
 
     const handleNaverLogin = () => {
         
@@ -23,7 +22,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 네이버 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
+        window.location.href = BASE_URL + '/oauth2/authorization/naver';
 
     }
     
@@ -40,7 +39,7 @@ const SocialLogin = ({ onLoginSuccess }) => {
 
         // Spring Security로 간소화 적용 후 코드
         // Spring Security가 제공하는 카카오 OAuth2 인증 엔드포인트로 리다이렉트
-        window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+        window.location.href = BASE_URL + '/oauth2/authorization/kakao';
         
     }
     

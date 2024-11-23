@@ -12,7 +12,7 @@ const PaperItem = ({ paper }) => {
     return Math.floor(Math.random() * 10) - 5;
   };
 
-  const showPaperDetailModal = (paper) => {
+  const showPaperDetailModal = () => {
     setIsPaperDetailModalOpen(true);
   };
 
@@ -23,9 +23,14 @@ const PaperItem = ({ paper }) => {
   return (
     <>
       <div>
+        {authorRole === "TEACHER" ? (
+          <p className="fromName">From. {`${authorName} 선생님`}</p>
+        ) : (
+          <p className="fromName">From. {authorName}</p>
+        )}
         <div
           key={paperId}
-          onClick={() => showPaperDetailModal(paper)}
+          onClick={() => showPaperDetailModal()}
           className="paper-box"
           style={{ transform: `rotate(${randomRotation()}deg)` }} // 각도 적용
         >

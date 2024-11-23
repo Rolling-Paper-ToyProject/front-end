@@ -7,11 +7,14 @@ import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
 import AddIcon from '@mui/icons-material/Add';
+import { API } from "../config";
+
 
 const MyPage = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
+    const [role, setRole] = useState();
     const [isCreateRollModalOpen, setIsCreateRollModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
@@ -26,11 +29,10 @@ const MyPage = () => {
 
             try {
                 // 사용자 정보 가져오기
-                const userResponse = await axios.get('http://localhost:8080/user/profile', {
-                    headers: {
-                        "Authorization": token
-                    }
-                });
+                const userResponse = await axios.get(
+                    API.TEACHER_PROFILE,
+                    { headers: { "Authorization": token } }
+                );
 
                 if (!userResponse === 200) {
                     throw new Error('Failed to fetch user info');
@@ -38,14 +40,14 @@ const MyPage = () => {
 
                 const userData = userResponse.data;
                 console.log("User Info Response:", userData);
-                setUserName(userData.data.name);  // SnResponse 구조에 맞게 수정
+                setUserName(userData.data.name);
+                setRole(userData.data.role);
 
                 // 롤 데이터 가져오기
-                const rollResponse = await axios.get(`http://localhost:8080/roll/me`, {
-                    headers: {
-                        "Authorization": token
-                    }
-                });
+                const rollResponse = await axios.get(
+                    API.GET_ROLL,
+                    { headers: { "Authorization": token } }
+                );
 
                 if (!rollResponse === 200) {
                     throw new Error('Failed to fetch roll data');
@@ -65,8 +67,9 @@ const MyPage = () => {
     }, [navigate]);
 
     const teacherlogout = () => {
-        localStorage.removeItem("Authorization");
-        localStorage.removeItem("RefreshToken");
+        // localStorage.removeItem("Authorization");
+        // localStorage.removeItem("RefreshToken");
+        localStorage.clear();
         navigate('/');
     };
 
@@ -91,6 +94,7 @@ const MyPage = () => {
                         <RollItem
                             key={roll.rollId}
                             roll={roll}
+                            role={role}
                         />
                     ))
                 ) : (
@@ -105,7 +109,7 @@ const MyPage = () => {
             </div>
 
             {isCreateRollModalOpen && <CreateRollModal closeModal={closeModal} /> }
-            
+
         </div>
     );
 };

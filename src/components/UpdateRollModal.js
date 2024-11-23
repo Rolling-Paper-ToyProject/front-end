@@ -3,8 +3,10 @@ import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
 import { LetterClick } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { API } from "../config";
 
 const UpdateRollModal = ({ closeModal, roll }) => {
+  const { rollId, rollName } = roll;
   const token = localStorage.getItem("Authorization");
   const [rollTitle, setRollTitle] = useState("");
 
@@ -24,7 +26,7 @@ const UpdateRollModal = ({ closeModal, roll }) => {
   const updateRoll = async () => {
     try {
       await axios.put(
-        `http://localhost:8080/roll/${roll.rollId}`,
+        API.UPDATE_ROLL(rollId),
         { rollName: rollTitle },
         { headers: { Authorization: token } }
       );
@@ -52,7 +54,7 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           type="text"
           value={rollTitle}
           onChange={(e) => setRollTitle(e.target.value)}
-          placeholder="새 학급명을 입력해주세요" // placeholder를 단순한 안내 텍스트로 사용
+          placeholder={rollName}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               updateRoll();

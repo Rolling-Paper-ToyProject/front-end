@@ -23,6 +23,7 @@ const PaperItem = ({ paper, onUpdatePaper, onDeletePaper }) => {
   return (
     <>
       <div
+        key={paperId}
         onClick={showPaperDetailModal}
         className="paper-box"
         style={{ transform: `rotate(${rotation}deg)` }} // 고정된 랜덤 각도 적용

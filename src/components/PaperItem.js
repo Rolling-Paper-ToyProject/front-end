@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/pages/RollingPaperPage.css";
 import PaperDetailModal from "./PaperDetailModal";
 
-const PaperItem = ({ paper }) => {
+const PaperItem = ({ paper, onUpdatePaper, onDeletePaper }) => {
   const { paperId, content, authorName, authorRole } = paper;
   const [isPaperDetailModalOpen, setIsPaperDetailModalOpen] = useState(false);
 
@@ -42,6 +42,8 @@ const PaperItem = ({ paper }) => {
           <PaperDetailModal
             closeModal={closePaperDetailModal}
             paper={paper} // 선택된 페이퍼 내용 전달
+            onUpdatePaper={onUpdatePaper}
+            onDeletePaper={onDeletePaper}
           />
         )}
       </div>

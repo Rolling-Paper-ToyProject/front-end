@@ -1,14 +1,14 @@
 /* fonts */
 /* Google Fonts에서 Hi Melody 폰트를 불러옴 */
-@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 .student-container {
-  font-family: "Hi Melody", cursive;
+  font-family: "Poor Story", system-ui;
 }
 
 /* 입력 필드 스타일 */
-input[type="text"],
-input[type="password"] {
+.student-container input[type="text"],
+.student-container input[type="password"] {
   width: 180px; /* 입력 필드 너비를 전체의 100%로 설정 */
   padding: 10px; /* 입력 필드 패딩 설정 */
   margin: 8px 0; /* 입력 필드 간의 상하 간격 설정 (5px) */
@@ -29,7 +29,7 @@ input[type="password"] {
     format("woff");
 }
 
-input[type="password"] {
+.student-container input[type="password"] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 
   &::-webkit-input-placeholder {
@@ -63,8 +63,9 @@ label {
   cursor: pointer; /* 커서 포인터로 변경 */
   transition: background-color 0.4s; /* 배경색 변경 애니메이션 */
 
-  font-size: 16px;
-  font-family: "Hi Melody", cursive;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Poor Story", system-ui;
 }
 
 /* 버튼 호버 스타일 */

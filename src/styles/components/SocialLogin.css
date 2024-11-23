@@ -1,6 +1,7 @@
 .social-login {
     display: flex;
-    gap: 15px; /* 버튼 간격을 조절 */
+    gap: 50px; /* 버튼 간격을 조절 */
+    margin-top: 20px;
 }
 .social-button {
     width: 75px; /* 버튼 크기 */

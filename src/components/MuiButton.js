@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
@@ -9,8 +8,8 @@ export const CustomButton1 = styled(Button)(({ theme }) => ({
     borderRadius: '50%',
     padding: 0, // 버튼의 padding 제거
     border: 'none', // 불필요한 border가 없도록 설정
-    width: '75px', // 버튼의 가로 크기
-    height: '75px', // 버튼의 세로 크기 (가로와 동일하게 설정)
+    width: '65px', // 버튼의 가로 크기
+    height: '65px', // 버튼의 세로 크기 (가로와 동일하게 설정)
     '&::before': {
         content: '""',
         position: 'absolute',
@@ -25,10 +24,10 @@ export const CustomButton1 = styled(Button)(({ theme }) => ({
     },
     '&:hover::before': {
         backgroundColor: 'rgba(245, 245, 245, 0.7)', // 호버 시 내부에 투명한 회색 오버레이 적용
+        borderRadius: '50%',
     },
     '&:hover': {
-        backgroundColor: 'rgba(245, 245, 245, 0)', // 기본 파란색 호버 스타일 덮어쓰기
-        fontWeight: 'bold',
+        backgroundColor: 'rgba(245, 245, 245, 0)', // 기본 파란색 호버 스타일 덮어쓰기ㄴ
         borderRadius: '50%',
     },
 }));
@@ -43,8 +42,8 @@ export const CustomButton2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-// 로그아웃 버튼
-export const CustomLogout = styled(Button)(({ theme }) => ({
+// 글자 전용 버튼
+export const LetterClick = styled(Button)(({ theme }) => ({
     color: '#000000',
     '&:hover': {
         backgroundColor:'#ffffff',

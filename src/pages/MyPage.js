@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/pages/MyPage.css';
 import RollItem from "../components/RollItem";
-import { CustomButton2 , CustomLogout} from '../components/MuiButton';
+import { CustomButton2 , LetterClick } from '../components/MuiButton';
 import {UserLogout} from '../components/MuiIcon';
 import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
+import AddIcon from '@mui/icons-material/Add';
 import { API } from "../config";
+
 
 const MyPage = () => {
     const navigate = useNavigate();
@@ -79,9 +81,10 @@ const MyPage = () => {
         <div className="my-page-container">
             <div className="greeting-container">
                 <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
-                <CustomLogout className="logout-button" onClick={teacherlogout}>
-                    <UserLogout>LOGOUT</UserLogout>
-                </CustomLogout>
+                <LetterClick className="logout-button" onClick={teacherlogout}>
+                    <UserLogout />
+                    <p>LOGOUT</p>
+                </LetterClick>
             </div>
             <div className="roll-list-container">
                 <p className="highlighted-text">학급 목록</p>
@@ -95,13 +98,13 @@ const MyPage = () => {
                         />
                     ))
                 ) : (
-                    <p>등록된 학급이 없습니다</p>
+                    <p className="no-class">등록된 학급이 없습니다.</p>
                 )}
                 <CustomButton2
                     onClick={() => setIsCreateRollModalOpen(true)}
                     className="create-roll"
                 >
-                    ✛ 학급 생성
+                    <AddIcon style={{marginRight:"5px"}}></AddIcon> 학급 생성
                 </CustomButton2>
             </div>
 

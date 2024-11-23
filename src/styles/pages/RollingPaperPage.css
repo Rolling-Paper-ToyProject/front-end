@@ -1,6 +1,12 @@
 /* fonts */
-/* Google Fonts에서 Hi Melody 폰트를 불러옴 */
-@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
+@font-face {
+  font-family: "Syongsyong";
+  src: url('../fonts/Cafe24Syongsyong-v2.0.woff2') format('woft2'),
+        url('../fonts/Cafe24Syongsyong-v2.0.woff') format('woft'),
+        url('../fonts/Cafe24Syongsyong-v2.0.ttf') format('truetype');
+  font-weight: normal; /* 글꼴 두께 */
+  font-style: normal; /* 글꼴 스타일 */
+}
 
 /* 헤더 스타일 */
 .header {
@@ -8,83 +14,84 @@
   align-items: center; /* 수직 중앙 정렬 */
   width: 100%; /* 컨테이너의 폭을 100%로 설정 */
   margin-bottom: 20px; /* 인사말과 다음 요소 사이의 간격 설정 */
+
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 3px 3px -2px gray;
 }
 
 .className {
   width: 75%;
-  font-size: 30px; /* 인사말 폰트 크기 설정 */
+  font-size: 22px; /* 인사말 폰트 크기 설정 */
   font-weight: bold;
-  margin: 18px 20px;
+  margin: 13px 20px;
   text-align: center;
   /* padding-left: 60px; /pages/RollingPaperPage.js 내 요소에 직접 반영 */ 
 
-  font-family: "Hi Melody", cursive;
+  font-family: "Syongsyong", sans-serif;
 }
 
 .paper-container {
   width: 100%;
+  min-height: 92vh; /* 최소 높이를 화면의 100%로 설정 */
+  height: auto; /* 내용물이 추가되면 높이가 늘어나도록 설정 */
   overflow: hidden;
   display: flex;
   flex-wrap: wrap; /* 여러 줄로 아이템이 배치되도록 설정 */
   gap: 10px; /* 아이템 간의 간격 */
   justify-content: center;
-
-  font-family: "Hi Melody", cursive;
+  align-content: flex-start;
+  padding-bottom: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(230,230,250,1) 100%);
+  font-family: "Syongsyong", sans-serif;
 }
 
 /* From 이름 */
 .fromName {
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 600;
   text-align: center;
+  padding: 0 5px 0 2px;
 }
 
-/* 롤링페이퍼 (하트모양)*/
+/* 롤링페이퍼 모양*/
 .paper-box {
-  width: 100px;
-  height: 100px;
-  background: lightpink;
-  position: relative;
-  transform: rotate(45deg); /* 요소를 45도 회전 */
-  margin: 50px 35px 50px 35px;
-
-  display: flex;
+  width: 120px;
+  height: 120px;
+	display: block;
+	position: relative;
+	cursor: pointer;
+  background-color: lightyellow;
+  border: 1px solid #ccc;
+  margin: 7px 5px 10px 7px;
+  padding: 10px;
 }
+
 .paper-box::before {
-  content: ""; /* 가상 요소 내용 없음 */
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  left: -50%;
-  border-radius: 50%;
-  background: lightpink;
-}
-.paper-box::after {
-  content: "";
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: -50%;
-  border-radius: 50%;
-  background: lightpink;
+  content: '';
+	position: absolute;
+	top: 103px;
+	right: 0;
+	border-bottom: 15px solid #7373734f;
+	border-left: 15px solid rgba(0, 0, 0, 0);
+	width: 0;
 }
 
-.paper-box > p {
-  transform: rotate(-45deg); /* 요소를 -45도 회전하여 정렬 */
-  z-index: 1;
-  text-align: center;
+.paper-box:hover::before {
+  border-bottom: 15px solid #677e52;
+}
+
+/* 롤링페이퍼 내용 */
+.roll-content{
+  font-size: 18px;
+  text-wrap: wrap;
   overflow: hidden;
-
-  display: -webkit-box; /* Flexbox처럼 동작하는 box로 설정 */
-  -webkit-box-orient: vertical; /* 수직 방향으로 정렬 */
-  overflow: hidden;
-  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 처리 */
-  -webkit-line-clamp: 3; /* 세 줄로 제한 */
-  line-height: 1.5; /* 줄 간격 설정 */
-  max-height: calc(1.5em * 3); /* 최대 높이 설정 */
-
-  width: 100%;
-  padding: 0 20px 10px 0;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-height: 1em;
 }
+
 /* 버튼 스타일 */
 .add-paper-button {
   margin: 18px 20px;

@@ -4,7 +4,7 @@ import "../styles/pages/RollingPaperPage.css";
 import CreatePaperModal from "../components/CreatePaperModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 import { BackToRollList } from "../components/MuiIcon";
 import { API } from "../config";
 
@@ -56,13 +56,13 @@ const RollingPaperPage = () => {
       <div>
         <div className="header">
           {role === "TEACHER" ? (
-            <CustomLogout
+            <LetterClick
               className="roll-list-button"
               onClick={() => navigate(`/mypage`)}
               style={{ fontWeight: "bold", fontSize: "16px"}}
             >
               < BackToRollList />
-            </CustomLogout>
+            </LetterClick>
           ) : ("")}
           <p 
             className="className"
@@ -73,13 +73,13 @@ const RollingPaperPage = () => {
           >
             {rollName}
           </p>
-          <CustomLogout
+          <LetterClick
             className="add-paper-button"
             onClick={showCreateModal}
             style={{ fontWeight: "bold", fontSize: "16px" }}
           >
             작성
-          </CustomLogout>
+          </LetterClick>
         </div>
 
         <div className="paper-container">
@@ -87,7 +87,7 @@ const RollingPaperPage = () => {
           {Array.isArray(papers) && papers.length > 0 ? (
             papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
           ) : (
-            <p>작성된 페이퍼가 없습니다</p>
+            <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
           )}
         </div>
         {/* CreatePaperModal 컴포넌트 */}

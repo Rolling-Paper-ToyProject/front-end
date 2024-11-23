@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/components/Modal.css"; // CSS 파일 가져오기
 import axios from "axios";
-import { CustomLogout } from "../components/MuiButton";
+import { LetterClick } from "../components/MuiButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { API } from "../config";
 
@@ -9,6 +9,13 @@ const UpdateRollModal = ({ closeModal, roll }) => {
   const { rollId, rollName } = roll;
   const token = localStorage.getItem("Authorization");
   const [rollTitle, setRollTitle] = useState("");
+
+  // 컴포넌트가 처음 렌더링될 때 rollTitle 초기화
+  useEffect(() => {
+    if (roll && roll.rollName) {
+      setRollTitle(roll.rollName);
+    }
+  }, [roll]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -55,14 +62,14 @@ const UpdateRollModal = ({ closeModal, roll }) => {
           }}
         />
         <div className="modal-actions">
-          <CustomLogout onClick={closeModal}>취소</CustomLogout>
-          <CustomLogout
+          <LetterClick onClick={closeModal}>취소</LetterClick>
+          <LetterClick
             className="roll-create-button"
             onClick={updateRoll}
             disabled={!rollTitle.trim()}
           >
             등록
-          </CustomLogout>
+          </LetterClick>
         </div>
       </div>
     </div>

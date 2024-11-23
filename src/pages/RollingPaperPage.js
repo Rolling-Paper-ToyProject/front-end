@@ -20,6 +20,8 @@ const RollingPaperPage = () => {
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
+    axios.defaults.headers.common['Authorization'] = token;
+
     useEffect(() => {
         const fetchPaperData = async () => {
             if (!token) {

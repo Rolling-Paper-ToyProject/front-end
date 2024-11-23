@@ -31,7 +31,7 @@ const RollingPaperPage = () => {
             const currentToken = localStorage.getItem("Authorization"); // 항상 최신 토큰 가져오기
 
             if (!currentToken) {
-              console.log("토큰 없음: navigate 호출");
+              console.log("새로고침 후 토큰 없음: navigate('/') 호출");
               alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
               navigate("/");
               return;

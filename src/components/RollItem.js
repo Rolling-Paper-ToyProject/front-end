@@ -19,6 +19,7 @@ const RollItem = ({ roll, role }) => {
   const enterRoll = () => {
       // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
       navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
+      // navigate(`/roll/${url}/join?rollId=${rollId}&rollName=${rollName}&role=${role}`);
       console.log(`롤링페이퍼 ${rollId}로 이동`);
   }
 

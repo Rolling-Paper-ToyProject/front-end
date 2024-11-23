@@ -12,6 +12,10 @@ const RollingPaperPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { rollId, rollName, role } = location.state || {};
+    // const queryParams = new URLSearchParams(location.search);
+    // const rollId = queryParams.get("rollId");
+    // const rollName = queryParams.get("rollName");
+    // const role = queryParams.get("role");
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
@@ -24,11 +28,20 @@ const RollingPaperPage = () => {
                 return;
             }
 
+            // const currentToken = localStorage.getItem("Authorization"); // 항상 최신 토큰 가져오기
+
+            // if (!currentToken) {
+            //   console.log("새로고침 후 토큰 없음: navigate('/') 호출");
+            //   alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
+            //   navigate("/");
+            //   return;
+            // }
+
             try {
                 // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
-                    API.GET_PAPER(rollId),
-                    { headers: { Authorization: token } }
+                  API.GET_PAPER(rollId),
+                  { headers: { Authorization: token } }
                 );
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
@@ -40,6 +53,10 @@ const RollingPaperPage = () => {
 
         fetchPaperData();
     }, [rollId, token]);
+
+    useEffect(() => {
+      localStorage.setItem("Authorization", token);
+    }, [token]);
 
     // 모달을 여는 함수
     const showCreateModal = () => {

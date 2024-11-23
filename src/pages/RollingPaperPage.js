@@ -14,7 +14,6 @@ const RollingPaperPage = () => {
     const { rollId, rollName, role } = location.state || {};
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
-    // token 상태 변수는 제거 (useEffect 내부에서만 사용)
 
     useEffect(() => {
         const fetchPaperData = async () => {
@@ -26,17 +25,15 @@ const RollingPaperPage = () => {
             }
 
             try {
-                // 페이퍼 정보 가져오기
                 const paperResponse = await axios.get(
-                    API.GET_PAPER,
+                    `${API.GET_PAPER}/${rollId}`,
                     { headers: { Authorization: currentToken } }
                 );
                 const paperData = paperResponse.data;
                 console.log("Paper Data Response:", paperData);
-                setPapers(paperData.data || []); // 빈 배열 fallback 추가
+                setPapers(paperData.data || []);
             } catch (error) {
                 console.error('Error:', error);
-                // 401 에러 처리 추가
                 if (error.response?.status === 401) {
                     alert("세션이 만료되었습니다. 다시 로그인해주세요.");
                     navigate("/");
@@ -45,14 +42,12 @@ const RollingPaperPage = () => {
         }
 
         fetchPaperData();
-    }, [rollId, navigate]); // token 의존성 제거, navigate 추가
+    }, [rollId, navigate]);
 
-    // 모달을 여는 함수
     const showCreateModal = () => {
         setIsCreatePaperModalOpen(true);
     };
 
-    // 모달을 닫는 함수
     const closeModal = () => {
         setIsCreatePaperModalOpen(false);
     };
@@ -92,14 +87,12 @@ const RollingPaperPage = () => {
             </div>
 
             <div className="paper-container">
-                {/* RollingPaperDetail 컴포넌트 */}
                 {Array.isArray(papers) && papers.length > 0 ? (
                     papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
                 ) : (
                     <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
                 )}
             </div>
-            {/* CreatePaperModal 컴포넌트 */}
             {isCreatePaperModalOpen && (
                 <CreatePaperModal
                     rollId={rollId}

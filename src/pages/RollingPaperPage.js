@@ -11,7 +11,11 @@ import { API } from "../config";
 const RollingPaperPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { rollId, rollName, role } = location.state || {};
+    // const { rollId, rollName, role } = location.state || {};
+    const queryParams = new URLSearchParams(location.search);
+    const rollId = queryParams.get("rollId");
+    const rollName = queryParams.get("rollName");
+    const role = queryParams.get("role");
     const [papers, setPapers] = useState([]);
     const [isCreatePaperModalOpen, setIsCreatePaperModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");

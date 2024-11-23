@@ -55,6 +55,20 @@ const RollingPaperPage = () => {
       setPapers((prevPapers) => [...prevPapers, newPaper]);
     };
 
+    const updatePaper = (paperId, newContent) => {
+      setPapers((prevPapers) => 
+        prevPapers.map((paper) => 
+          paper.paperId === paperId? { ...paper, content: newContent } : paper
+        )
+      );
+    };
+
+    const deletePaper = (paperId) => {
+      setPapers((prevPapers) => 
+        prevPapers.filter((paper) => paper.paperId !== paperId)
+      );
+    }
+
     return (
       <div>
         <div className="header">
@@ -88,7 +102,14 @@ const RollingPaperPage = () => {
         <div className="paper-container">
           {/* RollingPaperDetail 컴포넌트 */}
           {Array.isArray(papers) && papers.length > 0 ? (
-            papers.map((paper) => <PaperItem key={paper.paperId} paper={paper} role={role}/>)
+            papers.map((paper) => 
+            <PaperItem 
+              key={paper.paperId} 
+              paper={paper} 
+              role={role}
+              onUpdatePaper={updatePaper}
+              onDeletePaper={deletePaper}
+            />)
           ) : (
             <p style={{marginTop:"10px"}}>작성된 페이퍼가 없습니다</p>
           )}

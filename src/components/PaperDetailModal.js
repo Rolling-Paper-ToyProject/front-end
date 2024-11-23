@@ -34,6 +34,7 @@ const PaperDetailModal = ({ paper, closeModal, onUpdatePaper, onDeletePaper }) =
         );
         alert("페이퍼 내용을 수정하였습니다.");
         onUpdatePaper(paperId, newContent);
+        closeModal();
       } catch (error) {
         console.log("페이퍼 내용 수정 실패", error);
         alert("페이퍼 내용이 수정되지 않았습니다. 다시 시도해주세요.");

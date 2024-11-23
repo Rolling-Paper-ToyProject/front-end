@@ -30,14 +30,10 @@ const RollingPaperPage = () => {
                 return;
             }
 
-            // const currentToken = localStorage.getItem("Authorization"); // 항상 최신 토큰 가져오기
-
-            // if (!currentToken) {
-            //   console.log("새로고침 후 토큰 없음: navigate('/') 호출");
-            //   alert("로그인 상태가 아닙니다. 로그인 후 이용해주세요.");
-            //   navigate("/");
-            //   return;
-            // }
+            if (method === "GET") {
+                // POST 요청으로 리디렉션 처리
+                navigate(`/roll/${rollId}/join`, { replace: true });
+            }
 
             try {
                 // 페이퍼 정보 가져오기

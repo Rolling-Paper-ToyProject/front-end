@@ -24,7 +24,7 @@ const RollItem = ({ roll, role }) => {
 
   const copyUrl = () => {
     navigator.clipboard
-      .writeText(BASE_URL + `${url}`)
+      .writeText(BASE_URL + `/${url}`)
       .then(() => {
         alert("URL이 클립보드에 복사되었습니다.");
       })

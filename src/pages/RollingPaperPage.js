@@ -143,4 +143,4 @@ const RollingPaperPage = () => {
     );
 };
 
-export default RollingPaperPage;Page;
+export default RollingPaperPage;

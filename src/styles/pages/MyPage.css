@@ -1,7 +1,7 @@
 /* 전체 페이지 컨테이너 스타일 */
 .my-page-container {
     min-height: 99.8vh; /* 최소 높이를 브라우저 전체 높이로 설정 */
-    height : 100%;
+    height: 100%;
     display: flex; /* Flexbox 레이아웃 사용 */
     flex-direction: column; /* 세로 방향으로 배치 */
     align-items: center; /* 아이템 수직 중앙 정렬 */
@@ -24,8 +24,8 @@
     margin: 15px 20px;
 }
 
-.greeting>span{
-    font-size : 23px;
+.greeting>span {
+    font-size: 23px;
     font-weight: bold;
 }
 
@@ -40,10 +40,9 @@ button.logout-button {
     transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
-.logout-button>p{
+.logout-button>p {
     margin-left: 4px;
 }
-
 
 /* 롤링페이퍼 목록 컨테이너 스타일 */
 .roll-list-container {
@@ -54,17 +53,16 @@ button.logout-button {
 }
 
 /* 학급 목록 글자 */
-.highlighted-text{
+.highlighted-text {
     display: inline-block; /* 인라인 블록 요소로 설정 */
     position: relative; /* 가상 요소의 기준이 되도록 설정 */
-    width:80%;
+    width: 80%;
     text-align: left; /* 텍스트를 왼쪽으로 정렬 */
     margin: 20px 0; /* 필요에 따라 여백을 제거 */
-    padding : 0 7px;
-    font-size:24px;
-    font-weight : bold;
+    padding: 0 7px;
+    font-size: 24px;
+    font-weight: bold;
     z-index: 2;
-
 }
 
 /* 학급 목록 글자의 하이라이트 */
@@ -80,7 +78,7 @@ button.logout-button {
 }
 
 /* 학급 목록 내에 롤이 없을 경우 */
-.no-class{
+.no-class {
     margin: 40px 0;
 }
 
@@ -93,7 +91,6 @@ button.logout-button {
     padding: 10px 25px; /* 카드 내부 여백 설정 */
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */
     cursor: pointer;
-
     position: relative;
 }
 
@@ -123,16 +120,14 @@ button.logout-button {
     justify-content: center;
     align-items: center;
     gap: 20px;
-
     float: right;
     position: absolute;
-
     top: 23px;
     right: 20px;
 }
 
 /* 숨겨지는 버튼 그룹 */
-.hidden-group{
+.hidden-group {
     position: absolute;
     top: 25px;
     right: 30px;
@@ -145,27 +140,27 @@ button.logout-button {
     justify-content: center; /* 버튼들을 중앙에 정렬 */
     align-items: center; /* 버튼들을 세로로 중앙 정렬 */
     margin: 10px 15px 5px 0;
-  }
-  
-  .hidden-button-group p {
-    margin: 0; /* 각 버튼의 기본 여백 제거 */
-  }
+}
 
-  .hidden-button-group>.url-copy-button::after {
+.hidden-button-group p {
+    margin: 0; /* 각 버튼의 기본 여백 제거 */
+}
+
+.hidden-button-group>.url-copy-button::after {
     content: "|";
     margin-left: 20px;
-  }
+}
 
-  .hidden-button-group>.update-button::after {
+.hidden-button-group>.update-button::after {
     content: "|";
     margin-left: 32px;
-  }
+}
 
-  .hidden-button-group>.delete-button::after{
+.hidden-button-group>.delete-button::after {
     content: "";
-  }
+}
 
-.hidden-button-group>p:hover{
+.hidden-button-group>p:hover {
     color: #cccccc;
 }
 
@@ -178,56 +173,57 @@ button.logout-button {
 }
 
 /* 반응형 버튼 그룹 */
-/* 너비가 767px 이하일 때 */
 @media screen and (max-width: 909px) {
     .button-group {
-        display: none; /* button-group을 숨김 */
-      
-    }
-  
-    .hidden-group {
-        display: block; /* hidden-group을 표시 */
-    }
-  }
-
-  /* 너비가 768px 이상일 때 */
-  @media screen and (min-width: 910px) {
-    .button-group {
-      display: flex; /* button-group을 표시 */
-    }
-  
-    .hidden-group {
-      display: none; /* hidden-group을 숨김 */
-    }
-    
-    .hidden-button-group.visible{
         display: none;
     }
-  }
 
-  @media screen and (max-width: 400px){
-    .roll-name{
+    .hidden-group {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 910px) {
+    .button-group {
+        display: flex;
+    }
+
+    .hidden-group {
+        display: none;
+    }
+
+    .hidden-button-group.visible {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .roll-name {
         font-size: 18px;
     }
-  }
+}
 
 /* 수정 버튼과 삭제 버튼 스타일 */
 .button-group>.url-copy-button,
 .button-group>.update-button,
 .button-group>.delete-button {
-    display: flex; /* 내부 요소 크기만큼 너비 차지 */
+    display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 16px; /* 폰트 크기 설정 */
-    cursor: pointer; /* 커서 포인터로 변경 */
+    font-size: 16px;
+    cursor: pointer;
 }
 
 /* 버튼 호버 스타일 */
-.url-copy-button:hover, .update-button:hover, .delete-button:hover {
-    color : #cccccc;/* 호버 시 텍스트 밑줄 추가 */
+.url-copy-button:hover,
+.update-button:hover,
+.delete-button:hover {
+    color: #cccccc;
 }
 
-.url-copy-button>p, .update-button>p, .delete-button>p{
+.url-copy-button>p,
+.update-button>p,
+.delete-button>p {
     margin-top: 7px;
 }
 
@@ -236,10 +232,58 @@ button.create-roll {
     width: 80%;
     font-size: 18px;
     font-weight: bold;
-    margin: 15px 0 15px 0; /* 생성 버튼과 상단 요소 간의 간격 설정 */
-    padding: 5px 30px; /* 추가 버튼 패딩 설정 */
-    border: none; /* 버튼 테두리 제거 */
-    border-radius: 8px; /* 버튼 모서리 둥글게 설정 */
-    color: white; /* 버튼 텍스트 색상 설정 */
-    cursor: pointer; /* 커서 포인터로 변경 */
+    margin: 15px 0 15px 0;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+@keyframes floatMessage {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(-10px) translateX(-50%); }
+}
+
+.click-guide {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    animation: floatMessage 2s ease-in-out infinite;
+}
+
+.click-guide-message {
+    background-color: #4F46E5;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.roll-item.highlight {
+    animation: pulseHighlight 2s infinite;
+    position: relative;
+}
+
+.roll-item.highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    animation: pulseHighlight 2s infinite;
+    pointer-events: none;
 }

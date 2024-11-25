@@ -133,7 +133,8 @@ const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdateP
             )} 
           </>
         ) : (
-          <p className="paper-detail-content">{content}</p>
+          <p className="paper-detail-content" style={{ marginBottom: "15px" }}>{content}</p>
+
         )}
       </div>
     </div>

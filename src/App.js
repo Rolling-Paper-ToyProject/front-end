@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import StudentSigninPage from './pages/StudentSigninPage';
 import MyPageDev from './pages/MyPageDev';
 import MyPage from './pages/MyPage';
+import RollingPaperPageDev from './pages/RollingPaperPageDev';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
 import { ThemeProvider } from '@mui/material/styles';
@@ -24,6 +25,9 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />ㅅ
             <Route path="/:url" element={<StudentSigninPage />} />
+            {process.env.NODE_ENV === 'development' && (
+                <Route path="/rolling-paper-dev" element={<RollingPaperPageDev />} />
+            )}
             <Route path="/roll/:url/join/" element={<RollingPaperPage />} />
           </Routes>
         </BrowserRouter>

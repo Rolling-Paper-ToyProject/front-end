@@ -98,9 +98,9 @@ const StudentSignin = ({ url }) => {
       const response = await axios.post(
         API.STUDENT_JOIN_URL(url),
         {
-          name: studentName,
-          classCode: classCode,
-          pinNumber: pinNumber,
+          name: formData.studentName,
+          classCode: formData.classCode,
+          pinNumber: formData.pinNumber,
         }
       );
 

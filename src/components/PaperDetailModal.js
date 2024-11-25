@@ -4,8 +4,9 @@ import axios from "axios";
 import { LetterClick } from "../components/MuiButton";
 import { API } from "../config";
 
-const PaperDetailModal = ({ paper, closeModal, onUpdatePaper, onDeletePaper }) => {
-  const { content, authorName, paperId, authorRole } = paper;
+const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdatePaper, onDeletePaper }) => {
+  const { content, authorName, paperId, authorRole, studentId } = paper;
+  const authorStudentId = studentId;
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
   const [newContent, setNewContent] = useState(content);
   const token = localStorage.getItem("Authorization");
@@ -79,55 +80,59 @@ const PaperDetailModal = ({ paper, closeModal, onUpdatePaper, onDeletePaper }) =
           From. {`${authorName}${authorRole === "TEACHER" ? " 선생님" : ""}`}
         </p>
         {/* 롤링페이퍼 내용 */}
-        {isEditing ? (
+        {(currentStudentId === authorStudentId) || (role === "TEACHER") ? (
           <>
-            <textarea
-              type="text"
-              value={newContent}
-              onChange={(e) => setNewContent(e.target.value)}
-              /** 
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleSave();
-                  }
-                }}
-                수정 시 다음 줄로 넘어가기 위해서 Enter 누를 시 저장이 되어 보류
-              */                 
-            />
-            <div className="paper-modal-button">
-              <LetterClick
-                className="paper-edit-save-button"
-                onClick={handleSave}
-              >
-                저장
-              </LetterClick>
-              <LetterClick
-                className="paper-edit-cancel-button"
-                onClick={handleCancelUpdate}
-              >
-                취소
-              </LetterClick>
-            </div>
+            {!isEditing ? (
+              <>
+                <p className="paper-detail-content">{content}</p>
+                <div className="paper-modal-button">
+                  <LetterClick
+                    className="paper-edit-button"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    수정
+                  </LetterClick>
+                  <LetterClick
+                    className="paper-delete-button"
+                    onClick={() => handleDelete()}
+                  >
+                    삭제
+                  </LetterClick>
+                </div>
+              </>
+            ) : (
+              <>
+                <textarea
+                  type="text"
+                  value={newContent}
+                  onChange={(e) => setNewContent(e.target.value)}
+                  /** 
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSave();
+                      }
+                    }}
+                    수정 시 다음 줄로 넘어가기 위해서 Enter 누를 시 저장이 되어 보류
+                  */                 
+                />
+                <div className="paper-modal-button">
+                  <LetterClick
+                    className="paper-edit-save-button"
+                    onClick={handleSave}
+                  >
+                    저장
+                  </LetterClick>
+                  <LetterClick
+                    className="paper-edit-cancel-button"
+                    onClick={handleCancelUpdate}
+                  >
+                    취소
+                  </LetterClick>
+                </div>
+              </>
+            )} 
           </>
-        ) : (
-          <>
-            <p className="paper-detail-content">{content}</p>
-            <div className="paper-modal-button">
-              <LetterClick
-                className="paper-edit-button"
-                onClick={() => setIsEditing(true)}
-              >
-                수정
-              </LetterClick>
-              <LetterClick
-                className="paper-delete-button"
-                onClick={() => handleDelete()}
-              >
-                삭제
-              </LetterClick>
-            </div>
-          </>
-        )}
+        ) : ("")}
       </div>
     </div>
   );

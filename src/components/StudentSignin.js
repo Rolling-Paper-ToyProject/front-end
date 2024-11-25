@@ -74,17 +74,19 @@ const StudentSignin = ({ url }) => {
 
       console.log(classCode);
 
-      const studentData = response.data;
-      const studentToken = studentData.data.accessToken;
-      const refreshToken = studentData.data.refreshToken;
-      const rollId = studentData.data.rollId;
-      const rollName = studentData.data.rollName;
-      const role = studentData.data.role;
+      const { 
+        accessToken: studentToken,
+        refreshToken,
+        rollId,
+        rollName,
+        role,
+        studentId: currentStudentId
+      } = response.data;
 
       if (studentToken && refreshToken) {
         localStorage.setItem("Authorization", `Bearer ${studentToken}`);
         localStorage.setItem("RefreshToken", refreshToken);
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role, currentStudentId } });
       }
     } catch (error) {
       console.log("토큰 fetch 실패: ", error);

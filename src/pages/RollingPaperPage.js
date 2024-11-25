@@ -11,7 +11,7 @@ import { API } from "../config";
 const RollingPaperPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { rollId, rollName, role } = location.state || {};
+    const { rollId, rollName, role, currentStudentId } = location.state || {};
     // const queryParams = new URLSearchParams(location.search);
     // const rollId = queryParams.get("rollId");
     // const rollName = queryParams.get("rollName");
@@ -124,6 +124,7 @@ const RollingPaperPage = () => {
                             key={paper.paperId}
                             paper={paper}
                             role={role}
+                            currentStudentId={currentStudentId}
                             onUpdatePaper={updatePaper}
                             onDeletePaper={deletePaper}
                         />)

@@ -132,7 +132,9 @@ const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdateP
               </>
             )} 
           </>
-        ) : ("")}
+        ) : (
+          <p className="paper-detail-content">{content}</p>
+        )}
       </div>
     </div>
   );

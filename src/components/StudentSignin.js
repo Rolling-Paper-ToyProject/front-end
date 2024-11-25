@@ -81,7 +81,7 @@ const StudentSignin = ({ url }) => {
         rollName,
         role,
         studentId: currentStudentId
-      } = response.data;
+      } = response.data.data;
 
       if (studentToken && refreshToken) {
         localStorage.setItem("Authorization", `Bearer ${studentToken}`);

@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import StudentSignin from "../components/StudentSigninDev";
 import '../styles/common/Logo.css';
 
-const StudentSigninPage = () => {
+const StudentSigninPageDev = () => {
     const location = useLocation();
     const url = location.pathname.split('/').pop();
 
@@ -18,4 +18,4 @@ const StudentSigninPage = () => {
     )
 }
 
-export default StudentSigninPage
+export default StudentSigninPageDev

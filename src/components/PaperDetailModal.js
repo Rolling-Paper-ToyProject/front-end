@@ -77,7 +77,7 @@ const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdateP
         }}
       >
         <p className="paper-detail-name" style={{ fontWeight: "bold", marginBottom: "10px"}}>
-          From. {`${authorName}${authorRole === "TEACHER" ? " 선생님" : ""}`}
+          From. {`${authorRole === "TEACHER" ? "선생님" : authorName}`}
         </p>
         {/* 롤링페이퍼 내용 */}
         {(currentStudentId === authorStudentId) || (role === "TEACHER") ? (

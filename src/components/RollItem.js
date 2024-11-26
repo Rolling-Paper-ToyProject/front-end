@@ -17,10 +17,19 @@ const RollItem = ({ roll, role }) => {
   const navigate = useNavigate();
 
   const enterRoll = () => {
-      // 해당 rollId에 할당된 paper들을 불러오는 로직이 필요함
-      navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
-      // navigate(`/roll/${url}/join?rollId=${rollId}&rollName=${rollName}&role=${role}`);
-      console.log(`롤링페이퍼 ${rollId}로 이동`);
+      const rollElement = document.getElementById(`roll-${rollId}`);
+      if (rollElement) {
+        rollElement.classList.add("clicked");
+      }  
+
+      setTimeout(() => {
+        rollElement.classList.remove("clicked"); // 클래스 제거
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
+      }, 500);
+
+      // navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } })
+      // // navigate(`/roll/${url}/join?rollId=${rollId}&rollName=${rollName}&role=${role}`);
+      // console.log(`롤링페이퍼 ${rollId}로 이동`);
   }
 
   const copyUrl = () => {
@@ -59,7 +68,7 @@ const RollItem = ({ roll, role }) => {
   };
 
   return (
-    <div className="roll-item" onClick={enterRoll}>
+    <div id={`roll-${rollId}`} className="roll-item" onClick={enterRoll}>
       <div onClick={(e) => e.stopPropagation()}>
         <h2 className="roll-name" onClick={enterRoll}>
           {rollName}

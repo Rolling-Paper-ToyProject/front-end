@@ -6,7 +6,7 @@ import MyPage from './pages/MyPage';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
 
-// Dev 전용
+// Dev 전용(개발용)
 import MyPageDev from './pages/MyPageDev';
 import RollingPaperPageDev from './pages/RollingPaperPageDev';
 import StudentSigninPageDev from './pages/StudentSigninPageDev';

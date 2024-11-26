@@ -291,6 +291,15 @@ button.create-roll {
     /* margin-bottom: 8px; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     animation: fadeInOut 2s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+/* 갤럭시탭 S5e 조건 */
+@media screen and (min-width: 790px) and (max-width: 810px) and (min-height: 1270px) and (max-height: 1290px) {
+    .click-guide-message {
+        position: relative;
+        left: 60px;
+    }
 }
 
 .roll-item.highlight {

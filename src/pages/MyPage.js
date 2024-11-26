@@ -96,7 +96,7 @@ const MyPage = () => {
                 </LetterClick>
             </div>
             <div className="roll-list-container">
-                <p className="highlighted-text">📌학급 목록</p>
+                <p className="highlighted-text">📌 학급 목록</p>
 
                 {Array.isArray(rolls) && rolls.length > 0 ? (
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>

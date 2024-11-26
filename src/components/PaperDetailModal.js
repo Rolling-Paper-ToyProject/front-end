@@ -77,7 +77,7 @@ const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdateP
           e.stopPropagation();
         }}
       >
-        <CloseIcon className="modal-close"/>
+        <CloseIcon className="modal-close" onClick={handleOverlayClick}/>
         <p className="paper-detail-name" style={{ fontWeight: "bold", marginBottom: "10px"}}>
           From. {`${authorRole === "TEACHER" ? "선생님" : authorName}`}
         </p>

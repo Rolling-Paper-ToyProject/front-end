@@ -3,6 +3,7 @@ import '../styles/components/Modal.css' // CSS 파일 가져오기
 import axios from "axios";
 import { LetterClick } from "../components/MuiButton";
 import { API } from "../config";
+import CloseIcon from '@mui/icons-material/Close';
 
 const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdatePaper, onDeletePaper }) => {
   const { content, authorName, paperId, authorRole, studentId } = paper;
@@ -76,6 +77,7 @@ const PaperDetailModal = ({ paper, role, currentStudentId, closeModal, onUpdateP
           e.stopPropagation();
         }}
       >
+        <CloseIcon className="modal-close"/>
         <p className="paper-detail-name" style={{ fontWeight: "bold", marginBottom: "10px"}}>
           From. {`${authorName}${authorRole === "TEACHER" ? " 선생님" : ""}`}
         </p>

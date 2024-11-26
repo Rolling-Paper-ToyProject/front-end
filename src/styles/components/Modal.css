@@ -13,6 +13,11 @@
   cursor: default;
 }
 
+.modal-close{
+  position: absolute;
+  top: 27px;
+}
+
 /* 모달 내용 스타일 */
 .modal-content {
   width: 320px;

@@ -8,6 +8,7 @@ import axios from "axios";
 import CreateRollModal from "../components/CreateRollModal";
 import AddIcon from '@mui/icons-material/Add';
 import { API } from "../config";
+import { ArrowDown } from "lucide-react";
 
 
 const MyPage = () => {
@@ -15,6 +16,7 @@ const MyPage = () => {
     const [userName, setUserName] = useState("");
     const [rolls, setRolls] = useState([]);
     const [role, setRole] = useState();
+    const [showGuide, setShowGuide] = useState(true);
     const [isCreateRollModalOpen, setIsCreateRollModalOpen] = useState(false);
     const token = localStorage.getItem("Authorization");
 
@@ -66,6 +68,13 @@ const MyPage = () => {
         fetchData();
     }, [navigate]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowGuide(false);
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, []);
+
     const teacherlogout = () => {
         // localStorage.removeItem("Authorization");
         // localStorage.removeItem("RefreshToken");
@@ -80,23 +89,34 @@ const MyPage = () => {
     return (
         <div className="my-page-container">
             <div className="greeting-container">
-                <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요</p>
+                <p className="greeting"><span>{userName}</span> 선생님, 안녕하세요! 🙇‍♂️</p>
                 <LetterClick className="logout-button" onClick={teacherlogout}>
                     <UserLogout />
                     <p>LOGOUT</p>
                 </LetterClick>
             </div>
             <div className="roll-list-container">
-                <p className="highlighted-text">학급 목록</p>
+                <p className="highlighted-text">📌 학급 목록</p>
 
                 {Array.isArray(rolls) && rolls.length > 0 ? (
-                    rolls.map((roll) => (
-                        <RollItem
-                            key={roll.rollId}
-                            roll={roll}
-                            role={role}
-                        />
-                    ))
+                    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+                        {( showGuide && rolls.length === 1 ) && (
+                            <div className="click-guide">
+                                <div className="click-guide-message">
+                                    클릭하여 입장해주세요!
+                                </div>
+                                <ArrowDown size={24} color="#4F46E5" />
+                            </div>
+                        )}
+                        {rolls.map((roll) => (
+                            <RollItem
+                                key={roll.rollId}
+                                roll={roll}
+                                role={role}
+                                className={showGuide ? 'highlight' : ''}
+                            />
+                        ))}
+                    </div>
                 ) : (
                     <p className="no-class">등록된 학급이 없습니다.</p>
                 )}

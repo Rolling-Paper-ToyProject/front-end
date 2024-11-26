@@ -7,6 +7,12 @@ import MyPage from './pages/MyPage';
 import RollingPaperPageDev from './pages/RollingPaperPageDev';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
+
+// Dev 전용
+import MyPageDev from './pages/MyPageDev';
+import RollingPaperPageDev from './pages/RollingPaperPageDev';
+import StudentSigninPageDev from './pages/StudentSigninPageDev';
+
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './components/MuiColor';
 // import store from './store.js'
@@ -25,6 +31,9 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/oauth/callback" element={<RedirectHandler />} />ㅅ
             <Route path="/:url" element={<StudentSigninPage />} />
+            {process.env.NODE_ENV === 'development' && (
+                <Route path="/studentsigin-dev" element={<StudentSigninPageDev />} />
+            )}
             {process.env.NODE_ENV === 'development' && (
                 <Route path="/rolling-paper-dev" element={<RollingPaperPageDev />} />
             )}

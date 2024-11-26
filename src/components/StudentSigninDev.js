@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/components/StudentSignin.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { API } from "../config";
 
 const StudentSignin = ({ url }) => {
   const navigate = useNavigate();
-  
+
   // 상태 관리
   const [formData, setFormData] = useState({
     classCode: "",
@@ -14,42 +12,7 @@ const StudentSignin = ({ url }) => {
     pinNumber: "",
   }); // 모든 입력값을 하나의 상태로 관리
 
-  const token = localStorage.getItem("Authorization");
   const [currentStep, setCurrentStep] = useState(1); // 현재 단계: 1=학급코드, 2=이름, 3=비밀번호, 4=버튼
-
-  useEffect(() => {
-    const fetchTeacherData = async () => {
-      if (token) {
-        try {
-          const teacherUserResponse = await axios.get(
-            API.TEACHER_PROFILE,
-            { headers: { Authorization: token } }
-          )
-          const teacherUserData = teacherUserResponse.data;
-          const role = teacherUserData.data.role;
-          if (role !== "TEACHER") return;
-
-          const teacherRollResponse = await axios.get(
-            API.GET_ROLL,
-            {
-              headers: {
-                Authorization: token,
-              }
-            }
-          );
-          const teacherRollData = teacherRollResponse.data;
-          const foundItem = teacherRollData.data.find((item) => item.url === url);
-
-          if (foundItem) {
-            const { rollId, rollName } = foundItem;
-            navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
-          } else { return; }
-        } catch (error) {}
-      }
-    };
-
-    fetchTeacherData();
-  }, [token, url]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target; // 입력 필드의 name과 value를 가져옴
@@ -83,49 +46,16 @@ const StudentSignin = ({ url }) => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
-    try {
-      // 입력값 검증
-      if (formData.classCode !== formData.classCode.trim()) {
-        alert("입력한 학급코드 앞과 뒤의 여백을 없애주세요");
-        return;
-      }
 
-      if (formData.studentName !== formData.studentName.trim()) {
-        alert("입력한 이름 앞과 뒤의 여백을 없애주세요");
-        return;
-      }
-    
-      const response = await axios.post(
-        API.STUDENT_JOIN_URL(url),
-        {
-          name: formData.studentName,
-          classCode: formData.classCode,
-          pinNumber: formData.pinNumber,
-        }
-      );
+    // 입력값 검증
+    if (formData.classCode !== formData.classCode.trim()) {
+      alert("입력한 학급코드 앞과 뒤의 여백을 없애주세요");
+      return;
+    }
 
-      if (!response === 200) {
-        throw new Error("응답을 불러올 수 없습니다.");
-        // return; 필요하지 않음. Error로 인해 함수 실행이 중단됨.
-      }
-
-      const { 
-        accessToken: studentToken,
-        refreshToken,
-        rollId,
-        rollName,
-        role,
-        studentId: currentStudentId
-      } = response.data.data;
-
-      if (studentToken && refreshToken) {
-        localStorage.setItem("Authorization", `Bearer ${studentToken}`);
-        localStorage.setItem("RefreshToken", refreshToken);
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role, currentStudentId } });
-      }
-    } catch (error) {
-      console.log("토큰 fetch 실패: ", error);
-      alert("입력한 학급코드를 확인해주세요");
+    if (formData.studentName !== formData.studentName.trim()) {
+      alert("입력한 이름 앞과 뒤의 여백을 없애주세요");
+      return;
     }
   };
 

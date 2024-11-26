@@ -28,11 +28,8 @@ const PaperItem = ({ paper, role, currentStudentId ,onUpdatePaper, onDeletePaper
         className="paper-box"
         style={{ transform: `rotate(${rotation}deg)` }} // 고정된 랜덤 각도 적용
       >
-        {authorRole === "TEACHER" ? (
-          <p className="fromName">From. {`${authorName} 선생님`}</p>
-        ) : (
-          <p className="fromName">From. {authorName}</p>
-        )}
+      
+        <p className="fromName">{`From. ${authorRole === "TEACHER" ? ( "선생님" ) : ( authorName )}`}</p>
         <p className="roll-content">{content}</p>
       </div>
 

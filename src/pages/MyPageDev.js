@@ -59,14 +59,14 @@ const MyPageDev = () => {
                 </LetterClick>
             </div>
             <div className="roll-list-container">
-                <p className="highlighted-text">학급 목록</p>
+                <p className="highlighted-text">📌 학급 목록</p>
 
                 {Array.isArray(rolls) && rolls.length > 0 ? (
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
                         {showGuide && (
                             <div className="click-guide">
                                 <div className="click-guide-message">
-                                    학급을 클릭하여 입장해주세요!
+                                    클릭하여 입장해주세요!
                                 </div>
                                 <ArrowDown size={24} color="#4F46E5" />
                             </div>

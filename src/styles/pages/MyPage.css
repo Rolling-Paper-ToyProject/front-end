@@ -71,7 +71,7 @@ button.logout-button {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 105px;
+    width: 150px;
     height: 50%; /* 텍스트의 아래 절반만큼 */
     background-color: #e0e0ff; /* 형광펜 색상 */
     z-index: -1;
@@ -92,6 +92,26 @@ button.logout-button {
     margin: 10px 0; /* 카드 간의 상하 간격 설정 */
     cursor: pointer;
     position: relative;
+    transition: background-color 0.5s ease;
+}
+
+/* 축소 후 다시 커지는 애니메이션 */
+@keyframes shrinkAndGrow {
+  0% {
+    transform: scale(1); /* 원래 크기 */
+  }
+  50% {
+    transform: scale(0.98); /* 축소 */
+  }
+  100% {
+    transform: scale(1); /* 다시 원래 크기 */
+  }
+}
+
+/* 클릭 시 애니메이션 */
+.roll-item.clicked {
+    animation: shrinkAndGrow 0.3s ease;
+    background-color: #d9d9d9;
 }
 
 .roll-name {
@@ -107,7 +127,9 @@ button.logout-button {
 
 /* 학급 코드 스타일 */
 .class-code {
-    width: 400px;
+    display: inline-block;
+    width: auto;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
     margin-bottom: 10px;
     font-size: 16px; /* 폰트 크기 설정 */
     margin-right: 10px; /* 오른쪽 간격 설정 */
@@ -252,7 +274,7 @@ button.create-roll {
 
 .click-guide {
     position: absolute;
-    top: -60px;
+    top: -50px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -266,9 +288,18 @@ button.create-roll {
     padding: 8px 16px;
     border-radius: 8px;
     font-size: 16px;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     animation: fadeInOut 2s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+/* 갤럭시탭 S5e 조건 */
+@media screen and (min-width: 790px) and (max-width: 810px) and (min-height: 1270px) and (max-height: 1290px) {
+    .click-guide-message {
+        position: relative;
+        left: 60px;
+    }
 }
 
 .roll-item.highlight {

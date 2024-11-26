@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './styles/common/App.css';
 import LoginPage from './pages/LoginPage';
 import StudentSigninPage from './pages/StudentSigninPage';
+import MyPageDev from './pages/MyPageDev';
 import MyPage from './pages/MyPage';
+import RollingPaperPageDev from './pages/RollingPaperPageDev';
 import RollingPaperPage from './pages/RollingPaperPage';
 import RedirectHandler from './pages/RedirectHandler';
 

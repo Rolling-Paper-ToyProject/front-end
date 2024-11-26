@@ -13,6 +13,21 @@
   cursor: default;
 }
 
+.modal-close{
+  position: absolute;
+  top: 22px;
+  cursor: pointer;
+
+  /* 아이콘 클릭할 수 있는 범위 증가 */
+  box-sizing: content-box; /* 패딩을 포함하지 않도록 설정 */
+  width: 24px; /* 아이콘의 실제 너비 */
+  height: 24px; /* 아이콘의 실제 높이 */
+  padding: 5px; /* 클릭 영역 확장 (아이콘 주위에 여유 공간 추가) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* 모달 내용 스타일 */
 .modal-content {
   width: 320px;

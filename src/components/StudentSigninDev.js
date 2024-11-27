@@ -58,10 +58,7 @@ const StudentSignin = ({ url }) => {
       return;
     }
 
-    if (/^[가-힣a-zA-Z]*$/.test(formData.pinNumber)) {
-      alert('숫자만 입력 가능합니다.');
-      return;
-    } else if (!/^[0-9]*$/.test(formData.pinNumber)) {
+    if (/^[가-힣a-zA-Z]*$/.test(formData.pinNumber) || !/^[0-9]*$/.test(formData.pinNumber)) {
       alert('숫자만 입력 가능합니다.');
       return;
     }

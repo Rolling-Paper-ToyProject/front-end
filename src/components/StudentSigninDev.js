@@ -57,6 +57,11 @@ const StudentSignin = ({ url }) => {
       alert("입력한 이름 앞과 뒤의 여백을 없애주세요");
       return;
     }
+
+    if (/^[가-힣a-zA-Z]*$/.test(formData.pinNumber) || !/^[0-9]*$/.test(formData.pinNumber)) {
+      alert('숫자만 입력 가능합니다.');
+      return;
+    }
   };
 
   return (
@@ -95,6 +100,7 @@ const StudentSignin = ({ url }) => {
             value={formData.pinNumber}
             onChange={handleInputChange}
             maxLength={"4"}
+            placeholder="숫자 4자리"
             required
           />
         </div>

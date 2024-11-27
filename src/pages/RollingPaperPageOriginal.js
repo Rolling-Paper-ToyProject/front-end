@@ -88,19 +88,6 @@ const RollingPaperPage = () => {
 
     return (
         <div>
-            <div className="snowfall-container">
-                {Array.from({ length: 50 }).map((_, index) => (
-                    <div
-                        key={index}
-                        className="snowflake"
-                        style={{
-                            left: `${Math.random() * 100}vw`,
-                            animationDuration: `${5 + Math.random() * 10}s`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    />
-                ))}
-            </div>
             <div className="header">
                 {role === "TEACHER" ? (
                     <LetterClick

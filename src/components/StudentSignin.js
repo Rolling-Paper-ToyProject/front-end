@@ -25,9 +25,20 @@ const StudentSignin = ({ url }) => {
             API.TEACHER_PROFILE,
             { headers: { Authorization: token } }
           )
+
           const teacherUserData = teacherUserResponse.data;
+          console.log(teacherUserData)
+          if (!teacherUserData || !teacherUserData.data) {
+            console.error("올바르지 않은 선생님 사용자 응답입니다.")
+            return;
+          }
+          
           const role = teacherUserData.data.role;
-          if (role !== "TEACHER") return;
+          console.log(role)
+          if (role !== "TEACHER") {
+            console.warn("선생님이 아닌 사용자입니다.")
+            return;
+          }
 
           const teacherRollResponse = await axios.get(
             API.GET_ROLL,

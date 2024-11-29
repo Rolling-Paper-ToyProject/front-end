@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import "../styles/components/StudentSignin.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { API } from "../config";
 
 const StudentSignin = ({ url }) => {
   const navigate = useNavigate();
-  
+  const location = useLocation(); // location 훅 사용
+  const { state } = location; // navigate로 전달된 state 가져오기
+  const role = state?.role; // state에서 role 값을 가져오기 (없으면 undefined)
+
   // 상태 관리
   const [formData, setFormData] = useState({
     classCode: "",
@@ -18,12 +21,13 @@ const StudentSignin = ({ url }) => {
   const [currentStep, setCurrentStep] = useState(1); // 현재 단계: 1=학급코드, 2=이름, 3=비밀번호, 4=버튼
 
   useEffect(() => {
+    if (role !== "TEACHER") return;
     const fetchTeacherData = async () => {
       if (token) {
         try {
           const teacherUserResponse = await axios.get(
-            API.TEACHER_PROFILE,
-            { headers: { Authorization: token } }
+              API.TEACHER_PROFILE,
+              { headers: { Authorization: token } }
           )
 
           const teacherUserData = teacherUserResponse.data;
@@ -32,7 +36,7 @@ const StudentSignin = ({ url }) => {
             console.error("올바르지 않은 선생님 사용자 응답입니다.")
             return;
           }
-          
+
           const role = teacherUserData.data.role;
           console.log(role)
           if (role !== "TEACHER") {
@@ -41,19 +45,19 @@ const StudentSignin = ({ url }) => {
           }
 
           const teacherRollResponse = await axios.get(
-            API.GET_ROLL,
-            {
-              headers: {
-                Authorization: token,
+              API.GET_ROLL,
+              {
+                headers: {
+                  Authorization: token,
+                }
               }
-            }
           );
           const teacherRollData = teacherRollResponse.data;
           const foundItem = teacherRollData.data.find((item) => item.url === url);
 
           if (foundItem) {
             const { rollId, rollName } = foundItem;
-            navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
+            navigate(`/roll/${url}/join`, { state: { rollId, rollName, role : "TEACHER" } });
           } else { return; }
         } catch (error) {}
       }

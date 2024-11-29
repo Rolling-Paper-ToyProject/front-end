@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import "../styles/components/StudentSignin.css";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../config";
-
 
 const StudentSignin = ({ url }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-
+  
   // 상태 관리
   const [formData, setFormData] = useState({
     classCode: "",
@@ -21,34 +19,43 @@ const StudentSignin = ({ url }) => {
 
   useEffect(() => {
     const fetchTeacherData = async () => {
-      const token = localStorage.getItem("Authorization");
-      const role = location.state?.role; // state에서 role 가져오기
+      if (token) {
+        try {
+          const teacherUserResponse = await axios.get(
+            API.TEACHER_PROFILE,
+            { headers: { Authorization: token } }
+          )
 
-      // Role이 STUDENT라면 추가 검증 없이 종료
-      if (role === "STUDENT" || !token) {
-        console.log("STUDENT 계정이므로 추가 작업 없음.");
-        return;
-      }
+          const teacherUserData = teacherUserResponse.data;
+          console.log(teacherUserData)
+          if (!teacherUserData || !teacherUserData.data) {
+            console.error("올바르지 않은 선생님 사용자 응답입니다.")
+            return;
+          }
+          
+          const role = teacherUserData.data.role;
+          console.log(role)
+          if (role !== "TEACHER") {
+            console.warn("선생님이 아닌 사용자입니다.")
+            return;
+          }
 
-      try {
-        // TEACHER일 경우만 API 호출
-        const teacherUserResponse = await axios.get(API.TEACHER_PROFILE, {
-          headers: { Authorization: token },
-        });
+          const teacherRollResponse = await axios.get(
+            API.GET_ROLL,
+            {
+              headers: {
+                Authorization: token,
+              }
+            }
+          );
+          const teacherRollData = teacherRollResponse.data;
+          const foundItem = teacherRollData.data.find((item) => item.url === url);
 
-        const teacherRollResponse = await axios.get(API.GET_ROLL, {
-          headers: { Authorization: token },
-        });
-
-        const teacherRollData = teacherRollResponse.data;
-        const foundItem = teacherRollData.data.find((item) => item.url === url);
-
-        if (foundItem) {
-          const { rollId, rollName } = foundItem;
-          navigate(`/roll/${url}/join`, { state: { rollId, rollName, role: "TEACHER" } });
-        }
-      } catch (error) {
-        console.error("Error fetching teacher data: ", error);
+          if (foundItem) {
+            const { rollId, rollName } = foundItem;
+            navigate(`/roll/${url}/join`, { state: { rollId, rollName, role } });
+          } else { return; }
+        } catch (error) {}
       }
     };
 
@@ -130,7 +137,7 @@ const StudentSignin = ({ url }) => {
       if (studentToken && refreshToken) {
         localStorage.setItem("Authorization", `Bearer ${studentToken}`);
         localStorage.setItem("RefreshToken", refreshToken);
-        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role: "STUDENT", currentStudentId } });
+        navigate(`/roll/${url}/join`, { state: { rollId, rollName, role, currentStudentId } });
       }
     } catch (error) {
       console.log("토큰 fetch 실패: ", error);
